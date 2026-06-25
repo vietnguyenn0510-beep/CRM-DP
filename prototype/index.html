@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Đỉnh Phong CRM - Đăng nhập</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="js/tailwind.js"></script>
+<style>
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid #E3D8CA;
+            box-shadow: 0px 4px 20px rgba(122, 111, 99, 0.08);
+        }
+        .butcher-gradient {
+            background: linear-gradient(135deg, #B9823F 0%, #805211 100%);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body class="h-full bg-on-surface">
+<!-- Background Image Container with Overlay -->
+<div class="fixed inset-0 z-0">
+<div class="absolute inset-0 bg-black/40 z-10 backdrop-brightness-75"></div>
+<img alt="Luxury Steakhouse Background" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhw9pPV-1gf3xxZhlA0S4GJPovTPu-urtS7gedS2TbgWzRRU2lOh-DcQQVgmFePcB5jInNuuOsV2RtdsGuY_qBorrzNpSz_K7EdoBEOGtgej1mZrqNzLUtHHoXW6bwQbqPvsI_b5zWRwvhZEUNBOFBRYLnhuYItsqItk8ff2jr4ju20KuBgZh-yosZ4C7xslbN8ni1pui9jL_vL7KHXTV3-OE8Ex2ZVjw_NjFieo6YSu5H6rcKDLFKtZQsaIjtkjV7T7WdJSubfDQh"/>
+</div>
+<!-- Login Content -->
+<main class="relative z-20 flex min-h-full items-center justify-center p-md">
+<div class="glass-card w-full max-w-[440px] rounded-3xl p-xl flex flex-col items-center">
+<!-- Logo Section -->
+<div class="mb-lg flex flex-col items-center gap-xs">
+<span class="material-symbols-outlined text-primary text-[48px]" style="font-variation-settings: 'FILL' 1;">restaurant_menu</span>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Đỉnh Phong</h1>
+<p class="font-label-md text-label-md text-secondary tracking-widest uppercase">Artisanal Beef CRM</p>
+</div>
+<h2 class="font-title-md text-title-md text-on-surface mb-xl">Đăng nhập hệ thống</h2>
+<!-- Social Login -->
+<button onclick="window.location.href='dashboard.html'" class="w-full h-input-h rounded-[14px] bg-white border border-outline-variant hover:bg-surface-container-low transition-all duration-200 flex items-center justify-center gap-md mb-lg group">
+<svg fill="none" height="20" viewbox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg">
+<path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+<path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+<path d="M5.84 14.1c-.22-.66-.35-1.36-.35-2.1s.13-1.44.35-2.1V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l3.66-2.84z" fill="#FBBC05"></path>
+<path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z" fill="#EA4335"></path>
+</svg>
+<span class="font-body-lg text-body-lg text-on-surface font-semibold">Đăng nhập bằng Google</span>
+</button>
+<!-- Divider -->
+<div class="w-full flex items-center gap-md mb-lg">
+<div class="h-[1px] flex-1 bg-outline-variant"></div>
+<span class="font-label-md text-label-md text-secondary">Hoặc đăng nhập bằng email</span>
+<div class="h-[1px] flex-1 bg-outline-variant"></div>
+</div>
+<!-- Login Form -->
+<form class="w-full space-y-md" onsubmit="event.preventDefault();">
+<div class="space-y-xs">
+<label class="font-label-md text-label-md text-secondary px-xs">Email</label>
+<input class="w-full h-input-h px-md rounded-[14px] border border-outline-variant bg-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all font-body-lg text-body-lg" placeholder="example@dinhphong.vn" type="email"/>
+</div>
+<div class="space-y-xs">
+<div class="flex justify-between items-center px-xs">
+<label class="font-label-md text-label-md text-secondary">Mật khẩu</label>
+<a class="font-label-md text-label-md text-primary hover:underline" href="forgot_password.html">Quên mật khẩu?</a>
+</div>
+<div class="relative">
+<input class="w-full h-input-h px-md rounded-[14px] border border-outline-variant bg-white focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all font-body-lg text-body-lg" placeholder="••••••••" type="password"/>
+<button class="absolute right-md top-1/2 -translate-y-1/2 text-secondary hover:text-primary" type="button">
+<span class="material-symbols-outlined text-[20px]">visibility</span>
+</button>
+</div>
+</div>
+<button onclick="window.location.href='dashboard.html'" class="w-full h-input-h rounded-[14px] butcher-gradient text-white font-body-lg text-body-lg font-bold shadow-lg hover:brightness-110 active:scale-[0.98] transition-all duration-200 mt-md">
+                    Đăng nhập
+                </button>
+</form>
+<!-- Footer -->
+<div class="mt-xl text-center">
+<p class="font-body-sm text-body-sm text-secondary">
+                    Chưa có tài khoản? 
+                    <a class="text-primary font-semibold hover:underline" href="register.html">Đăng ký ngay</a>
+</p>
+</div>
+</div>
+<!-- System Branding Info (Subtle) -->
+<div class="absolute bottom-md text-white/40 font-label-md text-label-md">
+            © 2024 Đỉnh Phong Luxury. All rights reserved.
+        </div>
+</main>
+<script>
+        // Simple micro-interaction for input focus effects
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', () => {
+                input.parentElement.parentElement.classList.add('scale-[1.01]');
+            });
+            input.addEventListener('blur', () => {
+                input.parentElement.parentElement.classList.remove('scale-[1.01]');
+            });
+        });
+
+        // Add a parallax-ish move to the glass card on mouse move
+        const card = document.querySelector('.glass-card');
+        document.addEventListener('mousemove', (e) => {
+            const xAxis = (window.innerWidth / 2 - e.pageX) / 50;
+            const yAxis = (window.innerHeight / 2 - e.pageY) / 50;
+            card.style.transform = `rotateY(${xAxis}deg) rotateX(${yAxis}deg)`;
+        });
+    </script>
+</body></html>

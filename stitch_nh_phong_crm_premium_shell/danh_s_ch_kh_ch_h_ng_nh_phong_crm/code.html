@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Danh sách khách hàng | Đỉnh Phong Premium Beef CRM</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#d2c4b6",
+                    "on-error": "#ffffff",
+                    "tertiary-fixed": "#efe0d1",
+                    "on-surface-variant": "#514539",
+                    "on-secondary-fixed": "#201b16",
+                    "primary-container": "#9d6a29",
+                    "on-tertiary-fixed-variant": "#4f453b",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-container": "#fffbff",
+                    "on-primary-container": "#fffbff",
+                    "primary-fixed": "#ffddba",
+                    "on-primary-fixed-variant": "#663d00",
+                    "inverse-surface": "#31312d",
+                    "secondary-container": "#ebe1d8",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#f3f0ea",
+                    "on-surface": "#1c1c18",
+                    "on-secondary-container": "#6a635d",
+                    "tertiary": "#645a4f",
+                    "surface-container-low": "#f6f3ed",
+                    "surface-bright": "#fcf9f3",
+                    "surface": "#fcf9f3",
+                    "secondary-fixed": "#ebe1d8",
+                    "surface-container-high": "#ebe8e2",
+                    "primary-fixed-dim": "#f9ba72",
+                    "outline": "#837567",
+                    "on-secondary-fixed-variant": "#4c4640",
+                    "surface-variant": "#e5e2dc",
+                    "surface-dim": "#dcdad4",
+                    "on-error-container": "#93000a",
+                    "inverse-primary": "#f9ba72",
+                    "surface-container-highest": "#e5e2dc",
+                    "on-primary": "#ffffff",
+                    "surface-tint": "#835414",
+                    "outline-variant": "#d5c4b4",
+                    "error": "#ba1a1a",
+                    "on-primary-fixed": "#2b1700",
+                    "error-container": "#ffdad6",
+                    "on-tertiary": "#ffffff",
+                    "surface-container": "#f0eee8",
+                    "primary": "#805211",
+                    "on-tertiary-fixed": "#211a11",
+                    "secondary-fixed-dim": "#cfc5bd",
+                    "on-background": "#1c1c18",
+                    "background": "#fcf9f3",
+                    "secondary": "#645d57",
+                    "tertiary-container": "#7e7367"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "sidebar-width": "280px",
+                    "lg": "24px",
+                    "container-max": "1440px",
+                    "base": "4px",
+                    "xs": "4px",
+                    "sm": "8px",
+                    "md": "16px",
+                    "xl": "48px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "title-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "body-lg": ["Inter"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #FAF7F1; }
+        .frosted-cream {
+            background: rgba(255, 255, 255, 0.68);
+            backdrop-filter: blur(16px);
+            border: 1px solid #E3D8CA;
+            box-shadow: 0px 4px 20px rgba(122, 111, 99, 0.08);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .butcher-gold-border { border-left: 4px solid #B9823F; }
+    </style>
+</head>
+<body class="text-on-surface">
+<!-- Side Navigation Bar -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-surface-container border-r border-outline-variant flex flex-col z-50">
+<div class="px-6 py-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+</div>
+<div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary leading-tight">Đỉnh Phong</h1>
+<p class="font-label-md text-label-md text-tertiary">Premium Beef CRM</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 mt-4 overflow-y-auto scrollbar-hide">
+<a class="flex items-center text-tertiary py-3 px-6 hover:bg-on-primary-fixed-variant/10 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="dashboard">dashboard</span>
+<span class="font-body-lg text-body-lg">Tổng quan</span>
+</a>
+<a class="flex items-center text-tertiary py-3 px-6 hover:bg-on-primary-fixed-variant/10 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="monetization_on">monetization_on</span>
+<span class="font-body-lg text-body-lg">Cơ hội bán hàng</span>
+</a>
+<a class="flex items-center text-tertiary py-3 px-6 hover:bg-on-primary-fixed-variant/10 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="assignment">assignment</span>
+<span class="font-body-lg text-body-lg">Công việc</span>
+</a>
+<!-- Active Tab: Danh sách khách hàng -->
+<a class="relative flex items-center bg-secondary-container text-primary font-semibold py-3 px-6 butcher-gold-border" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="groups">groups</span>
+<span class="font-body-lg text-body-lg">Danh sách khách hàng</span>
+</a>
+<a class="flex items-center text-tertiary py-3 px-6 hover:bg-on-primary-fixed-variant/10 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="payments">payments</span>
+<span class="font-body-lg text-body-lg">Thanh toán</span>
+</a>
+<a class="flex items-center text-tertiary py-3 px-6 hover:bg-on-primary-fixed-variant/10 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="settings">settings</span>
+<span class="font-body-lg text-body-lg">Cài đặt</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-outline-variant p-4">
+<a class="flex items-center text-tertiary py-3 px-6 hover:bg-on-primary-fixed-variant/10 transition-colors duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined mr-3" data-icon="account_circle">account_circle</span>
+<span class="font-body-lg text-body-lg">Hồ sơ cá nhân</span>
+</a>
+</div>
+</aside>
+<!-- Top App Bar -->
+<header class="fixed top-0 right-0 w-[calc(100%-280px)] h-16 bg-surface/68 backdrop-blur-xl border-b border-outline-variant/30 flex items-center justify-between px-lg z-40">
+<div class="flex items-center w-1/3">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-on-surface-variant/5 border-none rounded-full pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/20" placeholder="Tìm nhanh..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:bg-on-surface-variant/5 rounded-full p-2 transition-all">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="hover:bg-on-surface-variant/5 rounded-full p-2 transition-all">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="h-8 w-px bg-outline-variant/30 mx-2"></div>
+<div class="flex items-center gap-3">
+<div class="text-right hidden sm:block">
+<p class="text-sm font-bold text-on-surface">Admin</p>
+<p class="text-xs text-tertiary">Quản trị viên</p>
+</div>
+<img class="w-10 h-10 rounded-full border border-outline-variant object-cover" data-alt="A high-quality professional corporate headshot of a boutique meat distributor manager, dressed in a sharp neutral-toned apron over a clean white linen shirt. The background is a soft-focus artisanal butchery with high-end equipment and warm lighting. The aesthetic is clean, minimalist, and exudes authority and premium quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgPSTyiNpmC7gFEizVuORHcZnFXV-Sj_l1u0iH0HZZm9mv-Jrfo5U-5xKqeYQzeaxAjdfb_SBfQsDwpqKT4KcV-Q76BtIzTLTuKjO5tPoxndEolqg1yO-d-t5jR5RHYzptbGXPenUhsjFuPRzDKc77uhhZs9eUdXRJpMLseREGwa3gwRQUw--Q6VNqYz6_oeEsL9T74rkv-GVaEPkOIBg7OaIPMg5FZ30t79NEZ6DZ7ZlO6OLnzqahkBHpCHEmO0IxGUnyDLAibmqy"/>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-[280px] pt-24 px-xl pb-12 min-h-screen">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+<div>
+<h1 class="text-[28px] font-medium text-on-surface">Danh sách khách hàng</h1>
+<p class="text-tertiary mt-1">Quản lý và theo dõi thông tin đối tác chiến lược của Đỉnh Phong</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-5 py-2.5 bg-[#B9823F] hover:bg-[#9F6D33] text-white font-medium rounded-[14px] transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="add">add</span>
+                    Thêm khách hàng
+                </button>
+<button class="px-5 py-2.5 border border-[#E3D8CA] text-[#241F1A] hover:bg-[#F4EDE2] font-medium rounded-[14px] transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="upload">upload</span>
+                    Upload CSV
+                </button>
+<button class="px-5 py-2.5 border border-[#E3D8CA] text-[#241F1A] hover:bg-[#F4EDE2] font-medium rounded-[14px] transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="download">download</span>
+                    Xuất CSV
+                </button>
+</div>
+</div>
+<!-- Filter & Search Bar -->
+<div class="mb-8 grid grid-cols-1 lg:grid-cols-12 gap-4">
+<div class="lg:col-span-5 relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-tertiary">search</span>
+<input class="w-full bg-white border border-[#E3D8CA] rounded-[14px] pl-12 pr-4 py-3 focus:border-[#B9823F] focus:ring-4 focus:ring-[#B9823F]/10 outline-none transition-all" placeholder="Tìm kiếm khách hàng theo tên, SĐT..." type="text"/>
+</div>
+<div class="lg:col-span-2">
+<select class="w-full bg-white border border-[#E3D8CA] rounded-[14px] px-4 py-3 focus:border-[#B9823F] focus:ring-4 focus:ring-[#B9823F]/10 outline-none appearance-none transition-all cursor-pointer">
+<option value="">Phân khúc</option>
+<option value="khach-le">Khách lẻ</option>
+<option value="dai-ly">Đại lý</option>
+<option value="vip">VIP</option>
+</select>
+</div>
+<div class="lg:col-span-2">
+<select class="w-full bg-white border border-[#E3D8CA] rounded-[14px] px-4 py-3 focus:border-[#B9823F] focus:ring-4 focus:ring-[#B9823F]/10 outline-none appearance-none transition-all cursor-pointer">
+<option value="">Nguồn khách</option>
+<option value="facebook">Facebook</option>
+<option value="referral">Giới thiệu</option>
+<option value="website">Website</option>
+</select>
+</div>
+<div class="lg:col-span-2">
+<select class="w-full bg-white border border-[#E3D8CA] rounded-[14px] px-4 py-3 focus:border-[#B9823F] focus:ring-4 focus:ring-[#B9823F]/10 outline-none appearance-none transition-all cursor-pointer">
+<option value="">Trạng thái</option>
+<option value="active">Đang hoạt động</option>
+<option value="inactive">Ngừng giao dịch</option>
+<option value="prospect">Tiềm năng</option>
+</select>
+</div>
+<div class="lg:col-span-1">
+<button class="w-full h-full bg-white border border-[#E3D8CA] rounded-[14px] flex items-center justify-center hover:bg-[#F4EDE2] transition-all">
+<span class="material-symbols-outlined text-tertiary">tune</span>
+</button>
+</div>
+</div>
+<!-- Data Table Container (Frosted Cream) -->
+<div class="frosted-cream rounded-[20px] overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-[#F4EDE2] text-[#7A6F63] font-medium text-sm">
+<th class="px-6 py-4">Tên khách hàng</th>
+<th class="px-6 py-4">Liên hệ</th>
+<th class="px-6 py-4">Phân khúc</th>
+<th class="px-6 py-4">Sản phẩm quan tâm</th>
+<th class="px-6 py-4">Người phụ trách</th>
+<th class="px-6 py-4">Trạng thái</th>
+<th class="px-6 py-4 text-center">Hành động</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#E3D8CA]">
+<!-- Row 1: Central Group -->
+<tr class="hover:bg-[#F4EDE2] transition-colors group cursor-pointer">
+<td class="px-6 py-5 font-bold text-on-surface">Central Group (VN)</td>
+<td class="px-6 py-5">
+<div class="text-sm font-medium">028 3824 1234</div>
+<div class="text-xs text-tertiary">procurement@centralgroup.vn</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-[#EFE2D0] text-[#8A6336] rounded-full text-xs font-semibold">Đại lý</span>
+</td>
+<td class="px-6 py-5 text-sm text-tertiary">Thăn ngoại A5 Wagyu, Prime Rib-eye</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<img class="w-8 h-8 rounded-full" data-alt="A professional portrait of a sales executive in a minimalist studio. High-end lighting, warm tones, reflecting a premium service brand. Focus on a friendly yet professional demeanor." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBn1hVHc6xjE_drwwpiQKFhYRRla3FzihGW-4p72Q-zyh9OxfnUYsLifFaj-DG3Xxfug4-Kfw0erUWgrABi6ceC9G5mrATGIs0zUdfxoNxUqXYum_awSKcorKWkLOQiPc-8G4S_d7LYNpdv4KZZlPUVGhfxUhzvMFRP3eMHx-Nl0YnbGSuHqaxcfiGzJRDuJi2KS0L_8nnwMkuD8VrH3rjGhS0mtFtosras_857mpgUsqJ3XvOTLMPJn3IsQBTOwSgJUHuiwMsX1NYs"/>
+<span class="text-sm font-medium">Lê Tuấn Anh</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="flex items-center gap-1.5 text-xs font-medium text-emerald-700">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                                    Đang hoạt động
+                                </span>
+</td>
+<td class="px-6 py-5 text-center">
+<button class="p-1 hover:bg-on-surface-variant/10 rounded-full transition-all">
+<span class="material-symbols-outlined text-tertiary">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2: Haidilao Hotpot -->
+<tr class="hover:bg-[#F4EDE2] transition-colors group cursor-pointer">
+<td class="px-6 py-5 font-bold text-on-surface">Haidilao Hotpot Vietnam</td>
+<td class="px-6 py-5">
+<div class="text-sm font-medium">090 999 8888</div>
+<div class="text-xs text-tertiary">supply@haidilaovn.com</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-[#F3E3CF] text-[#9F6D33] rounded-full text-xs font-semibold">VIP</span>
+</td>
+<td class="px-6 py-5 text-sm text-tertiary">Bắp bò Úc, Lõi vai bò Mỹ</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<img class="w-8 h-8 rounded-full" data-alt="Corporate headshot of a female account manager, professional attire, soft background of a modern workspace with wood accents and cream walls. Lighting is airy and bright." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBN1paIHUR52mg8N6szYy70FR1ZP3RD8Ilyk9EQ0zL3JUfL1tmnSrTVvK_MKYjgN_nhGVBrP4Q2sAMlQccTXlr6sl4qvt6Mhnb9geOcba0UL4NqhbEGAGtJg1-Pv6zdzB4NU9Z_rjILRkaDg1QhoZX7i1aZmrTOpZLuxHcU3bOMTSOVszHl0JZkG4-muMk_xNVTSoG0SRB5cPHE_ob0y_qh-9cROKbNIGelYc57EdARYiJNPg0ZwpOY-6CozbHky21kJQw_rhKxP_Vg"/>
+<span class="text-sm font-medium">Phan Minh Hằng</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="flex items-center gap-1.5 text-xs font-medium text-emerald-700">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                                    Đang hoạt động
+                                </span>
+</td>
+<td class="px-6 py-5 text-center">
+<button class="p-1 hover:bg-on-surface-variant/10 rounded-full transition-all">
+<span class="material-symbols-outlined text-tertiary">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3: Personal Chef -->
+<tr class="hover:bg-[#F4EDE2] transition-colors group cursor-pointer">
+<td class="px-6 py-5 font-bold text-on-surface">Chef Michael Nguyen</td>
+<td class="px-6 py-5">
+<div class="text-sm font-medium">098 765 4321</div>
+<div class="text-xs text-tertiary">michael@cuisine.art</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-[#F4EDE2] text-[#7A6F63] rounded-full text-xs font-semibold">Khách lẻ</span>
+</td>
+<td class="px-6 py-5 text-sm text-tertiary">Dry-aged Tomahawk, Fillet Mignon</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<img class="w-8 h-8 rounded-full" data-alt="Headshot of a male sales consultant, dressed in a minimal brown polo shirt. Background is a blurred luxury showroom with warm lighting. Clean and professional." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvl9Vwd8LcXVQICMNkqtwb14RYcdfEF8_1MQmuKrd2mt8LrA-FtKh7Upa66HpMsc_yc7ScLoOqlOMDAyoLD4EVOkfk5e7Orp_ap6x-KS6Eh642notef43js-KD0YTQt3hSh8tG_RNcqLW5eEAqQRqQlvwNGCnEVsFzpmDtUfNN_K_X93hX89jcz8PDO7x4dkpPQUCkn-1CxOFxzVYbpmEZLcImE9lhTiLaLDI2rFMcrpKPkwPe4Rv0Wy36Lc2i9vlg8gCCvDVDBxNP"/>
+<span class="text-sm font-medium">Trần Hoàng Nam</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="flex items-center gap-1.5 text-xs font-medium text-amber-600">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                                    Tiềm năng
+                                </span>
+</td>
+<td class="px-6 py-5 text-center">
+<button class="p-1 hover:bg-on-surface-variant/10 rounded-full transition-all">
+<span class="material-symbols-outlined text-tertiary">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4: Golden Gate Group -->
+<tr class="hover:bg-[#F4EDE2] transition-colors group cursor-pointer">
+<td class="px-6 py-5 font-bold text-on-surface">Golden Gate Group</td>
+<td class="px-6 py-5">
+<div class="text-sm font-medium">1900 6622</div>
+<div class="text-xs text-tertiary">contact@goldengate.com.vn</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-[#F3E3CF] text-[#9F6D33] rounded-full text-xs font-semibold">VIP</span>
+</td>
+<td class="px-6 py-5 text-sm text-tertiary">Short Ribs (MB 7+), Wagyu Brisket</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<img class="w-8 h-8 rounded-full" data-alt="Professional studio portrait of an account lead, clean aesthetic, high-key lighting, focused look, minimal style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB64c8QFLZfEU4gtdjja8qzChLLdsANPeqPshQAi-svVNY9nTfJ1qE-5lOPbG_yskslRvIvytri7Z7rLfKFYId93v9l4HpC79vGHbIBvbb112UtmC6FrtMshBa6O8mheWjEpRsU0NzI5QNoUwOhBCBwaIy6dWxGJ2dBCbfhJdk5FCGAUK3_eUgZOuCvWjlaCJcJ8mu9i0D2t3fmmTW6_jL6cHwANh3RvlcdDCNNAW5_1VOdgKtsGKQYxJjhVIympm6qqD9M3lHHu73-"/>
+<span class="text-sm font-medium">Lê Tuấn Anh</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="flex items-center gap-1.5 text-xs font-medium text-emerald-700">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                                    Đang hoạt động
+                                </span>
+</td>
+<td class="px-6 py-5 text-center">
+<button class="p-1 hover:bg-on-surface-variant/10 rounded-full transition-all">
+<span class="material-symbols-outlined text-tertiary">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 5: Fine Dining Restaurant -->
+<tr class="hover:bg-[#F4EDE2] transition-colors group cursor-pointer">
+<td class="px-6 py-5 font-bold text-on-surface">The Log Restaurant</td>
+<td class="px-6 py-5">
+<div class="text-sm font-medium">028 3911 0123</div>
+<div class="text-xs text-tertiary">info@thelog.com.vn</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-[#EFE2D0] text-[#8A6336] rounded-full text-xs font-semibold">Đại lý</span>
+</td>
+<td class="px-6 py-5 text-sm text-tertiary">Bò Angus thượng hạng, Ribeye Steak</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<img class="w-8 h-8 rounded-full" data-alt="Headshot of a friendly female staff member, warm studio lighting, neutral background, professional and welcoming." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqL7B0_S0Ch0eHH5w9uPP88sIQsYzDOeISPtvnlG3P2Y7wt2YdrjGNN-HPhoQ9ZCOLg9bjsmnDi_Ej6AblXzZiO_jKoehn83fGrav-LbK2xcCvVrfhXFHe9w9ZpnawUOK9iySCRPphBSSScn1CGHoVkvoNcpXXRjL806rkO39xe3J9eSJl8FmC6Ike4OLdei12a6PAGM3MvhQbsZatXp73pe6n0momzLMvzJowRh52N1Z3RY6gn28chlc9pL-xEUXOyfiGxHCAzMvx"/>
+<span class="text-sm font-medium">Nguyễn Thu Thủy</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="flex items-center gap-1.5 text-xs font-medium text-slate-500">
+<span class="w-2 h-2 rounded-full bg-slate-400"></span>
+                                    Tạm ngưng
+                                </span>
+</td>
+<td class="px-6 py-5 text-center">
+<button class="p-1 hover:bg-on-surface-variant/10 rounded-full transition-all">
+<span class="material-symbols-outlined text-tertiary">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-6 py-4 bg-[#F4EDE2]/50 flex items-center justify-between border-t border-[#E3D8CA]">
+<div class="text-sm text-tertiary">Hiển thị 1 - 5 của 1,280 khách hàng</div>
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-[#E3D8CA] rounded-lg transition-all disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 bg-[#B9823F] text-white rounded-lg text-sm font-bold">1</button>
+<button class="w-8 h-8 hover:bg-[#E3D8CA] rounded-lg text-sm font-medium">2</button>
+<button class="w-8 h-8 hover:bg-[#E3D8CA] rounded-lg text-sm font-medium">3</button>
+<span class="px-1 text-tertiary">...</span>
+<button class="w-8 h-8 hover:bg-[#E3D8CA] rounded-lg text-sm font-medium">256</button>
+</div>
+<button class="p-2 hover:bg-[#E3D8CA] rounded-lg transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Floating Quick View Summary (Extra boutique touch) -->
+<div class="mt-8 grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="frosted-cream p-4 rounded-xl flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-[#B9823F]/10 flex items-center justify-center text-[#B9823F]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">groups</span>
+</div>
+<div>
+<p class="text-xs text-tertiary uppercase tracking-wider font-bold">Tổng khách</p>
+<p class="text-xl font-bold text-on-surface">1,280</p>
+</div>
+</div>
+<div class="frosted-cream p-4 rounded-xl flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+</div>
+<div>
+<p class="text-xs text-tertiary uppercase tracking-wider font-bold">Hoạt động</p>
+<p class="text-xl font-bold text-on-surface">942</p>
+</div>
+</div>
+<div class="frosted-cream p-4 rounded-xl flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center text-amber-600">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+<div>
+<p class="text-xs text-tertiary uppercase tracking-wider font-bold">Hạng VIP</p>
+<p class="text-xl font-bold text-on-surface">124</p>
+</div>
+</div>
+<div class="frosted-cream p-4 rounded-xl flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-[#B9823F] flex items-center justify-center text-white">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shopping_cart</span>
+</div>
+<div>
+<p class="text-xs text-tertiary uppercase tracking-wider font-bold">Chốt mới/tháng</p>
+<p class="text-xl font-bold text-on-surface">+42</p>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Micro-interactions
+        document.querySelectorAll('tbody tr').forEach(row => {
+            row.addEventListener('click', () => {
+                row.classList.add('scale-[0.995]');
+                setTimeout(() => row.classList.remove('scale-[0.995]'), 100);
+            });
+        });
+
+        // Simple Search Filter simulation
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('tbody tr');
+            rows.forEach(row => {
+                const name = row.querySelector('td:first-child').textContent.toLowerCase();
+                if (name.includes(term)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body></html>

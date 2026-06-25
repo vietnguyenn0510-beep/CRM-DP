@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html class="light" lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Chi tiết công việc | Đỉnh Phong CRM</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="js/tailwind.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<style>
+  body {
+    background-color: #FAF7F1;
+    font-family: 'Inter', sans-serif;
+    color: #241F1A;
+  }
+  .frosted-cream {
+    background: rgba(255,255,255,0.68);
+    backdrop-filter: blur(16px);
+    border: 1px solid #E3D8CA;
+    box-shadow: 0px 4px 20px rgba(122,111,99,0.08);
+  }
+  .butcher-gold-btn {
+    background-color: #B9823F;
+    transition: all 0.2s ease;
+  }
+  .butcher-gold-btn:hover {
+    background-color: #9F6D33;
+    transform: translateY(-1px);
+  }
+  .nav-item-active {
+    background-color: #F3E3CF;
+    color: #9F6D33;
+    font-weight: 600;
+    border-radius: 0 0.75rem 0.75rem 0;
+    position: relative;
+  }
+  .nav-item-active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: #B9823F;
+    border-radius: 0 4px 4px 0;
+  }
+  .nav-item {
+    color: #7A6F63;
+    border-radius: 0 0.75rem 0.75rem 0;
+    transition: background 0.15s;
+  }
+  .nav-item:hover {
+    background-color: rgba(185,130,63,0.05);
+  }
+  .timeline-line {
+    position: absolute;
+    left: 7px;
+    top: 20px;
+    bottom: 0;
+    width: 2px;
+    background-color: #E3D8CA;
+  }
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- Sidebar -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-[#F4EDE2] border-r border-[#E3D8CA] flex flex-col z-50">
+  <div class="px-6 py-8 flex items-center gap-3">
+    <div class="w-10 h-10 bg-[#B9823F] flex items-center justify-center rounded-lg shadow-sm">
+      <span class="material-symbols-outlined text-white" style="font-variation-settings:'FILL' 1;">restaurant_menu</span>
+    </div>
+    <div>
+      <h1 class="text-[22px] font-bold text-[#B9823F] tracking-tight leading-none uppercase">Đỉnh Phong</h1>
+      <p class="text-[10px] text-[#7A6F63] tracking-widest uppercase mt-1">Premium Beef CRM</p>
+    </div>
+  </div>
+
+  <nav class="flex-1 px-4 space-y-1 mt-2 overflow-y-auto">
+    <a href="dashboard.html" class="nav-item flex items-center gap-3 px-4 py-2.5">
+      <span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 0;">dashboard</span>
+      <span class="text-[14px]">Tổng quan</span>
+    </a>
+    <a href="opportunities.html" class="nav-item flex items-center gap-3 px-4 py-2.5">
+      <span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 0;">monetization_on</span>
+      <span class="text-[14px]">Cơ hội</span>
+    </a>
+    <a href="tasks.html" class="nav-item-active flex items-center gap-3 px-4 py-2.5">
+      <span class="material-symbols-outlined text-[20px] text-[#9F6D33]" style="font-variation-settings:'FILL' 1;">assignment</span>
+      <span class="text-[14px]">Công việc</span>
+    </a>
+    <a href="customers.html" class="nav-item flex items-center gap-3 px-4 py-2.5">
+      <span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 0;">groups</span>
+      <span class="text-[14px]">Khách hàng</span>
+    </a>
+    <a href="payments.html" class="nav-item flex items-center gap-3 px-4 py-2.5">
+      <span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 0;">payments</span>
+      <span class="text-[14px]">Thanh toán</span>
+    </a>
+    <a href="settings.html" class="nav-item flex items-center gap-3 px-4 py-2.5">
+      <span class="material-symbols-outlined text-[20px]" style="font-variation-settings:'FILL' 0;">settings</span>
+      <span class="text-[14px]">Cài đặt</span>
+    </a>
+  </nav>
+
+  <div class="mt-auto p-4 border-t border-[#E3D8CA]/50 bg-[#F4EDE2] relative">
+    <div id="profile-dropdown" class="hidden absolute bottom-full left-4 right-4 mb-2 bg-white border border-[#E3D8CA] rounded-[14px] shadow-lg overflow-hidden z-10">
+      <a href="profile.html" class="flex items-center gap-3 px-4 py-3 hover:bg-[#F4EDE2] text-sm">
+        <span class="material-symbols-outlined text-[#B9823F] text-[18px]">person</span>
+        <span class="font-medium">Xem hồ sơ</span>
+      </a>
+      <a href="settings.html" class="flex items-center gap-3 px-4 py-3 hover:bg-[#F4EDE2] text-sm">
+        <span class="material-symbols-outlined text-[#7A6F63] text-[18px]">settings</span>
+        <span class="font-medium">Cài đặt</span>
+      </a>
+      <div class="border-t border-[#E3D8CA]/50 mx-2"></div>
+      <a href="index.html" class="flex items-center gap-3 px-4 py-3 hover:bg-red-50 text-sm text-red-600">
+        <span class="material-symbols-outlined text-[18px]">logout</span>
+        <span class="font-medium">Đăng xuất</span>
+      </a>
+    </div>
+    <div onclick="toggleProfileDropdown()" class="flex items-center gap-3 hover:bg-[#B9823F]/5 p-2 rounded-xl cursor-pointer">
+      <div class="relative">
+        <img class="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRrpeozyEJ-qX1mQ1mfknrMjUAebC1IUl0FzVdST9s3Ocju71cvkOLc0idwn9zDLDZ7XvWExo9maetvAugXOCUQsK18qsD_bxa85565xFcIQMi1GjSeyjFdNZhgm--7x1mHoAH2f7gIHrF_MlUUXXIES0xMiS2ACECxQJ93Xf_fzu95lrgkogZlNUGTOy9qDEndQl1bqSYFLmIIn3d4Bm7FXp-hgj2-JOFKMEf5h6PVVSTUq7bjFEFq3LezbEZ8msevCzX28BOs-G3" alt="Profile"/>
+        <div class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></div>
+      </div>
+      <div class="flex flex-col flex-1 min-w-0">
+        <span class="text-[14px] font-bold text-[#241F1A] truncate">Nguyễn Văn A</span>
+        <span class="text-[12px] text-[#7A6F63]">Quản trị viên</span>
+      </div>
+      <span class="material-symbols-outlined text-[#7A6F63] text-[18px]">unfold_more</span>
+    </div>
+  </div>
+</aside>
+
+<!-- Header -->
+<header class="fixed top-0 left-[280px] right-0 h-16 bg-[#FAF7F1]/80 backdrop-blur-md border-b border-[#E3D8CA] flex items-center justify-between px-8 z-40">
+  <div class="flex items-center gap-2 text-sm text-[#7A6F63]">
+    <span class="hover:text-[#B9823F] cursor-pointer">CRM</span>
+    <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+    <a href="tasks.html" class="hover:text-[#B9823F] cursor-pointer">Công việc</a>
+    <span class="material-symbols-outlined text-[16px]">chevron_right</span>
+    <span class="text-[#241F1A] font-medium truncate max-w-[340px]">Gửi báo giá Thịt Bò Úc - Lô 24</span>
+  </div>
+  <div class="flex items-center gap-2">
+    <button class="w-9 h-9 flex items-center justify-center rounded-xl hover:bg-[#B9823F]/8 text-[#7A6F63] relative" title="Thông báo">
+      <span class="material-symbols-outlined text-[20px]">notifications</span>
+      <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full"></span>
+    </button>
+    <button class="w-9 h-9 flex items-center justify-center rounded-xl hover:bg-[#B9823F]/8 text-[#7A6F63]" title="Trợ giúp">
+      <span class="material-symbols-outlined text-[20px]">help_outline</span>
+    </button>
+  </div>
+</header>
+
+<!-- Main Content -->
+<main class="ml-[280px] pt-20 px-8 pb-12">
+
+  <!-- Back link -->
+  <a href="tasks.html" class="inline-flex items-center gap-1.5 text-[#B9823F] text-sm font-medium hover:text-[#9F6D33] mb-5 transition-colors">
+    <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+    Công việc
+  </a>
+
+  <!-- Page Header Card -->
+  <div class="frosted-cream rounded-[20px] p-6 mb-6">
+    <!-- Row 1: title + priority + status -->
+    <div class="flex flex-wrap items-center gap-3 mb-3">
+      <h1 class="text-[22px] font-bold text-[#241F1A]">Gửi báo giá Thịt Bò Úc - Lô 24</h1>
+      <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-[#A66D38]/10 text-[#A66D38] border border-[#A66D38]/20">
+        <span class="material-symbols-outlined text-[13px]" style="font-variation-settings:'FILL' 1;">flag</span>
+        Cao
+      </span>
+      <span class="text-sm text-[#7A6F63] font-medium">· Đang chờ gửi</span>
+    </div>
+    <!-- Row 2: info chips -->
+    <div class="flex flex-wrap items-center gap-4 mb-5 text-sm">
+      <span class="inline-flex items-center gap-1.5 text-red-600 font-medium">
+        <span class="material-symbols-outlined text-[16px]">schedule</span>
+        Đến hạn: Hôm qua, 17:00
+      </span>
+      <span class="inline-flex items-center gap-1.5 text-[#7A6F63]">
+        <span class="material-symbols-outlined text-[16px]">business</span>
+        Sheraton Saigon Hotel
+      </span>
+      <span class="inline-flex items-center gap-1.5 text-[#7A6F63]">
+        <span class="material-symbols-outlined text-[16px]">person</span>
+        <span class="w-6 h-6 rounded-full bg-[#B9823F] flex items-center justify-center text-white text-[10px] font-bold">MK</span>
+        Minh Khôi
+      </span>
+    </div>
+    <!-- Row 3: actions -->
+    <div class="flex items-center justify-end gap-3">
+      <button onclick="handleComplete()" class="butcher-gold-btn inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-white text-sm font-semibold shadow-sm">
+        <span class="material-symbols-outlined text-[18px]">check_circle</span>
+        Đánh dấu hoàn thành
+      </button>
+      <button onclick="handleEdit()" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-[#7A6F63] text-sm font-semibold border border-[#E3D8CA] bg-white hover:bg-[#F4EDE2] transition-colors">
+        <span class="material-symbols-outlined text-[18px]">edit</span>
+        Chỉnh sửa
+      </button>
+    </div>
+  </div>
+
+  <!-- Two-column grid -->
+  <div class="grid grid-cols-3 gap-6">
+
+    <!-- Left: Details -->
+    <div class="col-span-1 space-y-6">
+      <div class="frosted-cream rounded-[20px] p-6">
+        <h2 class="text-[16px] font-bold text-[#241F1A] mb-5">Chi tiết công việc</h2>
+        <div class="space-y-4">
+
+          <div class="flex items-start justify-between gap-2">
+            <span class="text-sm text-[#7A6F63] flex-shrink-0 pt-0.5">Mức độ ưu tiên</span>
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-semibold bg-[#A66D38]/10 text-[#A66D38] border border-[#A66D38]/20">
+              <span class="material-symbols-outlined text-[12px]" style="font-variation-settings:'FILL' 1;">flag</span>Cao
+            </span>
+          </div>
+
+          <div class="flex items-start justify-between gap-2">
+            <span class="text-sm text-[#7A6F63] flex-shrink-0 pt-0.5">Trạng thái</span>
+            <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200">Đang chờ gửi</span>
+          </div>
+
+          <div class="flex items-start justify-between gap-2">
+            <span class="text-sm text-[#7A6F63] flex-shrink-0 pt-0.5">Deadline</span>
+            <span class="text-sm font-medium text-red-600">Hôm qua, 17:00</span>
+          </div>
+
+          <div class="border-t border-[#E3D8CA]/60 pt-4 flex items-center justify-between gap-2">
+            <span class="text-sm text-[#7A6F63] flex-shrink-0">Người giao</span>
+            <div class="flex items-center gap-2">
+              <span class="w-7 h-7 rounded-full bg-[#B9823F] flex items-center justify-center text-white text-[10px] font-bold">VA</span>
+              <span class="text-sm font-medium">Nguyễn Văn A</span>
+            </div>
+          </div>
+
+          <div class="flex items-center justify-between gap-2">
+            <span class="text-sm text-[#7A6F63] flex-shrink-0">Người nhận</span>
+            <div class="flex items-center gap-2">
+              <span class="w-7 h-7 rounded-full bg-[#9F6D33] flex items-center justify-center text-white text-[10px] font-bold">MK</span>
+              <span class="text-sm font-medium">Minh Khôi</span>
+            </div>
+          </div>
+
+          <div class="flex items-start justify-between gap-2">
+            <span class="text-sm text-[#7A6F63] flex-shrink-0 pt-0.5">Khách hàng</span>
+            <a href="customer_detail.html" class="text-sm font-medium text-[#B9823F] hover:text-[#9F6D33] text-right transition-colors">Sheraton Saigon Hotel</a>
+          </div>
+
+          <div class="flex items-start justify-between gap-2">
+            <span class="text-sm text-[#7A6F63] flex-shrink-0 pt-0.5">Cơ hội</span>
+            <a href="opportunity_detail.html" class="text-sm font-medium text-[#B9823F] hover:text-[#9F6D33] text-right transition-colors">Wagyu A5 Striploin Set</a>
+          </div>
+
+          <div class="flex items-start justify-between gap-2">
+            <span class="text-sm text-[#7A6F63] flex-shrink-0 pt-0.5">Ngày tạo</span>
+            <span class="text-sm font-medium">10/11/2024</span>
+          </div>
+        </div>
+
+        <!-- Description -->
+        <div class="mt-6 pt-6 border-t border-[#E3D8CA]/60">
+          <h3 class="text-[14px] font-semibold text-[#241F1A] mb-3">Mô tả công việc</h3>
+          <p class="text-sm text-[#7A6F63] leading-relaxed">
+            Chuẩn bị và gửi báo giá chi tiết cho lô hàng Thịt Bò Úc thăn ngoại Wagyu A5 số 24 cho sự kiện cuối năm. Cần bao gồm: bảng giá, chứng nhận chất lượng, và điều khoản giao hàng.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right: Activity / Comments -->
+    <div class="col-span-2">
+      <div class="frosted-cream rounded-[20px] p-6">
+        <div class="flex items-center justify-between mb-6">
+          <h2 class="text-[16px] font-bold text-[#241F1A]">Hoạt động &amp; Ghi chú</h2>
+          <button onclick="handleAddNote()" class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-[#7A6F63] text-sm font-medium border border-[#E3D8CA] bg-white hover:bg-[#F4EDE2] transition-colors">
+            <span class="material-symbols-outlined text-[16px]">add</span>
+            Thêm ghi chú
+          </button>
+        </div>
+
+        <!-- Timeline -->
+        <div class="space-y-0 mb-8">
+
+          <!-- Entry 1 -->
+          <div class="flex gap-4 relative pb-6">
+            <div class="flex flex-col items-center flex-shrink-0">
+              <div class="w-4 h-4 rounded-full bg-[#B9823F] border-2 border-white shadow-sm z-10 mt-1"></div>
+              <div class="w-0.5 flex-1 bg-[#E3D8CA] mt-1"></div>
+            </div>
+            <div class="flex-1 pb-1">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="text-sm font-semibold text-[#241F1A]">Công việc được tạo</span>
+              </div>
+              <div class="flex items-center gap-2 text-xs text-[#7A6F63]">
+                <span class="w-5 h-5 rounded-full bg-[#B9823F] flex items-center justify-center text-white text-[9px] font-bold">VA</span>
+                <span>Nguyễn Văn A</span>
+                <span>·</span>
+                <span>10/11/2024</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Entry 2 -->
+          <div class="flex gap-4 relative pb-6">
+            <div class="flex flex-col items-center flex-shrink-0">
+              <div class="w-4 h-4 rounded-full bg-[#B9823F] border-2 border-white shadow-sm z-10 mt-1"></div>
+              <div class="w-0.5 flex-1 bg-[#E3D8CA] mt-1"></div>
+            </div>
+            <div class="flex-1 pb-1">
+              <div class="flex items-center gap-2 mb-1">
+                <span class="text-sm font-semibold text-[#241F1A]">Giao cho Minh Khôi</span>
+              </div>
+              <div class="flex items-center gap-2 text-xs text-[#7A6F63]">
+                <span class="w-5 h-5 rounded-full bg-[#B9823F] flex items-center justify-center text-white text-[9px] font-bold">VA</span>
+                <span>Nguyễn Văn A</span>
+                <span>·</span>
+                <span>10/11/2024</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Entry 3: overdue warning -->
+          <div class="flex gap-4 relative">
+            <div class="flex flex-col items-center flex-shrink-0">
+              <div class="w-4 h-4 rounded-full bg-red-500 border-2 border-white shadow-sm z-10 mt-1"></div>
+            </div>
+            <div class="flex-1">
+              <div class="bg-red-50 border border-red-200 rounded-[12px] p-3">
+                <div class="flex items-center gap-2 mb-1">
+                  <span class="material-symbols-outlined text-red-500 text-[16px]" style="font-variation-settings:'FILL' 1;">warning</span>
+                  <span class="text-sm font-semibold text-red-700">Nhắc nhở: Chưa hoàn thành - quá hạn</span>
+                </div>
+                <div class="flex items-center gap-2 text-xs text-red-500">
+                  <span class="material-symbols-outlined text-[14px]">smart_toy</span>
+                  <span>Hệ thống</span>
+                  <span>·</span>
+                  <span>Hôm qua, 18:00</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Comment box -->
+        <div class="border-t border-[#E3D8CA]/60 pt-5">
+          <div class="flex items-start gap-3">
+            <span class="w-8 h-8 rounded-full bg-[#B9823F] flex items-center justify-center text-white text-[10px] font-bold flex-shrink-0 mt-0.5">VA</span>
+            <div class="flex-1">
+              <textarea id="comment-input" rows="3" placeholder="Thêm ghi chú..." class="w-full text-sm border border-[#E3D8CA] rounded-[12px] px-4 py-3 bg-white/60 focus:outline-none focus:border-[#B9823F] focus:ring-2 focus:ring-[#B9823F]/10 resize-none text-[#241F1A] placeholder:text-[#7A6F63]"></textarea>
+              <div class="flex justify-end mt-2">
+                <button onclick="handleSendComment()" class="butcher-gold-btn inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-white text-sm font-semibold shadow-sm">
+                  <span class="material-symbols-outlined text-[16px]">send</span>
+                  Gửi
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<script>
+  function toggleProfileDropdown() {
+    const dropdown = document.getElementById('profile-dropdown');
+    dropdown.classList.toggle('hidden');
+  }
+
+  document.addEventListener('click', function(e) {
+    const dropdown = document.getElementById('profile-dropdown');
+    const trigger = dropdown.nextElementSibling;
+    if (!dropdown.contains(e.target) && !trigger.contains(e.target)) {
+      dropdown.classList.add('hidden');
+    }
+  });
+
+  function showToast(msg, type) {
+    Toastify({
+      text: msg,
+      duration: 3000,
+      gravity: 'top',
+      position: 'right',
+      style: {
+        background: type === 'success' ? '#B9823F' : '#E55050',
+        borderRadius: '12px',
+        fontFamily: 'Inter, sans-serif',
+        fontSize: '14px',
+        padding: '12px 20px',
+      }
+    }).showToast();
+  }
+
+  function handleComplete() {
+    showToast('Công việc đã được đánh dấu hoàn thành!', 'success');
+  }
+
+  function handleEdit() {
+    showToast('Đang mở form chỉnh sửa...', 'info');
+  }
+
+  function handleAddNote() {
+    document.getElementById('comment-input').focus();
+  }
+
+  function handleSendComment() {
+    const input = document.getElementById('comment-input');
+    const val = input.value.trim();
+    if (!val) {
+      showToast('Vui lòng nhập nội dung ghi chú.', 'error');
+      return;
+    }
+    input.value = '';
+    showToast('Ghi chú đã được gửi thành công!', 'success');
+  }
+</script>
+</body>
+</html>

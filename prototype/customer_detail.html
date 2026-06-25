@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html class="light" lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Haidilao Hotpot Vietnam | Đỉnh Phong Premium Beef CRM</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="js/tailwind.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<style>
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #FAF7F1;
+    color: #241F1A;
+  }
+
+  .frosted-cream {
+    background: rgba(255, 255, 255, 0.68);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid #E3D8CA;
+    box-shadow: 0px 4px 20px rgba(122, 111, 99, 0.08);
+  }
+
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    vertical-align: middle;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar { width: 4px; height: 4px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #E3D8CA; border-radius: 10px; }
+  ::-webkit-scrollbar-thumb:hover { background: #B9823F; }
+
+  /* Tab underline animation */
+  .tab-btn {
+    position: relative;
+    padding-bottom: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #7A6F63;
+    border: none;
+    background: none;
+    cursor: pointer;
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+  .tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #B9823F;
+    border-radius: 2px;
+    transform: scaleX(0);
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .tab-btn.active {
+    color: #B9823F;
+    font-weight: 600;
+  }
+  .tab-btn.active::after {
+    transform: scaleX(1);
+  }
+  .tab-btn:hover {
+    color: #9F6D33;
+  }
+
+  /* Tab pane */
+  .tab-pane { display: none; }
+  .tab-pane.active { display: block; }
+
+  /* Sidebar active indicator */
+  .sidebar-active-indicator {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: #B9823F;
+    border-radius: 0 2px 2px 0;
+  }
+
+  /* Info row separator */
+  .info-row + .info-row {
+    border-top: 1px solid #F0E9DF;
+    margin-top: 0;
+    padding-top: 12px;
+  }
+  .info-row {
+    padding-bottom: 12px;
+  }
+
+  /* Opportunity stage pill colors */
+  .stage-qualified   { background: #EBF5FF; color: #2563EB; }
+  .stage-proposal    { background: #FFF7E6; color: #B45309; }
+  .stage-negotiation { background: #F0FDF4; color: #15803D; }
+  .stage-closed      { background: #F3E3CF; color: #9F6D33; }
+  .stage-lost        { background: #FEF2F2; color: #B91C1C; }
+
+  /* Payment status */
+  .pay-paid    { background: #F0FDF4; color: #15803D; }
+  .pay-pending { background: #FFF7E6; color: #B45309; }
+  .pay-overdue { background: #FEF2F2; color: #B91C1C; }
+
+  /* Task priority */
+  .priority-high   { background: #FEF2F2; color: #B91C1C; }
+  .priority-medium { background: #FFF7E6; color: #B45309; }
+  .priority-low    { background: #F0FDF4; color: #15803D; }
+
+  /* Subtle hover for table rows */
+  .data-row:hover { background: #FAF3EA; }
+
+  /* Breadcrumb chevron */
+  .bc-sep {
+    font-size: 16px;
+    color: #C4B8AC;
+    margin: 0 2px;
+    vertical-align: middle;
+  }
+
+  /* Gold accent line on customer header card */
+  .customer-header-card {
+    border-left: 4px solid #B9823F;
+    border-radius: 0 20px 20px 0;
+  }
+
+  /* Profile dropdown fade */
+  #profile-dropdown {
+    animation: fadeUp 0.15s ease;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(6px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  }
+</style>
+</head>
+<body class="flex min-h-screen">
+
+<!-- ============================================================
+     SIDEBAR
+     ============================================================ -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-[#F4EDE2] border-r border-[#E3D8CA] flex flex-col z-50">
+  <!-- Logo -->
+  <div class="px-6 py-8 flex items-center gap-3">
+    <div class="w-10 h-10 bg-[#B9823F] flex items-center justify-center rounded-lg shadow-sm">
+      <span class="material-symbols-outlined text-white" style="font-variation-settings:'FILL' 1;">restaurant_menu</span>
+    </div>
+    <div>
+      <h1 class="text-[22px] font-bold text-[#B9823F] tracking-tight leading-none uppercase">Đỉnh Phong</h1>
+      <p class="text-[10px] text-[#7A6F63] tracking-widest uppercase mt-1">Premium Beef CRM</p>
+    </div>
+  </div>
+
+  <!-- Nav -->
+  <nav class="flex-1 px-4 space-y-1 mt-2 overflow-y-auto">
+    <a href="dashboard.html"
+       class="flex items-center text-[#7A6F63] py-3 px-6 hover:bg-[#B9823F]/5 transition-colors rounded-r-xl">
+      <span class="material-symbols-outlined mr-4">dashboard</span>
+      <span class="text-[15px]">Tổng quan</span>
+    </a>
+    <a href="opportunities.html"
+       class="flex items-center text-[#7A6F63] py-3 px-6 hover:bg-[#B9823F]/5 transition-colors rounded-r-xl">
+      <span class="material-symbols-outlined mr-4">monetization_on</span>
+      <span class="text-[15px]">Cơ hội bán hàng</span>
+    </a>
+    <a href="tasks.html"
+       class="flex items-center text-[#7A6F63] py-3 px-6 hover:bg-[#B9823F]/5 transition-colors rounded-r-xl">
+      <span class="material-symbols-outlined mr-4">assignment</span>
+      <span class="text-[15px]">Công việc</span>
+    </a>
+    <!-- Active: Danh sách khách hàng -->
+    <a href="customers.html"
+       class="relative flex items-center bg-[#F3E3CF] text-[#9F6D33] font-semibold py-3 px-6 rounded-r-xl">
+      <div class="sidebar-active-indicator"></div>
+      <span class="material-symbols-outlined mr-4">groups</span>
+      <span class="text-[15px]">Danh sách khách hàng</span>
+    </a>
+    <a href="payments.html"
+       class="flex items-center text-[#7A6F63] py-3 px-6 hover:bg-[#B9823F]/5 transition-colors rounded-r-xl">
+      <span class="material-symbols-outlined mr-4">payments</span>
+      <span class="text-[15px]">Thanh toán</span>
+    </a>
+    <a href="settings.html"
+       class="flex items-center text-[#7A6F63] py-3 px-6 hover:bg-[#B9823F]/5 transition-colors rounded-r-xl">
+      <span class="material-symbols-outlined mr-4">settings</span>
+      <span class="text-[15px]">Cài đặt</span>
+    </a>
+  </nav>
+
+  <!-- Profile section -->
+  <div class="mt-auto p-4 border-t border-[#E3D8CA]/50 bg-[#F4EDE2] relative">
+    <!-- Dropdown -->
+    <div id="profile-dropdown"
+         class="hidden absolute bottom-full left-4 right-4 mb-2 bg-white border border-[#E3D8CA] rounded-[14px] shadow-lg overflow-hidden z-10">
+      <a href="profile.html"
+         class="flex items-center gap-3 px-4 py-3 hover:bg-[#F4EDE2] text-sm">
+        <span class="material-symbols-outlined text-[#B9823F] text-[18px]">person</span>
+        <span class="font-medium">Xem hồ sơ</span>
+      </a>
+      <a href="settings.html"
+         class="flex items-center gap-3 px-4 py-3 hover:bg-[#F4EDE2] text-sm">
+        <span class="material-symbols-outlined text-[#7A6F63] text-[18px]">settings</span>
+        <span class="font-medium">Cài đặt</span>
+      </a>
+      <div class="border-t border-[#E3D8CA]/50 mx-2"></div>
+      <a href="index.html"
+         class="flex items-center gap-3 px-4 py-3 hover:bg-red-50 text-sm text-red-600">
+        <span class="material-symbols-outlined text-[18px]">logout</span>
+        <span class="font-medium">Đăng xuất</span>
+      </a>
+    </div>
+
+    <div onclick="toggleProfileDropdown()"
+         class="flex items-center gap-3 hover:bg-[#B9823F]/5 p-2 rounded-xl cursor-pointer">
+      <div class="relative">
+        <img class="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm"
+             src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRrpeozyEJ-qX1mQ1mfknrMjUAebC1IUl0FzVdST9s3Ocju71cvkOLc0idwn9zDLDZ7XvWExo9maetvAugXOCUQsK18qsD_bxa85565xFcIQMi1GjSeyjFdNZhgm--7x1mHoAH2f7gIHrF_MlUUXXIES0xMiS2ACECxQJ93Xf_fzu95lrgkogZlNUGTOy9qDEndQl1bqSYFLmIIn3d4Bm7FXp-hgj2-JOFKMEf5h6PVVSTUq7bjFEFq3LezbEZ8msevCzX28BOs-G3"
+             alt="Nguyễn Văn A"/>
+        <div class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></div>
+      </div>
+      <div class="flex flex-col flex-1 min-w-0">
+        <span class="text-[14px] font-bold text-[#241F1A] truncate">Nguyễn Văn A</span>
+        <span class="text-[12px] text-[#7A6F63]">Quản trị viên</span>
+      </div>
+      <span class="material-symbols-outlined text-[#7A6F63] text-[18px]">unfold_more</span>
+    </div>
+  </div>
+</aside>
+
+<!-- ============================================================
+     HEADER
+     ============================================================ -->
+<header class="fixed top-0 left-[280px] right-0 h-16 bg-[#FAF7F1]/80 backdrop-blur-md z-40 border-b border-[#E3D8CA]/30 flex items-center justify-between px-8">
+  <!-- Breadcrumb -->
+  <nav class="flex items-center gap-0.5 text-[13px]" aria-label="Breadcrumb">
+    <span class="text-[#7A6F63] font-medium">CRM</span>
+    <span class="material-symbols-outlined bc-sep" style="font-size:16px;">chevron_right</span>
+    <a href="customers.html" class="text-[#7A6F63] hover:text-[#B9823F] font-medium transition-colors">Danh sách khách hàng</a>
+    <span class="material-symbols-outlined bc-sep" style="font-size:16px;">chevron_right</span>
+    <span class="text-[#B9823F] font-semibold">Haidilao Hotpot Vietnam</span>
+  </nav>
+
+  <!-- Actions -->
+  <div class="flex items-center gap-2">
+    <button class="w-9 h-9 flex items-center justify-center rounded-full hover:bg-[#E3D8CA]/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B9823F]"
+            aria-label="Thông báo">
+      <span class="material-symbols-outlined text-[#7A6F63]" style="font-size:22px;">notifications</span>
+    </button>
+    <button class="w-9 h-9 flex items-center justify-center rounded-full hover:bg-[#E3D8CA]/50 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B9823F]"
+            aria-label="Trợ giúp">
+      <span class="material-symbols-outlined text-[#7A6F63]" style="font-size:22px;">help_outline</span>
+    </button>
+    <div class="h-6 w-px bg-[#E3D8CA] mx-1"></div>
+    <img class="w-8 h-8 rounded-full object-cover border-2 border-white shadow-sm"
+         src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRrpeozyEJ-qX1mQ1mfknrMjUAebC1IUl0FzVdST9s3Ocju71cvkOLc0idwn9zDLDZ7XvWExo9maetvAugXOCUQsK18qsD_bxa85565xFcIQMi1GjSeyjFdNZhgm--7x1mHoAH2f7gIHrF_MlUUXXIES0xMiS2ACECxQJ93Xf_fzu95lrgkogZlNUGTOy9qDEndQl1bqSYFLmIIn3d4Bm7FXp-hgj2-JOFKMEf5h6PVVSTUq7bjFEFq3LezbEZ8msevCzX28BOs-G3"
+         alt="Nguyễn Văn A"/>
+  </div>
+</header>
+
+<!-- ============================================================
+     MAIN CONTENT
+     ============================================================ -->
+<main class="ml-[280px] pt-20 px-8 pb-12 min-h-screen">
+
+  <!-- ── Section 1: Customer Header Card ── -->
+  <div class="frosted-cream customer-header-card rounded-[20px] p-6 mb-6">
+    <!-- Back link -->
+    <a href="customers.html"
+       class="inline-flex items-center gap-1 text-[#B9823F] text-sm font-medium hover:text-[#9F6D33] transition-colors mb-5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B9823F] rounded">
+      <span class="material-symbols-outlined" style="font-size:18px;">arrow_back</span>
+      Danh sách khách hàng
+    </a>
+
+    <!-- Identity row -->
+    <div class="flex flex-wrap items-start gap-4">
+      <!-- Avatar -->
+      <img class="w-16 h-16 rounded-full object-cover border-2 border-[#E3D8CA] shadow-sm flex-shrink-0"
+           src="https://lh3.googleusercontent.com/aida-public/AB6AXuBN1paIHUR52mg8N6szYy70FR1ZP3RD8Ilyk9EQ0zL3JUfL1tmnSrTVvK_MKYjgN_nhGVBrP4Q2sAMlQccTXlr6sl4qvt6Mhnb9geOcba0UL4NqhbEGAGtJg1-Pv6zdzB4NU9Z_rjILRkaDg1QhoZX7i1aZmrTOpZLuxHcU3bOMTSOVszHl0JZkG4-muMk_xNVTSoG0SRB5cPHE_ob0y_qh-9cROKbNIGelYc57EdARYiJNPg0ZwpOY-6CozbHky21kJQw_rhKxP_Vg"
+           alt="Haidilao Hotpot Vietnam"/>
+
+      <!-- Name + contact -->
+      <div class="flex flex-col gap-1 min-w-0 flex-1">
+        <div class="flex flex-wrap items-center gap-2">
+          <h2 class="text-[22px] font-bold text-[#241F1A] leading-tight">Haidilao Hotpot Vietnam</h2>
+          <span class="px-2.5 py-0.5 bg-[#F3E3CF] text-[#9F6D33] text-xs font-semibold rounded-full">VIP</span>
+          <span class="inline-flex items-center gap-1 px-2.5 py-0.5 bg-green-100 text-green-700 text-xs font-semibold rounded-full">
+            <span class="w-1.5 h-1.5 rounded-full bg-green-500 inline-block"></span>
+            Đang hoạt động
+          </span>
+        </div>
+        <p class="text-[14px] text-[#7A6F63]">090 999 8888 · supply@haidilaovn.com</p>
+      </div>
+
+      <!-- Spacer + action buttons -->
+      <div class="flex items-center gap-3 ml-auto flex-shrink-0">
+        <button onclick="handleEdit()"
+                class="px-5 py-2.5 border border-[#E3D8CA] text-[#241F1A] hover:bg-[#F4EDE2] font-medium rounded-[14px] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#B9823F] flex items-center gap-2">
+          <span class="material-symbols-outlined" style="font-size:18px;">edit</span>
+          Chỉnh sửa
+        </button>
+        <button onclick="handleCreateOpportunity()"
+                class="px-5 py-2.5 bg-[#B9823F] hover:bg-[#9F6D33] text-white font-medium rounded-[14px] transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9F6D33] flex items-center gap-2">
+          <span class="material-symbols-outlined" style="font-size:18px;">add</span>
+          Tạo cơ hội
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Section 2: Two-column detail grid ── -->
+  <div class="grid grid-cols-3 gap-6">
+
+    <!-- LEFT COLUMN: Contact info card -->
+    <div class="col-span-1 frosted-cream rounded-[20px] p-6 self-start">
+      <h3 class="text-[15px] font-semibold text-[#241F1A] mb-4 flex items-center gap-2">
+        <span class="material-symbols-outlined text-[#B9823F]" style="font-size:20px;font-variation-settings:'FILL' 1;">contact_page</span>
+        Thông tin liên hệ
+      </h3>
+
+      <div class="space-y-0">
+
+        <!-- Phân khúc -->
+        <div class="info-row flex items-start justify-between gap-2">
+          <span class="text-[13px] text-[#7A6F63] font-medium w-28 flex-shrink-0 pt-0.5">Phân khúc</span>
+          <span class="px-2.5 py-0.5 bg-[#F3E3CF] text-[#9F6D33] text-xs font-semibold rounded-full">VIP</span>
+        </div>
+
+        <!-- Nguồn khách -->
+        <div class="info-row flex items-start justify-between gap-2">
+          <span class="text-[13px] text-[#7A6F63] font-medium w-28 flex-shrink-0 pt-0.5">Nguồn khách</span>
+          <span class="text-[13px] font-medium text-[#241F1A] text-right">Giới thiệu</span>
+        </div>
+
+        <!-- Người phụ trách -->
+        <div class="info-row flex items-start justify-between gap-2">
+          <span class="text-[13px] text-[#7A6F63] font-medium w-28 flex-shrink-0 pt-0.5">Người phụ trách</span>
+          <div class="flex items-center gap-2">
+            <img class="w-6 h-6 rounded-full object-cover border border-[#E3D8CA]"
+                 src="https://lh3.googleusercontent.com/aida-public/AB6AXuBN1paIHUR52mg8N6szYy70FR1ZP3RD8Ilyk9EQ0zL3JUfL1tmnSrTVvK_MKYjgN_nhGVBrP4Q2sAMlQccTXlr6sl4qvt6Mhnb9geOcba0UL4NqhbEGAGtJg1-Pv6zdzB4NU9Z_rjILRkaDg1QhoZX7i1aZmrTOpZLuxHcU3bOMTSOVszHl0JZkG4-muMk_xNVTSoG0SRB5cPHE_ob0y_qh-9cROKbNIGelYc57EdARYiJNPg0ZwpOY-6CozbHky21kJQw_rhKxP_Vg"
+                 alt="Phan Minh Hằng"/>
+            <span class="text-[13px] font-medium text-[#241F1A]">Phan Minh Hằng</span>
+          </div>
+        </div>
+
+        <!-- Ngày tạo -->
+        <div class="info-row flex items-start justify-between gap-2">
+          <span class="text-[13px] text-[#7A6F63] font-medium w-28 flex-shrink-0 pt-0.5">Ngày tạo</span>
+          <span class="text-[13px] font-medium text-[#241F1A]">15/03/2023</span>
+        </div>
+
+        <!-- Địa chỉ -->
+        <div class="info-row flex items-start justify-between gap-2">
+          <span class="text-[13px] text-[#7A6F63] font-medium w-28 flex-shrink-0 pt-0.5">Địa chỉ</span>
+          <span class="text-[13px] font-medium text-[#241F1A] text-right">Hà Nội, Việt Nam</span>
+        </div>
+
+        <!-- Ghi chú -->
+        <div class="info-row">
+          <span class="text-[13px] text-[#7A6F63] font-medium block mb-1.5">Ghi chú</span>
+          <p class="text-[13px] text-[#241F1A] leading-relaxed bg-[#FAF3EA] rounded-xl px-3 py-2.5 border border-[#EFE2CE]">
+            Khách hàng ưu tiên cao, cần liên hệ trước 2 tuần khi có lô hàng mới.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Quick stats row -->
+      <div class="mt-5 pt-4 border-t border-[#F0E9DF] grid grid-cols-2 gap-3">
+        <div class="bg-[#FAF3EA] rounded-xl px-3 py-2.5 text-center">
+          <p class="text-[11px] text-[#7A6F63] font-medium uppercase tracking-wider">Tổng đơn hàng</p>
+          <p class="text-[20px] font-bold text-[#B9823F] mt-0.5">47</p>
+        </div>
+        <div class="bg-[#FAF3EA] rounded-xl px-3 py-2.5 text-center">
+          <p class="text-[11px] text-[#7A6F63] font-medium uppercase tracking-wider">Doanh thu (triệu)</p>
+          <p class="text-[20px] font-bold text-[#B9823F] mt-0.5">3,840</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- RIGHT COLUMN: Tabs -->
+    <div class="col-span-2 frosted-cream rounded-[20px] p-6">
+
+      <!-- Tab bar -->
+      <div class="flex items-center gap-6 border-b border-[#E3D8CA] mb-5">
+        <button class="tab-btn active" data-tab="opportunities" onclick="switchTab('opportunities', this)">
+          Cơ hội <span class="ml-1 text-[11px] font-semibold text-[#9F6D33] bg-[#F3E3CF] px-1.5 py-0.5 rounded-full">3</span>
+        </button>
+        <button class="tab-btn" data-tab="payments" onclick="switchTab('payments', this)">
+          Thanh toán <span class="ml-1 text-[11px] font-semibold text-[#7A6F63] bg-[#F4EDE2] px-1.5 py-0.5 rounded-full">2</span>
+        </button>
+        <button class="tab-btn" data-tab="tasks" onclick="switchTab('tasks', this)">
+          Công việc <span class="ml-1 text-[11px] font-semibold text-[#7A6F63] bg-[#F4EDE2] px-1.5 py-0.5 rounded-full">1</span>
+        </button>
+      </div>
+
+      <!-- ── Tab: Cơ hội ── -->
+      <div id="tab-opportunities" class="tab-pane active">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left">
+            <thead>
+              <tr class="text-[11px] text-[#7A6F63] font-semibold uppercase tracking-wider border-b border-[#E3D8CA]">
+                <th class="pb-3 pr-4 font-semibold">Tên cơ hội</th>
+                <th class="pb-3 pr-4 font-semibold">Giai đoạn</th>
+                <th class="pb-3 pr-4 font-semibold">Giá trị</th>
+                <th class="pb-3 pr-4 font-semibold">Phụ trách</th>
+                <th class="pb-3 text-right font-semibold"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Row 1 -->
+              <tr class="data-row transition-colors border-b border-[#F0E9DF]">
+                <td class="py-4 pr-4">
+                  <p class="text-[14px] font-semibold text-[#241F1A]">Hợp đồng Bắp Bò Úc Q3/2025</p>
+                  <p class="text-[12px] text-[#7A6F63] mt-0.5">Dự kiến đóng: 30/09/2025</p>
+                </td>
+                <td class="py-4 pr-4">
+                  <span class="px-2.5 py-1 rounded-full text-xs font-semibold stage-negotiation">Đàm phán</span>
+                </td>
+                <td class="py-4 pr-4 text-[14px] font-semibold text-[#241F1A]">420,000,000 đ</td>
+                <td class="py-4 pr-4">
+                  <div class="flex items-center gap-1.5">
+                    <img class="w-6 h-6 rounded-full object-cover"
+                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuBN1paIHUR52mg8N6szYy70FR1ZP3RD8Ilyk9EQ0zL3JUfL1tmnSrTVvK_MKYjgN_nhGVBrP4Q2sAMlQccTXlr6sl4qvt6Mhnb9geOcba0UL4NqhbEGAGtJg1-Pv6zdzB4NU9Z_rjILRkaDg1QhoZX7i1aZmrTOpZLuxHcU3bOMTSOVszHl0JZkG4-muMk_xNVTSoG0SRB5cPHE_ob0y_qh-9cROKbNIGelYc57EdARYiJNPg0ZwpOY-6CozbHky21kJQw_rhKxP_Vg"
+                         alt="Phan Minh Hằng"/>
+                    <span class="text-[13px] text-[#241F1A]">P. M. Hằng</span>
+                  </div>
+                </td>
+                <td class="py-4 text-right">
+                  <a href="#" class="text-[#B9823F] hover:text-[#9F6D33] text-[13px] font-medium transition-colors">Xem →</a>
+                </td>
+              </tr>
+              <!-- Row 2 -->
+              <tr class="data-row transition-colors border-b border-[#F0E9DF]">
+                <td class="py-4 pr-4">
+                  <p class="text-[14px] font-semibold text-[#241F1A]">Lõi Vai Bò Mỹ — Lô 12 tấn</p>
+                  <p class="text-[12px] text-[#7A6F63] mt-0.5">Dự kiến đóng: 15/08/2025</p>
+                </td>
+                <td class="py-4 pr-4">
+                  <span class="px-2.5 py-1 rounded-full text-xs font-semibold stage-proposal">Đề xuất</span>
+                </td>
+                <td class="py-4 pr-4 text-[14px] font-semibold text-[#241F1A]">285,000,000 đ</td>
+                <td class="py-4 pr-4">
+                  <div class="flex items-center gap-1.5">
+                    <img class="w-6 h-6 rounded-full object-cover"
+                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuBN1paIHUR52mg8N6szYy70FR1ZP3RD8Ilyk9EQ0zL3JUfL1tmnSrTVvK_MKYjgN_nhGVBrP4Q2sAMlQccTXlr6sl4qvt6Mhnb9geOcba0UL4NqhbEGAGtJg1-Pv6zdzB4NU9Z_rjILRkaDg1QhoZX7i1aZmrTOpZLuxHcU3bOMTSOVszHl0JZkG4-muMk_xNVTSoG0SRB5cPHE_ob0y_qh-9cROKbNIGelYc57EdARYiJNPg0ZwpOY-6CozbHky21kJQw_rhKxP_Vg"
+                         alt="Phan Minh Hằng"/>
+                    <span class="text-[13px] text-[#241F1A]">P. M. Hằng</span>
+                  </div>
+                </td>
+                <td class="py-4 text-right">
+                  <a href="#" class="text-[#B9823F] hover:text-[#9F6D33] text-[13px] font-medium transition-colors">Xem →</a>
+                </td>
+              </tr>
+              <!-- Row 3 -->
+              <tr class="data-row transition-colors">
+                <td class="py-4 pr-4">
+                  <p class="text-[14px] font-semibold text-[#241F1A]">Short Ribs MB 7+ — Thử nghiệm</p>
+                  <p class="text-[12px] text-[#7A6F63] mt-0.5">Dự kiến đóng: 01/07/2025</p>
+                </td>
+                <td class="py-4 pr-4">
+                  <span class="px-2.5 py-1 rounded-full text-xs font-semibold stage-closed">Đã chốt</span>
+                </td>
+                <td class="py-4 pr-4 text-[14px] font-semibold text-[#241F1A]">96,000,000 đ</td>
+                <td class="py-4 pr-4">
+                  <div class="flex items-center gap-1.5">
+                    <img class="w-6 h-6 rounded-full object-cover"
+                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRrpeozyEJ-qX1mQ1mfknrMjUAebC1IUl0FzVdST9s3Ocju71cvkOLc0idwn9zDLDZ7XvWExo9maetvAugXOCUQsK18qsD_bxa85565xFcIQMi1GjSeyjFdNZhgm--7x1mHoAH2f7gIHrF_MlUUXXIES0xMiS2ACECxQJ93Xf_fzu95lrgkogZlNUGTOy9qDEndQl1bqSYFLmIIn3d4Bm7FXp-hgj2-JOFKMEf5h6PVVSTUq7bjFEFq3LezbEZ8msevCzX28BOs-G3"
+                         alt="Nguyễn Văn A"/>
+                    <span class="text-[13px] text-[#241F1A]">N. Văn A</span>
+                  </div>
+                </td>
+                <td class="py-4 text-right">
+                  <a href="#" class="text-[#B9823F] hover:text-[#9F6D33] text-[13px] font-medium transition-colors">Xem →</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Opportunities footer -->
+        <div class="mt-4 pt-3 border-t border-[#F0E9DF] flex items-center justify-between">
+          <span class="text-[12px] text-[#7A6F63]">Tổng giá trị pipeline: <strong class="text-[#B9823F]">801,000,000 đ</strong></span>
+          <button onclick="handleCreateOpportunity()"
+                  class="text-[13px] text-[#B9823F] hover:text-[#9F6D33] font-medium flex items-center gap-1 transition-colors">
+            <span class="material-symbols-outlined" style="font-size:16px;">add_circle</span>
+            Thêm cơ hội mới
+          </button>
+        </div>
+      </div>
+
+      <!-- ── Tab: Thanh toán ── -->
+      <div id="tab-payments" class="tab-pane">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left">
+            <thead>
+              <tr class="text-[11px] text-[#7A6F63] font-semibold uppercase tracking-wider border-b border-[#E3D8CA]">
+                <th class="pb-3 pr-4 font-semibold">Ngày thanh toán</th>
+                <th class="pb-3 pr-4 font-semibold">Số tiền</th>
+                <th class="pb-3 pr-4 font-semibold">Trạng thái</th>
+                <th class="pb-3 pr-4 font-semibold">Phương thức</th>
+                <th class="pb-3 text-right font-semibold"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Row 1 -->
+              <tr class="data-row transition-colors border-b border-[#F0E9DF]">
+                <td class="py-4 pr-4">
+                  <p class="text-[14px] font-semibold text-[#241F1A]">05/06/2025</p>
+                  <p class="text-[12px] text-[#7A6F63] mt-0.5">HD-2025-06-018</p>
+                </td>
+                <td class="py-4 pr-4 text-[14px] font-semibold text-[#241F1A]">96,000,000 đ</td>
+                <td class="py-4 pr-4">
+                  <span class="px-2.5 py-1 rounded-full text-xs font-semibold pay-paid">Đã thanh toán</span>
+                </td>
+                <td class="py-4 pr-4 text-[13px] text-[#7A6F63]">Chuyển khoản ngân hàng</td>
+                <td class="py-4 text-right">
+                  <a href="#" class="text-[#B9823F] hover:text-[#9F6D33] text-[13px] font-medium transition-colors">Xem →</a>
+                </td>
+              </tr>
+              <!-- Row 2 -->
+              <tr class="data-row transition-colors">
+                <td class="py-4 pr-4">
+                  <p class="text-[14px] font-semibold text-[#241F1A]">20/07/2025</p>
+                  <p class="text-[12px] text-[#7A6F63] mt-0.5">HD-2025-07-031</p>
+                </td>
+                <td class="py-4 pr-4 text-[14px] font-semibold text-[#241F1A]">285,000,000 đ</td>
+                <td class="py-4 pr-4">
+                  <span class="px-2.5 py-1 rounded-full text-xs font-semibold pay-pending">Chờ thanh toán</span>
+                </td>
+                <td class="py-4 pr-4 text-[13px] text-[#7A6F63]">Chuyển khoản ngân hàng</td>
+                <td class="py-4 text-right">
+                  <a href="#" class="text-[#B9823F] hover:text-[#9F6D33] text-[13px] font-medium transition-colors">Xem →</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Payments footer -->
+        <div class="mt-4 pt-3 border-t border-[#F0E9DF] flex items-center justify-between">
+          <span class="text-[12px] text-[#7A6F63]">Tổng đã nhận: <strong class="text-green-700">96,000,000 đ</strong> · Còn lại: <strong class="text-amber-600">285,000,000 đ</strong></span>
+          <a href="payments.html" class="text-[13px] text-[#B9823F] hover:text-[#9F6D33] font-medium flex items-center gap-1 transition-colors">
+            Xem tất cả
+            <span class="material-symbols-outlined" style="font-size:16px;">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- ── Tab: Công việc ── -->
+      <div id="tab-tasks" class="tab-pane">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left">
+            <thead>
+              <tr class="text-[11px] text-[#7A6F63] font-semibold uppercase tracking-wider border-b border-[#E3D8CA]">
+                <th class="pb-3 pr-4 font-semibold">Tiêu đề công việc</th>
+                <th class="pb-3 pr-4 font-semibold">Hạn chót</th>
+                <th class="pb-3 pr-4 font-semibold">Ưu tiên</th>
+                <th class="pb-3 pr-4 font-semibold">Phụ trách</th>
+                <th class="pb-3 text-right font-semibold"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Row 1 -->
+              <tr class="data-row transition-colors">
+                <td class="py-4 pr-4">
+                  <p class="text-[14px] font-semibold text-[#241F1A]">Gửi báo giá Bắp Bò Úc Q3</p>
+                  <p class="text-[12px] text-[#7A6F63] mt-0.5">Liên quan: Hợp đồng Q3/2025</p>
+                </td>
+                <td class="py-4 pr-4 text-[13px] text-[#241F1A]">12/07/2025</td>
+                <td class="py-4 pr-4">
+                  <span class="px-2.5 py-1 rounded-full text-xs font-semibold priority-high">Cao</span>
+                </td>
+                <td class="py-4 pr-4">
+                  <div class="flex items-center gap-1.5">
+                    <img class="w-6 h-6 rounded-full object-cover"
+                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuBN1paIHUR52mg8N6szYy70FR1ZP3RD8Ilyk9EQ0zL3JUfL1tmnSrTVvK_MKYjgN_nhGVBrP4Q2sAMlQccTXlr6sl4qvt6Mhnb9geOcba0UL4NqhbEGAGtJg1-Pv6zdzB4NU9Z_rjILRkaDg1QhoZX7i1aZmrTOpZLuxHcU3bOMTSOVszHl0JZkG4-muMk_xNVTSoG0SRB5cPHE_ob0y_qh-9cROKbNIGelYc57EdARYiJNPg0ZwpOY-6CozbHky21kJQw_rhKxP_Vg"
+                         alt="Phan Minh Hằng"/>
+                    <span class="text-[13px] text-[#241F1A]">P. M. Hằng</span>
+                  </div>
+                </td>
+                <td class="py-4 text-right">
+                  <a href="tasks.html" class="text-[#B9823F] hover:text-[#9F6D33] text-[13px] font-medium transition-colors">Xem →</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Tasks footer -->
+        <div class="mt-4 pt-3 border-t border-[#F0E9DF] flex items-center justify-between">
+          <span class="text-[12px] text-[#7A6F63]">1 công việc đang chờ xử lý</span>
+          <a href="tasks.html" class="text-[13px] text-[#B9823F] hover:text-[#9F6D33] font-medium flex items-center gap-1 transition-colors">
+            Xem tất cả công việc
+            <span class="material-symbols-outlined" style="font-size:16px;">arrow_forward</span>
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /right col -->
+  </div><!-- /grid -->
+
+</main>
+
+<!-- ============================================================
+     SCRIPTS
+     ============================================================ -->
+<script>
+  // --- Profile dropdown ---
+  function toggleProfileDropdown() {
+    const dropdown = document.getElementById('profile-dropdown');
+    dropdown.classList.toggle('hidden');
+  }
+
+  // Close dropdown when clicking outside
+  document.addEventListener('click', function(e) {
+    const dropdown = document.getElementById('profile-dropdown');
+    const trigger  = dropdown.closest('div[onclick]') || dropdown.parentElement.querySelector('[onclick]');
+    if (!dropdown.classList.contains('hidden') && !dropdown.parentElement.contains(e.target)) {
+      dropdown.classList.add('hidden');
+    }
+  });
+
+  // --- Tab switching ---
+  function switchTab(tabName, btn) {
+    // Deactivate all tabs
+    document.querySelectorAll('.tab-btn').forEach(function(b) {
+      b.classList.remove('active');
+    });
+    document.querySelectorAll('.tab-pane').forEach(function(p) {
+      p.classList.remove('active');
+    });
+
+    // Activate selected
+    btn.classList.add('active');
+    var pane = document.getElementById('tab-' + tabName);
+    if (pane) pane.classList.add('active');
+  }
+
+  // --- Action stubs ---
+  function handleEdit() {
+    Toastify({
+      text: "Mở form chỉnh sửa khách hàng…",
+      duration: 2500,
+      gravity: "top",
+      position: "right",
+      style: {
+        background: "#B9823F",
+        borderRadius: "12px",
+        fontSize: "14px",
+        fontFamily: "Inter, sans-serif",
+        padding: "12px 20px"
+      }
+    }).showToast();
+  }
+
+  function handleCreateOpportunity() {
+    Toastify({
+      text: "Tạo cơ hội bán hàng mới cho Haidilao…",
+      duration: 2500,
+      gravity: "top",
+      position: "right",
+      style: {
+        background: "#B9823F",
+        borderRadius: "12px",
+        fontSize: "14px",
+        fontFamily: "Inter, sans-serif",
+        padding: "12px 20px"
+      }
+    }).showToast();
+  }
+
+  // --- Sidebar nav micro-interaction (scale on click) ---
+  document.querySelectorAll('aside nav a').forEach(function(link) {
+    link.addEventListener('click', function() {
+      this.style.transform = 'scale(0.97)';
+      setTimeout(function() { link.style.transform = ''; }, 120);
+    });
+  });
+</script>
+</body>
+</html>

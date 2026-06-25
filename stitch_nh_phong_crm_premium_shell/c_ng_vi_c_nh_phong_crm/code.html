@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Công việc | Đỉnh Phong CRM</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "outline-variant": "#d5c4b4",
+                    "on-surface": "#1c1c18",
+                    "tertiary-container": "#7e7367",
+                    "secondary": "#645d57",
+                    "tertiary-fixed": "#efe0d1",
+                    "on-background": "#1c1c18",
+                    "tertiary-fixed-dim": "#d2c4b6",
+                    "on-primary-fixed": "#2b1700",
+                    "error-container": "#ffdad6",
+                    "on-secondary-fixed": "#201b16",
+                    "surface-container-highest": "#e5e2dc",
+                    "surface-container-low": "#f6f3ed",
+                    "on-tertiary-fixed": "#211a11",
+                    "secondary-container": "#ebe1d8",
+                    "on-tertiary-container": "#fffbff",
+                    "primary-fixed-dim": "#f9ba72",
+                    "primary-container": "#9d6a29",
+                    "surface-dim": "#dcdad4",
+                    "on-secondary": "#ffffff",
+                    "on-primary-container": "#fffbff",
+                    "inverse-on-surface": "#f3f0ea",
+                    "surface-container-lowest": "#ffffff",
+                    "surface-container-high": "#ebe8e2",
+                    "error": "#ba1a1a",
+                    "on-error-container": "#93000a",
+                    "on-tertiary-fixed-variant": "#4f453b",
+                    "on-tertiary": "#ffffff",
+                    "surface-variant": "#e5e2dc",
+                    "on-secondary-fixed-variant": "#4c4640",
+                    "primary": "#805211",
+                    "on-primary": "#ffffff",
+                    "surface": "#fcf9f3",
+                    "secondary-fixed": "#ebe1d8",
+                    "on-surface-variant": "#514539",
+                    "on-primary-fixed-variant": "#663d00",
+                    "secondary-fixed-dim": "#cfc5bd",
+                    "tertiary": "#645a4f",
+                    "surface-tint": "#835414",
+                    "surface-container": "#f0eee8",
+                    "outline": "#837567",
+                    "surface-bright": "#fcf9f3",
+                    "inverse-surface": "#31312d",
+                    "inverse-primary": "#f9ba72",
+                    "primary-fixed": "#ffddba",
+                    "on-secondary-container": "#6a635d",
+                    "on-error": "#ffffff",
+                    "background": "#fcf9f3"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-max": "1440px",
+                    "md": "16px",
+                    "xl": "48px",
+                    "sidebar-width": "280px",
+                    "sm": "8px",
+                    "lg": "24px",
+                    "base": "4px",
+                    "xs": "4px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "title-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "body-lg": ["Inter"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: #FAF7F1;
+            font-family: 'Inter', sans-serif;
+            color: #241F1A;
+        }
+
+        .frosted-cream {
+            background: rgba(255, 255, 255, 0.68);
+            backdrop-filter: blur(16px);
+            border: 1px solid #E3D8CA;
+            box-shadow: 0px 4px 20px rgba(122, 111, 99, 0.08);
+        }
+
+        .butcher-gold-btn {
+            background-color: #B9823F;
+            transition: all 0.2s ease;
+        }
+
+        .butcher-gold-btn:hover {
+            background-color: #9F6D33;
+            transform: translateY(-1px);
+        }
+
+        .task-checkbox {
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border: 2px solid #E3D8CA;
+            border-radius: 50%;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .task-checkbox:checked {
+            background-color: #B9823F;
+            border-color: #B9823F;
+        }
+
+        .task-checkbox:checked::after {
+            content: 'check';
+            font-family: 'Material Symbols Outlined';
+            font-size: 16px;
+            color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .active-tab {
+            color: #9F6D33;
+            border-bottom: 2px solid #B9823F;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #E3D8CA;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="overflow-hidden">
+<!-- Side Navigation Shell -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-surface-container border-r border-outline-variant flex flex-col z-50">
+<div class="py-lg px-6">
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary">Đỉnh Phong</h1>
+<p class="text-on-surface-variant font-label-md text-label-md mt-1 uppercase tracking-wider">Premium Beef CRM</p>
+</div>
+<nav class="flex-1 mt-4 overflow-y-auto custom-scrollbar">
+<div class="space-y-1">
+<a class="flex items-center text-tertiary py-3 px-6 hover:bg-secondary-container/50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+<span class="font-body-lg text-body-lg">Tổng quan</span>
+</a>
+<a class="flex items-center text-tertiary py-3 px-6 hover:bg-secondary-container/50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">monetization_on</span>
+<span class="font-body-lg text-body-lg">Cơ hội bán hàng</span>
+</a>
+<!-- Active Tab: Công việc -->
+<a class="relative flex items-center bg-secondary-container text-primary font-semibold py-3 px-6 before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-primary" href="#">
+<span class="material-symbols-outlined mr-3">assignment</span>
+<span class="font-body-lg text-body-lg">Công việc</span>
+</a>
+<a class="flex items-center text-tertiary py-3 px-6 hover:bg-secondary-container/50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">groups</span>
+<span class="font-body-lg text-body-lg">Danh sách khách hàng</span>
+</a>
+<a class="flex items-center text-tertiary py-3 px-6 hover:bg-secondary-container/50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">payments</span>
+<span class="font-body-lg text-body-lg">Thanh toán</span>
+</a>
+<a class="flex items-center text-tertiary py-3 px-6 hover:bg-secondary-container/50 transition-colors duration-200" href="#">
+<span class="material-symbols-outlined mr-3">settings</span>
+<span class="font-body-lg text-body-lg">Cài đặt</span>
+</a>
+</div>
+</nav>
+<div class="p-lg mt-auto border-t border-outline-variant/30">
+<a class="flex items-center text-tertiary py-3 px-2 rounded-xl hover:bg-secondary-container/50 transition-colors" href="#">
+<span class="material-symbols-outlined mr-3" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+<span class="font-body-lg text-body-lg">Hồ sơ cá nhân</span>
+</a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-[280px] h-screen overflow-y-auto bg-[#FAF7F1] flex flex-col relative">
+<!-- Top App Bar Shell -->
+<header class="sticky top-0 h-16 bg-surface/68 backdrop-blur-xl border-b border-outline-variant/30 flex items-center justify-between px-lg z-40">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-white/50 border border-outline-variant rounded-[14px] pl-10 pr-4 py-2 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-body-sm font-body-sm" placeholder="Tìm kiếm công việc, khách hàng..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-on-surface-variant/5 rounded-full p-2 transition-all">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-on-surface-variant/5 rounded-full p-2 transition-all">help_outline</button>
+<div class="w-8 h-8 rounded-full bg-secondary-fixed overflow-hidden ml-2">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a premium estate manager for a luxury beef distributor, wearing a sophisticated linen shirt, set against a soft, sunlit cream-colored background. The lighting is elegant and high-key, matching the frosted cream UI aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCasnGnXkZxUXR39-lQtl_yhyAapvgy1h47feA0IM25gsR9AQmuXLPiMhSkX58JhwVs_3V218V_18P8X_sumZf3YAm33cV2whYEd-f7kgtfJFVB90pBDYrTd-6qgETtQJLfhLpU_8xtVX1BozpNcrNBlmZ3HW6c_l2THJosfIs_9RxNUEhLSVO610h6_dDXS7QaZvck9KglOIRUd07LHuDpF92AU2v7Pk6FU4bZ_Cw_geQFMGVyPXESu7eDaulxsKIb-yC0tc-VVtxt"/>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<div class="p-lg flex-1">
+<!-- Header Section -->
+<div class="flex items-center justify-between mb-8">
+<div>
+<h1 class="text-[28px] font-medium text-[#241F1A]">Công việc</h1>
+<p class="text-[#7A6F63] font-body-lg text-body-lg">Quản lý các đầu mục công việc và lịch hẹn với đối tác.</p>
+</div>
+<button class="butcher-gold-btn text-white px-6 py-3 rounded-[14px] flex items-center gap-2 font-semibold shadow-sm">
+<span class="material-symbols-outlined text-xl">add</span>
+<span>Tạo công việc</span>
+</button>
+</div>
+<!-- Tabs Section -->
+<div class="flex gap-8 mb-6 border-b border-[#E3D8CA]">
+<button class="pb-3 px-1 active-tab font-semibold transition-all">Tất cả</button>
+<button class="pb-3 px-1 text-[#7A6F63] hover:text-[#9F6D33] font-medium transition-all">Hôm nay</button>
+<button class="pb-3 px-1 text-[#7A6F63] hover:text-[#9F6D33] font-medium transition-all">Quá hạn</button>
+<button class="pb-3 px-1 text-[#7A6F63] hover:text-[#9F6D33] font-medium transition-all">Đã hoàn thành</button>
+</div>
+<!-- Task List Glass Card -->
+<div class="frosted-cream rounded-[20px] p-6">
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="text-[#7A6F63] font-label-md text-label-md uppercase tracking-wider border-b border-[#E3D8CA]/50">
+<th class="pb-4 font-semibold w-12 text-center"></th>
+<th class="pb-4 font-semibold">Tên công việc &amp; Khách hàng</th>
+<th class="pb-4 font-semibold">Người phụ trách</th>
+<th class="pb-4 font-semibold">Mức độ ưu tiên</th>
+<th class="pb-4 font-semibold">Deadline</th>
+<th class="pb-4 font-semibold">Trạng thái</th>
+<th class="pb-4 font-semibold w-10 text-center"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#E3D8CA]/30">
+<!-- Task Row 1 -->
+<tr class="group hover:bg-[#F4EDE2]/30 transition-colors">
+<td class="py-5 text-center">
+<input class="task-checkbox" type="checkbox"/>
+</td>
+<td class="py-5">
+<div class="flex flex-col">
+<span class="font-semibold text-[#241F1A]">Gửi báo giá Thịt Bò Úc - Lô 24</span>
+<span class="text-[#7A6F63] text-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-base">domain</span>
+                                            Sheraton Saigon Hotel
+                                        </span>
+</div>
+</td>
+<td class="py-5">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full overflow-hidden border-2 border-white shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Close up portrait of a young professional man in a tailored tan suit, smiling warmly. Professional lighting, soft focus cream background, warm boutique aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5Hwotr6on4soxENL3mGKAF7ALCPby08lg-SPl-CQDc63UxAIKagkPbjBxClH1DuPDvmdfXoIQ8FgVUehP8jaGOK96q3qI7fHGpMltFFpjk_GC7O54ElrNmjjw7xYa7D6q7yyjUmU6XfYB2eBFk-J0lfNTaRijVsyVIFoeRiwBBhHj2NdCvnGgW_bEO8KY6_LrpXIDKvw-ib2iIiAXaRgmXNf57Y_nv_23hreukan9s1l8IdvRPe2iQG3nyykyJlQQIw66by8xloRw"/>
+</div>
+<span class="font-medium text-body-sm">Minh Khôi</span>
+</div>
+</td>
+<td class="py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-[#A66D38]/10 text-[#A66D38] border border-[#A66D38]/20">
+                                        Cao
+                                    </span>
+</td>
+<td class="py-5">
+<span class="text-[#7A3E2A] font-semibold text-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-base">event_busy</span>
+                                        Hôm qua, 17:00
+                                    </span>
+</td>
+<td class="py-5">
+<span class="text-body-sm text-[#7A6F63]">Đang chờ gửi</span>
+</td>
+<td class="py-5 text-center">
+<button class="material-symbols-outlined text-outline hover:text-primary transition-colors">more_vert</button>
+</td>
+</tr>
+<!-- Task Row 2 -->
+<tr class="group hover:bg-[#F4EDE2]/30 transition-colors">
+<td class="py-5 text-center">
+<input class="task-checkbox" type="checkbox"/>
+</td>
+<td class="py-5">
+<div class="flex flex-col">
+<span class="font-semibold text-[#241F1A]">Gọi điện tư vấn Nhà hàng Opus</span>
+<span class="text-[#7A6F63] text-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-base">domain</span>
+                                            Opus Restaurant
+                                        </span>
+</div>
+</td>
+<td class="py-5">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full overflow-hidden border-2 border-white shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Portrait of a sophisticated female executive with tied back hair, wearing a neutral-toned professional outfit. High-end lighting, cream interior office background, warm minimalist style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZN4mGEn8yUHMGAH6e3lJBY8Tw47Jl0uEa4V4BeA-zGNRZt9SkcFmrvtGJFKx5dO2xhqmB7ityvehcIy8_BOT7ocoYQR92e3jIJaf1xZWprFLKI2rWFZpI2J9Yrx8JuT4NlDlZiaVM9q8M2wiBU3Nj-sDdEJD_gx5jKTIG213zuQ7WgbcLGNi9Ekg6xyKD85_M1gNebgBbV_nOO5Sv_CkRkGN6yVXcBYp1vgxIULiRnov5-PJ3BjYAQQUb-vcO173K73uUF8Irkiju"/>
+</div>
+<span class="font-medium text-body-sm">Phương Linh</span>
+</div>
+</td>
+<td class="py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-[#C8B6A6]/20 text-[#7A6F63] border border-[#C8B6A6]/40">
+                                        Trung bình
+                                    </span>
+</td>
+<td class="py-5">
+<span class="text-[#241F1A] font-medium text-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-base">event</span>
+                                        Hôm nay, 10:30
+                                    </span>
+</td>
+<td class="py-5">
+<span class="text-body-sm text-[#7A6F63]">Đang thực hiện</span>
+</td>
+<td class="py-5 text-center">
+<button class="material-symbols-outlined text-outline hover:text-primary transition-colors">more_vert</button>
+</td>
+</tr>
+<!-- Task Row 3 -->
+<tr class="group hover:bg-[#F4EDE2]/30 transition-colors">
+<td class="py-5 text-center">
+<input checked="" class="task-checkbox" type="checkbox"/>
+</td>
+<td class="py-5">
+<div class="flex flex-col">
+<span class="font-semibold text-[#241F1A] line-through opacity-50">Hợp đồng năm - Chuỗi BBQ King</span>
+<span class="text-[#7A6F63] text-body-sm flex items-center gap-1 opacity-50">
+<span class="material-symbols-outlined text-base">domain</span>
+                                            King BBQ Group
+                                        </span>
+</div>
+</td>
+<td class="py-5 opacity-50">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full overflow-hidden border-2 border-white shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Portrait of a senior business consultant with a kind expression, wearing spectacles and a soft brown cardigan. The setting is a cozy, high-end library with warm golden tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMog5WY7HkVy-o_YFfHMdZobqP8N8bZyuo_6dWerdCeJnulUNKQdDfOf0EdwCFz_Xqzy3rTsSWsBXbWqeEVC0DE8y4tgQVCKu0pMldfvgegSYidY25CS8TYLEwHiA2DiSIsA8z32_B0PzhxJbQVjTNIXywaCFXwNOaIRbS0PqzryIj0qL74SjvjtQaSknaWpeEZxTLL5N04TP4I7cjdCpamnAYuwu1v5IxpRki7QfbnvWtJxhot0DgTyVJgwP6E4jNEIU57HziEGjo"/>
+</div>
+<span class="font-medium text-body-sm">Đình Phong</span>
+</div>
+</td>
+<td class="py-5 opacity-50">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-[#B8B0A8]/20 text-[#7A6F63] border border-[#B8B0A8]/40">
+                                        Thấp
+                                    </span>
+</td>
+<td class="py-5 opacity-50">
+<span class="text-[#241F1A] font-medium text-body-sm">
+                                        01/10/2023
+                                    </span>
+</td>
+<td class="py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700">
+                                        Hoàn thành
+                                    </span>
+</td>
+<td class="py-5 text-center">
+<button class="material-symbols-outlined text-outline hover:text-primary transition-colors">more_vert</button>
+</td>
+</tr>
+<!-- Task Row 4 (Extra for visual depth) -->
+<tr class="group hover:bg-[#F4EDE2]/30 transition-colors">
+<td class="py-5 text-center">
+<input class="task-checkbox" type="checkbox"/>
+</td>
+<td class="py-5">
+<div class="flex flex-col">
+<span class="font-semibold text-[#241F1A]">Kiểm tra kho lạnh - Chi nhánh 2</span>
+<span class="text-[#7A6F63] text-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-base">location_on</span>
+                                            Kho Bình Chánh
+                                        </span>
+</div>
+</td>
+<td class="py-5">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full overflow-hidden border-2 border-white shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A portrait of a male operations manager in his 30s, looking focused and professional, wearing a dark polo shirt with a subtle gold logo. High-end minimalist background with soft lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9538A2QHLnlzlKSxY50AzUHhnUH6ed1IJykvmR8IO_I-59buVoRWxbjQ-_dIfwKYoKX4RvE8VT-11-RV112qBmGeYxF37GXrQS1zpwsb5xz6HWvlr0RXJ4yeR6_Ssd-S2LTmrMzQqkrck9ap4_WLu-c8O6UZHmSj3QOfEmgjTg5Xj0toSqgzeTvEByO5PUOwmBXklmoPMxcxfAUvziQu-7_hopCf48HZqmv_ijt8OG-y8LLeRd2WNY7r0sSfMpTkN2a2JGSzzCCVu"/>
+</div>
+<span class="font-medium text-body-sm">Thành Đạt</span>
+</div>
+</td>
+<td class="py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-[#A66D38]/10 text-[#A66D38] border border-[#A66D38]/20">
+                                        Cao
+                                    </span>
+</td>
+<td class="py-5">
+<span class="text-[#241F1A] font-medium text-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-base">event</span>
+                                        Mai, 08:00
+                                    </span>
+</td>
+<td class="py-5">
+<span class="text-body-sm text-[#7A6F63]">Chưa bắt đầu</span>
+</td>
+<td class="py-5 text-center">
+<button class="material-symbols-outlined text-outline hover:text-primary transition-colors">more_vert</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination/Summary -->
+<div class="mt-8 flex items-center justify-between text-body-sm text-[#7A6F63] border-t border-[#E3D8CA]/30 pt-4">
+<p>Hiển thị 4 trong tổng số 24 công việc</p>
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg bg-primary text-white font-bold">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-secondary-container transition-colors">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-secondary-container transition-colors">3</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Micro-interactions for the task list
+        document.querySelectorAll('.task-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const row = this.closest('tr');
+                const title = row.querySelector('.font-semibold');
+                const subtext = row.querySelector('.text-[#7A6F63]');
+                const infoCells = row.querySelectorAll('td:not(:first-child):not(:last-child)');
+
+                if (this.checked) {
+                    title.classList.add('line-through', 'opacity-50');
+                    subtext.classList.add('opacity-50');
+                    infoCells.forEach(cell => cell.classList.add('opacity-50'));
+                } else {
+                    title.classList.remove('line-through', 'opacity-50');
+                    subtext.classList.remove('opacity-50');
+                    infoCells.forEach(cell => cell.classList.remove('opacity-50'));
+                }
+            });
+        });
+
+        // Tab switching logic
+        document.querySelectorAll('button[class*="pb-3"]').forEach(tab => {
+            tab.addEventListener('click', function() {
+                document.querySelectorAll('button[class*="pb-3"]').forEach(t => {
+                    t.classList.remove('active-tab', 'font-semibold');
+                    t.classList.add('text-[#7A6F63]', 'font-medium');
+                });
+                this.classList.add('active-tab', 'font-semibold');
+                this.classList.remove('text-[#7A6F63]', 'font-medium');
+            });
+        });
+    </script>
+</body></html>

@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Danh sách khách hàng | Đỉnh Phong Premium Beef CRM</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="js/tailwind.js"></script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #FAF7F1; }
+        .frosted-cream {
+            background: rgba(255, 255, 255, 0.68);
+            backdrop-filter: blur(16px);
+            border: 1px solid #E3D8CA;
+            box-shadow: 0px 4px 20px rgba(122, 111, 99, 0.08);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .butcher-gold-border { border-left: 4px solid #B9823F; }
+    </style>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body class="text-on-surface">
+<!-- Side Navigation Bar -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-surface-container border-r border-outline-variant flex flex-col z-50">
+<div class="px-6 py-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+</div>
+<div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary leading-tight">Đỉnh Phong</h1>
+<p class="font-label-md text-label-md text-tertiary">Premium Beef CRM</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 mt-4 overflow-y-auto scrollbar-hide">
+<a class="flex items-center text-tertiary py-3 px-6 hover:bg-on-primary-fixed-variant/10 transition-colors duration-200" href="dashboard.html">
+<span class="material-symbols-outlined mr-3" data-icon="dashboard">dashboard</span>
+<span class="font-body-lg text-body-lg">Tổng quan</span>
+</a>
+<a class="flex items-center text-tertiary py-3 px-6 hover:bg-on-primary-fixed-variant/10 transition-colors duration-200" href="opportunities.html">
+<span class="material-symbols-outlined mr-3" data-icon="monetization_on">monetization_on</span>
+<span class="font-body-lg text-body-lg">Cơ hội bán hàng</span>
+</a>
+<a class="flex items-center text-tertiary py-3 px-6 hover:bg-on-primary-fixed-variant/10 transition-colors duration-200" href="tasks.html">
+<span class="material-symbols-outlined mr-3" data-icon="assignment">assignment</span>
+<span class="font-body-lg text-body-lg">Công việc</span>
+</a>
+<!-- Active Tab: Danh sách khách hàng -->
+<a class="relative flex items-center bg-secondary-container text-primary font-semibold py-3 px-6 butcher-gold-border" href="customers.html">
+<span class="material-symbols-outlined mr-3" data-icon="groups">groups</span>
+<span class="font-body-lg text-body-lg">Danh sách khách hàng</span>
+</a>
+<a class="flex items-center text-tertiary py-3 px-6 hover:bg-on-primary-fixed-variant/10 transition-colors duration-200" href="payments.html">
+<span class="material-symbols-outlined mr-3" data-icon="payments">payments</span>
+<span class="font-body-lg text-body-lg">Thanh toán</span>
+</a>
+<a class="flex items-center text-tertiary py-3 px-6 hover:bg-on-primary-fixed-variant/10 transition-colors duration-200" href="settings.html">
+<span class="material-symbols-outlined mr-3" data-icon="settings">settings</span>
+<span class="font-body-lg text-body-lg">Cài đặt</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-outline-variant p-4 relative">
+<div id="profile-dropdown" class="hidden absolute bottom-full left-2 right-2 mb-2 bg-white border border-[#E3D8CA] rounded-[14px] shadow-lg overflow-hidden z-10">
+<a href="profile.html" class="flex items-center gap-3 px-4 py-3 hover:bg-[#F4EDE2] text-sm transition-colors"><span class="material-symbols-outlined text-[#B9823F] text-[18px]">person</span><span class="font-medium text-[#241F1A]">Xem hồ sơ</span></a>
+<a href="settings.html" class="flex items-center gap-3 px-4 py-3 hover:bg-[#F4EDE2] text-sm transition-colors"><span class="material-symbols-outlined text-[#7A6F63] text-[18px]">settings</span><span class="font-medium text-[#241F1A]">Cài đặt</span></a>
+<div class="border-t border-[#E3D8CA]/50 mx-3"></div>
+<a href="index.html" class="flex items-center gap-3 px-4 py-3 hover:bg-red-50 text-sm transition-colors text-red-600"><span class="material-symbols-outlined text-[18px]">logout</span><span class="font-medium">Đăng xuất</span></a>
+</div>
+<div onclick="toggleProfileDropdown()" class="flex items-center gap-3 hover:bg-[#B9823F]/5 p-2 rounded-xl transition-all cursor-pointer">
+<img class="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRrpeozyEJ-qX1mQ1mfknrMjUAebC1IUl0FzVdST9s3Ocju71cvkOLc0idwn9zDLDZ7XvWExo9maetvAugXOCUQsK18qsD_bxa85565xFcIQMi1GjSeyjFdNZhgm--7x1mHoAH2f7gIHrF_MlUUXXIES0xMiS2ACECxQJ93Xf_fzu95lrgkogZlNUGTOy9qDEndQl1bqSYFLmIIn3d4Bm7FXp-hgj2-JOFKMEf5h6PVVSTUq7bjFEFq3LezbEZ8msevCzX28BOs-G3" alt="Profile"/>
+<div class="flex flex-col flex-1 min-w-0"><span class="text-[14px] font-bold text-[#241F1A] truncate">Nguyễn Văn A</span><span class="text-[12px] text-[#7A6F63]">Quản trị viên</span></div>
+<span class="material-symbols-outlined text-[#7A6F63] text-[18px]">unfold_more</span>
+</div>
+</div>
+</aside>
+<!-- Top App Bar -->
+<header class="fixed top-0 right-0 w-[calc(100%-280px)] h-16 bg-surface/68 backdrop-blur-xl border-b border-outline-variant/30 flex items-center justify-between px-lg z-40">
+<div class="flex items-center w-1/3">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-on-surface-variant/5 border-none rounded-full pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/20" placeholder="Tìm nhanh..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:bg-on-surface-variant/5 rounded-full p-2 transition-all">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="hover:bg-on-surface-variant/5 rounded-full p-2 transition-all">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+<div class="h-8 w-px bg-outline-variant/30 mx-2"></div>
+<div class="flex items-center gap-3">
+<div class="text-right hidden sm:block">
+<p class="text-sm font-bold text-on-surface">Admin</p>
+<p class="text-xs text-tertiary">Quản trị viên</p>
+</div>
+<img class="w-10 h-10 rounded-full border border-outline-variant object-cover" data-alt="A high-quality professional corporate headshot of a boutique meat distributor manager, dressed in a sharp neutral-toned apron over a clean white linen shirt. The background is a soft-focus artisanal butchery with high-end equipment and warm lighting. The aesthetic is clean, minimalist, and exudes authority and premium quality." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAgPSTyiNpmC7gFEizVuORHcZnFXV-Sj_l1u0iH0HZZm9mv-Jrfo5U-5xKqeYQzeaxAjdfb_SBfQsDwpqKT4KcV-Q76BtIzTLTuKjO5tPoxndEolqg1yO-d-t5jR5RHYzptbGXPenUhsjFuPRzDKc77uhhZs9eUdXRJpMLseREGwa3gwRQUw--Q6VNqYz6_oeEsL9T74rkv-GVaEPkOIBg7OaIPMg5FZ30t79NEZ6DZ7ZlO6OLnzqahkBHpCHEmO0IxGUnyDLAibmqy"/>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-[280px] pt-24 px-xl pb-12 min-h-screen">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+<div>
+<nav class="flex items-center gap-1 text-[12px] text-[#7A6F63] mb-1">
+<span>CRM</span><span class="material-symbols-outlined text-[12px]">chevron_right</span><span class="text-[#B9823F] font-medium">Danh sách khách hàng</span>
+</nav>
+<h1 class="text-[28px] font-medium text-on-surface">Danh sách khách hàng</h1>
+<p class="text-tertiary mt-1">Quản lý và theo dõi thông tin đối tác chiến lược của Đỉnh Phong</p>
+</div>
+<div class="flex items-center gap-3">
+<button onclick="openModal('modal-add-customer')" class="px-5 py-2.5 bg-[#B9823F] hover:bg-[#9F6D33] text-white font-medium rounded-[14px] transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="add">add</span>
+                    Thêm khách hàng
+                </button>
+<button onclick="document.getElementById('csv-upload-input').click()" class="px-5 py-2.5 border border-[#E3D8CA] text-[#241F1A] hover:bg-[#F4EDE2] font-medium rounded-[14px] transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="upload">upload</span>
+                    Upload CSV
+                </button>
+<input type="file" id="csv-upload-input" accept=".csv" class="hidden" onchange="handleCsvUpload(event)"/>
+<button onclick="exportCsv()" class="px-5 py-2.5 border border-[#E3D8CA] text-[#241F1A] hover:bg-[#F4EDE2] font-medium rounded-[14px] transition-all flex items-center gap-2">
+<span class="material-symbols-outlined text-lg" data-icon="download">download</span>
+                    Xuất CSV
+                </button>
+</div>
+</div>
+<!-- Filter & Search Bar -->
+<div class="mb-8 grid grid-cols-1 lg:grid-cols-12 gap-4">
+<div class="lg:col-span-5 relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-tertiary">search</span>
+<input class="w-full bg-white border border-[#E3D8CA] rounded-[14px] pl-12 pr-4 py-3 focus:border-[#B9823F] focus:ring-4 focus:ring-[#B9823F]/10 outline-none transition-all" placeholder="Tìm kiếm khách hàng theo tên, SĐT..." type="text"/>
+</div>
+<div class="lg:col-span-2">
+<select class="w-full bg-white border border-[#E3D8CA] rounded-[14px] px-4 py-3 focus:border-[#B9823F] focus:ring-4 focus:ring-[#B9823F]/10 outline-none appearance-none transition-all cursor-pointer">
+<option value="">Phân khúc</option>
+<option value="khach-le">Khách lẻ</option>
+<option value="dai-ly">Đại lý</option>
+<option value="vip">VIP</option>
+</select>
+</div>
+<div class="lg:col-span-2">
+<select class="w-full bg-white border border-[#E3D8CA] rounded-[14px] px-4 py-3 focus:border-[#B9823F] focus:ring-4 focus:ring-[#B9823F]/10 outline-none appearance-none transition-all cursor-pointer">
+<option value="">Nguồn khách</option>
+<option value="facebook">Facebook</option>
+<option value="referral">Giới thiệu</option>
+<option value="website">Website</option>
+</select>
+</div>
+<div class="lg:col-span-2">
+<select class="w-full bg-white border border-[#E3D8CA] rounded-[14px] px-4 py-3 focus:border-[#B9823F] focus:ring-4 focus:ring-[#B9823F]/10 outline-none appearance-none transition-all cursor-pointer">
+<option value="">Trạng thái</option>
+<option value="active">Đang hoạt động</option>
+<option value="inactive">Ngừng giao dịch</option>
+<option value="prospect">Tiềm năng</option>
+</select>
+</div>
+<div class="lg:col-span-1">
+<button class="w-full h-full bg-white border border-[#E3D8CA] rounded-[14px] flex items-center justify-center hover:bg-[#F4EDE2] transition-all">
+<span class="material-symbols-outlined text-tertiary">tune</span>
+</button>
+</div>
+</div>
+<!-- Data Table Container (Frosted Cream) -->
+<div class="frosted-cream rounded-[20px] overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-[#F4EDE2] text-[#7A6F63] font-medium text-sm">
+<th class="px-6 py-4">Tên khách hàng</th>
+<th class="px-6 py-4">Liên hệ</th>
+<th class="px-6 py-4">Phân khúc</th>
+<th class="px-6 py-4">Sản phẩm quan tâm</th>
+<th class="px-6 py-4">Người phụ trách</th>
+<th class="px-6 py-4">Trạng thái</th>
+<th class="px-6 py-4 text-center">Hành động</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#E3D8CA]">
+<!-- Row 1: Central Group -->
+<tr class="hover:bg-[#F4EDE2] transition-colors group cursor-pointer">
+<td class="px-6 py-5 font-bold text-on-surface">Central Group (VN)</td>
+<td class="px-6 py-5">
+<div class="text-sm font-medium">028 3824 1234</div>
+<div class="text-xs text-tertiary">procurement@centralgroup.vn</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-[#EFE2D0] text-[#8A6336] rounded-full text-xs font-semibold">Đại lý</span>
+</td>
+<td class="px-6 py-5 text-sm text-tertiary">Thăn ngoại A5 Wagyu, Prime Rib-eye</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<img class="w-8 h-8 rounded-full" data-alt="A professional portrait of a sales executive in a minimalist studio. High-end lighting, warm tones, reflecting a premium service brand. Focus on a friendly yet professional demeanor." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBn1hVHc6xjE_drwwpiQKFhYRRla3FzihGW-4p72Q-zyh9OxfnUYsLifFaj-DG3Xxfug4-Kfw0erUWgrABi6ceC9G5mrATGIs0zUdfxoNxUqXYum_awSKcorKWkLOQiPc-8G4S_d7LYNpdv4KZZlPUVGhfxUhzvMFRP3eMHx-Nl0YnbGSuHqaxcfiGzJRDuJi2KS0L_8nnwMkuD8VrH3rjGhS0mtFtosras_857mpgUsqJ3XvOTLMPJn3IsQBTOwSgJUHuiwMsX1NYs"/>
+<span class="text-sm font-medium">Lê Tuấn Anh</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="flex items-center gap-1.5 text-xs font-medium text-emerald-700">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                                    Đang hoạt động
+                                </span>
+</td>
+<td class="px-6 py-5 text-center" onclick="event.stopPropagation()">
+<div class="relative inline-block">
+<button onclick="toggleRowDropdown(this)" class="p-1 hover:bg-[#E3D8CA]/70 rounded-full transition-all">
+<span class="material-symbols-outlined text-[#7A6F63]">more_vert</span>
+</button>
+<div class="row-dropdown hidden absolute right-0 top-full mt-1 bg-white border border-[#E3D8CA] rounded-[12px] shadow-lg z-20 min-w-[160px] py-1">
+<a href="customer_detail.html" class="flex items-center gap-2.5 px-4 py-2.5 hover:bg-[#F4EDE2] text-sm text-[#241F1A] transition-colors"><span class="material-symbols-outlined text-[16px] text-[#7A6F63]">open_in_new</span>Xem chi tiết</a>
+<button class="flex items-center gap-2.5 px-4 py-2.5 hover:bg-[#F4EDE2] text-sm text-[#241F1A] transition-colors w-full text-left"><span class="material-symbols-outlined text-[16px] text-[#7A6F63]">edit</span>Chỉnh sửa</button>
+<div class="border-t border-[#E3D8CA]/40 mx-3 my-1"></div>
+<button class="flex items-center gap-2.5 px-4 py-2.5 hover:bg-red-50 text-sm text-red-600 transition-colors w-full text-left"><span class="material-symbols-outlined text-[16px]">delete</span>Xóa</button>
+</div>
+</div>
+</td>
+</tr>
+<!-- Row 2: Haidilao Hotpot -->
+<tr class="hover:bg-[#F4EDE2] transition-colors group cursor-pointer">
+<td class="px-6 py-5 font-bold text-on-surface">Haidilao Hotpot Vietnam</td>
+<td class="px-6 py-5">
+<div class="text-sm font-medium">090 999 8888</div>
+<div class="text-xs text-tertiary">supply@haidilaovn.com</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-[#F3E3CF] text-[#9F6D33] rounded-full text-xs font-semibold">VIP</span>
+</td>
+<td class="px-6 py-5 text-sm text-tertiary">Bắp bò Úc, Lõi vai bò Mỹ</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<img class="w-8 h-8 rounded-full" data-alt="Corporate headshot of a female account manager, professional attire, soft background of a modern workspace with wood accents and cream walls. Lighting is airy and bright." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBN1paIHUR52mg8N6szYy70FR1ZP3RD8Ilyk9EQ0zL3JUfL1tmnSrTVvK_MKYjgN_nhGVBrP4Q2sAMlQccTXlr6sl4qvt6Mhnb9geOcba0UL4NqhbEGAGtJg1-Pv6zdzB4NU9Z_rjILRkaDg1QhoZX7i1aZmrTOpZLuxHcU3bOMTSOVszHl0JZkG4-muMk_xNVTSoG0SRB5cPHE_ob0y_qh-9cROKbNIGelYc57EdARYiJNPg0ZwpOY-6CozbHky21kJQw_rhKxP_Vg"/>
+<span class="text-sm font-medium">Phan Minh Hằng</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="flex items-center gap-1.5 text-xs font-medium text-emerald-700">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                                    Đang hoạt động
+                                </span>
+</td>
+<td class="px-6 py-5 text-center" onclick="event.stopPropagation()">
+<div class="relative inline-block">
+<button onclick="toggleRowDropdown(this)" class="p-1 hover:bg-[#E3D8CA]/70 rounded-full transition-all">
+<span class="material-symbols-outlined text-[#7A6F63]">more_vert</span>
+</button>
+<div class="row-dropdown hidden absolute right-0 top-full mt-1 bg-white border border-[#E3D8CA] rounded-[12px] shadow-lg z-20 min-w-[160px] py-1">
+<a href="customer_detail.html" class="flex items-center gap-2.5 px-4 py-2.5 hover:bg-[#F4EDE2] text-sm text-[#241F1A] transition-colors"><span class="material-symbols-outlined text-[16px] text-[#7A6F63]">open_in_new</span>Xem chi tiết</a>
+<button class="flex items-center gap-2.5 px-4 py-2.5 hover:bg-[#F4EDE2] text-sm text-[#241F1A] transition-colors w-full text-left"><span class="material-symbols-outlined text-[16px] text-[#7A6F63]">edit</span>Chỉnh sửa</button>
+<div class="border-t border-[#E3D8CA]/40 mx-3 my-1"></div>
+<button class="flex items-center gap-2.5 px-4 py-2.5 hover:bg-red-50 text-sm text-red-600 transition-colors w-full text-left"><span class="material-symbols-outlined text-[16px]">delete</span>Xóa</button>
+</div>
+</div>
+</td>
+</tr>
+<!-- Row 3: Personal Chef -->
+<tr class="hover:bg-[#F4EDE2] transition-colors group cursor-pointer">
+<td class="px-6 py-5 font-bold text-on-surface">Chef Michael Nguyen</td>
+<td class="px-6 py-5">
+<div class="text-sm font-medium">098 765 4321</div>
+<div class="text-xs text-tertiary">michael@cuisine.art</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-[#F4EDE2] text-[#7A6F63] rounded-full text-xs font-semibold">Khách lẻ</span>
+</td>
+<td class="px-6 py-5 text-sm text-tertiary">Dry-aged Tomahawk, Fillet Mignon</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<img class="w-8 h-8 rounded-full" data-alt="Headshot of a male sales consultant, dressed in a minimal brown polo shirt. Background is a blurred luxury showroom with warm lighting. Clean and professional." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAvl9Vwd8LcXVQICMNkqtwb14RYcdfEF8_1MQmuKrd2mt8LrA-FtKh7Upa66HpMsc_yc7ScLoOqlOMDAyoLD4EVOkfk5e7Orp_ap6x-KS6Eh642notef43js-KD0YTQt3hSh8tG_RNcqLW5eEAqQRqQlvwNGCnEVsFzpmDtUfNN_K_X93hX89jcz8PDO7x4dkpPQUCkn-1CxOFxzVYbpmEZLcImE9lhTiLaLDI2rFMcrpKPkwPe4Rv0Wy36Lc2i9vlg8gCCvDVDBxNP"/>
+<span class="text-sm font-medium">Trần Hoàng Nam</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="flex items-center gap-1.5 text-xs font-medium text-amber-600">
+<span class="w-2 h-2 rounded-full bg-amber-500"></span>
+                                    Tiềm năng
+                                </span>
+</td>
+<td class="px-6 py-5 text-center" onclick="event.stopPropagation()">
+<div class="relative inline-block">
+<button onclick="toggleRowDropdown(this)" class="p-1 hover:bg-[#E3D8CA]/70 rounded-full transition-all">
+<span class="material-symbols-outlined text-[#7A6F63]">more_vert</span>
+</button>
+<div class="row-dropdown hidden absolute right-0 top-full mt-1 bg-white border border-[#E3D8CA] rounded-[12px] shadow-lg z-20 min-w-[160px] py-1">
+<a href="customer_detail.html" class="flex items-center gap-2.5 px-4 py-2.5 hover:bg-[#F4EDE2] text-sm text-[#241F1A] transition-colors"><span class="material-symbols-outlined text-[16px] text-[#7A6F63]">open_in_new</span>Xem chi tiết</a>
+<button class="flex items-center gap-2.5 px-4 py-2.5 hover:bg-[#F4EDE2] text-sm text-[#241F1A] transition-colors w-full text-left"><span class="material-symbols-outlined text-[16px] text-[#7A6F63]">edit</span>Chỉnh sửa</button>
+<div class="border-t border-[#E3D8CA]/40 mx-3 my-1"></div>
+<button class="flex items-center gap-2.5 px-4 py-2.5 hover:bg-red-50 text-sm text-red-600 transition-colors w-full text-left"><span class="material-symbols-outlined text-[16px]">delete</span>Xóa</button>
+</div>
+</div>
+</td>
+</tr>
+<!-- Row 4: Golden Gate Group -->
+<tr class="hover:bg-[#F4EDE2] transition-colors group cursor-pointer">
+<td class="px-6 py-5 font-bold text-on-surface">Golden Gate Group</td>
+<td class="px-6 py-5">
+<div class="text-sm font-medium">1900 6622</div>
+<div class="text-xs text-tertiary">contact@goldengate.com.vn</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-[#F3E3CF] text-[#9F6D33] rounded-full text-xs font-semibold">VIP</span>
+</td>
+<td class="px-6 py-5 text-sm text-tertiary">Short Ribs (MB 7+), Wagyu Brisket</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<img class="w-8 h-8 rounded-full" data-alt="Professional studio portrait of an account lead, clean aesthetic, high-key lighting, focused look, minimal style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB64c8QFLZfEU4gtdjja8qzChLLdsANPeqPshQAi-svVNY9nTfJ1qE-5lOPbG_yskslRvIvytri7Z7rLfKFYId93v9l4HpC79vGHbIBvbb112UtmC6FrtMshBa6O8mheWjEpRsU0NzI5QNoUwOhBCBwaIy6dWxGJ2dBCbfhJdk5FCGAUK3_eUgZOuCvWjlaCJcJ8mu9i0D2t3fmmTW6_jL6cHwANh3RvlcdDCNNAW5_1VOdgKtsGKQYxJjhVIympm6qqD9M3lHHu73-"/>
+<span class="text-sm font-medium">Lê Tuấn Anh</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="flex items-center gap-1.5 text-xs font-medium text-emerald-700">
+<span class="w-2 h-2 rounded-full bg-emerald-500"></span>
+                                    Đang hoạt động
+                                </span>
+</td>
+<td class="px-6 py-5 text-center" onclick="event.stopPropagation()">
+<div class="relative inline-block">
+<button onclick="toggleRowDropdown(this)" class="p-1 hover:bg-[#E3D8CA]/70 rounded-full transition-all">
+<span class="material-symbols-outlined text-[#7A6F63]">more_vert</span>
+</button>
+<div class="row-dropdown hidden absolute right-0 top-full mt-1 bg-white border border-[#E3D8CA] rounded-[12px] shadow-lg z-20 min-w-[160px] py-1">
+<a href="customer_detail.html" class="flex items-center gap-2.5 px-4 py-2.5 hover:bg-[#F4EDE2] text-sm text-[#241F1A] transition-colors"><span class="material-symbols-outlined text-[16px] text-[#7A6F63]">open_in_new</span>Xem chi tiết</a>
+<button class="flex items-center gap-2.5 px-4 py-2.5 hover:bg-[#F4EDE2] text-sm text-[#241F1A] transition-colors w-full text-left"><span class="material-symbols-outlined text-[16px] text-[#7A6F63]">edit</span>Chỉnh sửa</button>
+<div class="border-t border-[#E3D8CA]/40 mx-3 my-1"></div>
+<button class="flex items-center gap-2.5 px-4 py-2.5 hover:bg-red-50 text-sm text-red-600 transition-colors w-full text-left"><span class="material-symbols-outlined text-[16px]">delete</span>Xóa</button>
+</div>
+</div>
+</td>
+</tr>
+<!-- Row 5: Fine Dining Restaurant -->
+<tr class="hover:bg-[#F4EDE2] transition-colors group cursor-pointer">
+<td class="px-6 py-5 font-bold text-on-surface">The Log Restaurant</td>
+<td class="px-6 py-5">
+<div class="text-sm font-medium">028 3911 0123</div>
+<div class="text-xs text-tertiary">info@thelog.com.vn</div>
+</td>
+<td class="px-6 py-5">
+<span class="px-3 py-1 bg-[#EFE2D0] text-[#8A6336] rounded-full text-xs font-semibold">Đại lý</span>
+</td>
+<td class="px-6 py-5 text-sm text-tertiary">Bò Angus thượng hạng, Ribeye Steak</td>
+<td class="px-6 py-5">
+<div class="flex items-center gap-2">
+<img class="w-8 h-8 rounded-full" data-alt="Headshot of a friendly female staff member, warm studio lighting, neutral background, professional and welcoming." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqL7B0_S0Ch0eHH5w9uPP88sIQsYzDOeISPtvnlG3P2Y7wt2YdrjGNN-HPhoQ9ZCOLg9bjsmnDi_Ej6AblXzZiO_jKoehn83fGrav-LbK2xcCvVrfhXFHe9w9ZpnawUOK9iySCRPphBSSScn1CGHoVkvoNcpXXRjL806rkO39xe3J9eSJl8FmC6Ike4OLdei12a6PAGM3MvhQbsZatXp73pe6n0momzLMvzJowRh52N1Z3RY6gn28chlc9pL-xEUXOyfiGxHCAzMvx"/>
+<span class="text-sm font-medium">Nguyễn Thu Thủy</span>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="flex items-center gap-1.5 text-xs font-medium text-slate-500">
+<span class="w-2 h-2 rounded-full bg-slate-400"></span>
+                                    Tạm ngưng
+                                </span>
+</td>
+<td class="px-6 py-5 text-center" onclick="event.stopPropagation()">
+<div class="relative inline-block">
+<button onclick="toggleRowDropdown(this)" class="p-1 hover:bg-[#E3D8CA]/70 rounded-full transition-all">
+<span class="material-symbols-outlined text-[#7A6F63]">more_vert</span>
+</button>
+<div class="row-dropdown hidden absolute right-0 top-full mt-1 bg-white border border-[#E3D8CA] rounded-[12px] shadow-lg z-20 min-w-[160px] py-1">
+<a href="customer_detail.html" class="flex items-center gap-2.5 px-4 py-2.5 hover:bg-[#F4EDE2] text-sm text-[#241F1A] transition-colors"><span class="material-symbols-outlined text-[16px] text-[#7A6F63]">open_in_new</span>Xem chi tiết</a>
+<button class="flex items-center gap-2.5 px-4 py-2.5 hover:bg-[#F4EDE2] text-sm text-[#241F1A] transition-colors w-full text-left"><span class="material-symbols-outlined text-[16px] text-[#7A6F63]">edit</span>Chỉnh sửa</button>
+<div class="border-t border-[#E3D8CA]/40 mx-3 my-1"></div>
+<button class="flex items-center gap-2.5 px-4 py-2.5 hover:bg-red-50 text-sm text-red-600 transition-colors w-full text-left"><span class="material-symbols-outlined text-[16px]">delete</span>Xóa</button>
+</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="px-6 py-4 bg-[#F4EDE2]/50 flex items-center justify-between border-t border-[#E3D8CA]">
+<div class="text-sm text-tertiary">Hiển thị 1 - 5 của 1,280 khách hàng</div>
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-[#E3D8CA] rounded-lg transition-all disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 bg-[#B9823F] text-white rounded-lg text-sm font-bold">1</button>
+<button class="w-8 h-8 hover:bg-[#E3D8CA] rounded-lg text-sm font-medium">2</button>
+<button class="w-8 h-8 hover:bg-[#E3D8CA] rounded-lg text-sm font-medium">3</button>
+<span class="px-1 text-tertiary">...</span>
+<button class="w-8 h-8 hover:bg-[#E3D8CA] rounded-lg text-sm font-medium">256</button>
+</div>
+<button class="p-2 hover:bg-[#E3D8CA] rounded-lg transition-all">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Floating Quick View Summary (Extra boutique touch) -->
+<div class="mt-8 grid grid-cols-1 md:grid-cols-4 gap-4">
+<div class="frosted-cream p-4 rounded-xl flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-[#B9823F]/10 flex items-center justify-center text-[#B9823F]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">groups</span>
+</div>
+<div>
+<p class="text-xs text-tertiary uppercase tracking-wider font-bold">Tổng khách</p>
+<p class="text-xl font-bold text-on-surface">1,280</p>
+</div>
+</div>
+<div class="frosted-cream p-4 rounded-xl flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-600">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">trending_up</span>
+</div>
+<div>
+<p class="text-xs text-tertiary uppercase tracking-wider font-bold">Hoạt động</p>
+<p class="text-xl font-bold text-on-surface">942</p>
+</div>
+</div>
+<div class="frosted-cream p-4 rounded-xl flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-amber-100 flex items-center justify-center text-amber-600">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">stars</span>
+</div>
+<div>
+<p class="text-xs text-tertiary uppercase tracking-wider font-bold">Hạng VIP</p>
+<p class="text-xl font-bold text-on-surface">124</p>
+</div>
+</div>
+<div class="frosted-cream p-4 rounded-xl flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-[#B9823F] flex items-center justify-center text-white">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">shopping_cart</span>
+</div>
+<div>
+<p class="text-xs text-tertiary uppercase tracking-wider font-bold">Chốt mới/tháng</p>
+<p class="text-xl font-bold text-on-surface">+42</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Modal: Thêm khách hàng -->
+<div id="modal-add-customer" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4">
+<div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="closeModal('modal-add-customer')"></div>
+<div class="relative bg-white rounded-[24px] w-full max-w-lg shadow-2xl overflow-hidden">
+<div class="bg-[#F4EDE2] px-6 py-5 border-b border-[#E3D8CA] flex items-center justify-between">
+<div class="flex items-center gap-3"><div class="w-9 h-9 rounded-full bg-[#B9823F] flex items-center justify-center"><span class="material-symbols-outlined text-white text-[18px]">person_add</span></div><h2 class="text-[18px] font-bold text-[#241F1A]">Thêm khách hàng mới</h2></div>
+<button onclick="closeModal('modal-add-customer')" class="p-1.5 hover:bg-[#E3D8CA] rounded-full transition-all"><span class="material-symbols-outlined text-[#7A6F63]">close</span></button>
+</div>
+<form class="p-6 space-y-4" onsubmit="submitAddCustomer(event)">
+<div class="grid grid-cols-2 gap-4">
+<div><label class="block text-xs font-semibold text-[#7A6F63] mb-1.5 uppercase tracking-wide">Tên khách hàng *</label><input required type="text" placeholder="VD: Nhà hàng The Log" class="w-full border border-[#E3D8CA] rounded-[12px] px-4 py-2.5 text-sm focus:border-[#B9823F] focus:ring-2 focus:ring-[#B9823F]/15 outline-none transition-all"/></div>
+<div><label class="block text-xs font-semibold text-[#7A6F63] mb-1.5 uppercase tracking-wide">Số điện thoại</label><input type="tel" placeholder="0xx xxx xxxx" class="w-full border border-[#E3D8CA] rounded-[12px] px-4 py-2.5 text-sm focus:border-[#B9823F] focus:ring-2 focus:ring-[#B9823F]/15 outline-none transition-all"/></div>
+</div>
+<div><label class="block text-xs font-semibold text-[#7A6F63] mb-1.5 uppercase tracking-wide">Email</label><input type="email" placeholder="contact@example.com" class="w-full border border-[#E3D8CA] rounded-[12px] px-4 py-2.5 text-sm focus:border-[#B9823F] focus:ring-2 focus:ring-[#B9823F]/15 outline-none transition-all"/></div>
+<div class="grid grid-cols-2 gap-4">
+<div><label class="block text-xs font-semibold text-[#7A6F63] mb-1.5 uppercase tracking-wide">Phân khúc</label><select class="w-full border border-[#E3D8CA] rounded-[12px] px-4 py-2.5 text-sm focus:border-[#B9823F] outline-none transition-all bg-white"><option value="">Chọn phân khúc</option><option>Khách lẻ</option><option>Đại lý</option><option>VIP</option></select></div>
+<div><label class="block text-xs font-semibold text-[#7A6F63] mb-1.5 uppercase tracking-wide">Nguồn khách</label><select class="w-full border border-[#E3D8CA] rounded-[12px] px-4 py-2.5 text-sm focus:border-[#B9823F] outline-none transition-all bg-white"><option value="">Chọn nguồn</option><option>Facebook</option><option>Giới thiệu</option><option>Website</option></select></div>
+</div>
+<div><label class="block text-xs font-semibold text-[#7A6F63] mb-1.5 uppercase tracking-wide">Ghi chú</label><textarea rows="2" placeholder="Thông tin bổ sung..." class="w-full border border-[#E3D8CA] rounded-[12px] px-4 py-2.5 text-sm focus:border-[#B9823F] focus:ring-2 focus:ring-[#B9823F]/15 outline-none transition-all resize-none"></textarea></div>
+<div class="flex gap-3 pt-2">
+<button type="button" onclick="closeModal('modal-add-customer')" class="flex-1 py-2.5 border border-[#E3D8CA] text-[#241F1A] rounded-[12px] text-sm font-medium hover:bg-[#F4EDE2] transition-all">Hủy</button>
+<button type="submit" class="flex-1 py-2.5 bg-[#B9823F] hover:bg-[#9F6D33] text-white rounded-[12px] text-sm font-bold transition-all">Thêm khách hàng</button>
+</div>
+</form>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script>
+    function toast(msg, ok) {
+        Toastify({ text: msg, duration: 3000, gravity: 'top', position: 'right', style: { background: ok !== false ? 'linear-gradient(135deg,#B9823F,#9F6D33)' : '#dc2626', borderRadius: '12px' } }).showToast();
+    }
+    function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+    function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+    function toggleProfileDropdown() {
+        const d = document.getElementById('profile-dropdown');
+        d.classList.toggle('hidden');
+    }
+    document.addEventListener('click', (e) => {
+        const d = document.getElementById('profile-dropdown');
+        if (!d.classList.contains('hidden') && !e.target.closest('[onclick="toggleProfileDropdown()"]') && !e.target.closest('#profile-dropdown')) {
+            d.classList.add('hidden');
+        }
+        document.querySelectorAll('.row-dropdown').forEach(drop => {
+            if (!drop.classList.contains('hidden') && !e.target.closest('.row-dropdown') && !e.target.closest('[onclick*="toggleRowDropdown"]')) {
+                drop.classList.add('hidden');
+            }
+        });
+    });
+    function toggleRowDropdown(btn) {
+        const drop = btn.nextElementSibling;
+        document.querySelectorAll('.row-dropdown').forEach(d => { if (d !== drop) d.classList.add('hidden'); });
+        drop.classList.toggle('hidden');
+    }
+    function submitAddCustomer(e) {
+        e.preventDefault();
+        closeModal('modal-add-customer');
+        toast('Đã thêm khách hàng mới thành công!');
+    }
+    function exportCsv() { toast('Đang xuất danh sách khách hàng...'); }
+    function handleCsvUpload(e) {
+        const file = e.target.files[0];
+        if (file) toast('Đã tải lên: ' + file.name);
+    }
+    document.querySelectorAll('tbody tr').forEach(row => {
+        row.addEventListener('click', (e) => {
+            if (e.target.closest('[onclick*="stopPropagation"]') || e.target.closest('.row-dropdown')) return;
+            window.location.href = 'customer_detail.html';
+        });
+    });
+    const searchInput = document.querySelector('input[placeholder*="Tìm kiếm"]');
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            document.querySelectorAll('tbody tr').forEach(row => {
+                const name = row.querySelector('td:first-child')?.textContent.toLowerCase() || '';
+                row.style.display = name.includes(term) ? '' : 'none';
+            });
+        });
+    }
+</script>
+</body></html>

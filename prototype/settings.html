@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html class="light" lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cài đặt | Đỉnh Phong CRM</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="js/tailwind.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<style>
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #FAF7F1;
+    color: #241F1A;
+  }
+  .frosted-cream {
+    background: rgba(255,255,255,0.68);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid #E3D8CA;
+    box-shadow: 0px 4px 20px rgba(122,111,99,0.08);
+  }
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    vertical-align: middle;
+  }
+  .sidebar-scroll::-webkit-scrollbar { width: 4px; }
+  .sidebar-scroll::-webkit-scrollbar-thumb { background: #E3D8CA; border-radius: 10px; }
+
+  /* Tab system */
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+  .tab-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #7A6F63;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+  }
+  .tab-btn:hover { color: #B9823F; }
+  .tab-btn.active {
+    color: #B9823F;
+    border-bottom-color: #B9823F;
+    font-weight: 600;
+  }
+
+  /* Toggle switch */
+  .toggle-wrap { display: flex; align-items: center; }
+  .toggle-input { display: none; }
+  .toggle-label {
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+    background: #D1C7BA;
+    border-radius: 9999px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.25s;
+    flex-shrink: 0;
+  }
+  .toggle-label::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 18px;
+    height: 18px;
+    background: #fff;
+    border-radius: 9999px;
+    transition: left 0.25s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.18);
+  }
+  .toggle-input:checked + .toggle-label { background: #B9823F; }
+  .toggle-input:checked + .toggle-label::after { left: 23px; }
+
+  /* Input / Select */
+  .form-input {
+    width: 100%;
+    border: 1px solid #E3D8CA;
+    border-radius: 14px;
+    padding: 12px 16px;
+    font-size: 14px;
+    color: #241F1A;
+    background: #fff;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .form-input:focus {
+    border-color: #B9823F;
+    box-shadow: 0 0 0 3px rgba(185,130,63,0.10);
+  }
+  textarea.form-input { resize: vertical; min-height: 80px; }
+  .form-select {
+    width: 100%;
+    border: 1px solid #E3D8CA;
+    border-radius: 14px;
+    padding: 12px 16px;
+    font-size: 14px;
+    color: #241F1A;
+    background: #fff;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237A6F63' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .form-select:focus {
+    border-color: #B9823F;
+    box-shadow: 0 0 0 3px rgba(185,130,63,0.10);
+  }
+
+  /* Color theme radio */
+  .theme-option input[type="radio"] { display: none; }
+  .theme-swatch {
+    width: 48px;
+    height: 48px;
+    border-radius: 9999px;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: border-color 0.2s, transform 0.15s;
+    display: block;
+  }
+  .theme-option input[type="radio"]:checked + .theme-swatch {
+    border-color: #241F1A;
+    transform: scale(1.1);
+  }
+
+  /* Density / format radio */
+  .radio-card input[type="radio"] { display: none; }
+  .radio-card-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    padding: 14px 20px;
+    border: 1.5px solid #E3D8CA;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+    font-size: 13px;
+    font-weight: 500;
+    color: #7A6F63;
+    min-width: 110px;
+    text-align: center;
+  }
+  .radio-card input[type="radio"]:checked + .radio-card-label {
+    border-color: #B9823F;
+    background: rgba(185,130,63,0.06);
+    color: #B9823F;
+    font-weight: 600;
+  }
+  .radio-card-label:hover { border-color: #B9823F; }
+
+  /* Member role badge */
+  .badge-admin  { background: #FFF3E0; color: #9F6D33; }
+  .badge-sales  { background: #E3F2FD; color: #1565C0; }
+  .badge-support{ background: #F5F5F5; color: #5A5A5A; }
+
+  /* Table row hover */
+  .member-row { transition: background 0.15s; }
+  .member-row:hover { background: rgba(185,130,63,0.04); }
+
+  /* Card fade-in */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up  { animation: fadeUp 0.4s ease-out both; }
+  .fade-up-2{ animation: fadeUp 0.4s 0.07s ease-out both; }
+  .fade-up-3{ animation: fadeUp 0.4s 0.14s ease-out both; }
+
+  /* Sidebar nav hover slide */
+  nav a { transition: transform 0.15s ease, background-color 0.15s; }
+  nav a:not(.nav-active):hover { transform: translateX(3px); }
+
+  /* Integration status indicator */
+  .int-connected    { color: #15803d; background: #dcfce7; }
+  .int-disconnected { color: #7A6F63; background: #F4EDE2; }
+</style>
+</head>
+<body class="flex min-h-screen overflow-hidden">
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-[#F4EDE2] border-r border-[#E3D8CA] flex flex-col z-50">
+  <div class="px-6 py-8 flex items-center gap-3">
+    <div class="w-10 h-10 bg-[#B9823F] flex items-center justify-center rounded-lg shadow-sm">
+      <span class="material-symbols-outlined text-white" style="font-variation-settings:'FILL' 1;">restaurant_menu</span>
+    </div>
+    <div>
+      <h1 class="text-[22px] font-bold text-[#B9823F] tracking-tight leading-none uppercase">Đỉnh Phong</h1>
+      <p class="text-[10px] text-[#7A6F63] tracking-widest uppercase mt-1">Premium Beef CRM</p>
+    </div>
+  </div>
+  <nav class="flex-1 px-4 space-y-1 mt-2 sidebar-scroll overflow-y-auto">
+    <a href="dashboard.html" class="flex items-center text-[#7A6F63] py-3 px-6 hover:bg-[#B9823F]/5 rounded-r-xl">
+      <span class="material-symbols-outlined mr-4 text-[20px]">dashboard</span>
+      <span class="text-[15px]">Tổng quan</span>
+    </a>
+    <a href="opportunities.html" class="flex items-center text-[#7A6F63] py-3 px-6 hover:bg-[#B9823F]/5 rounded-r-xl">
+      <span class="material-symbols-outlined mr-4 text-[20px]">monetization_on</span>
+      <span class="text-[15px]">Cơ hội bán hàng</span>
+    </a>
+    <a href="tasks.html" class="flex items-center text-[#7A6F63] py-3 px-6 hover:bg-[#B9823F]/5 rounded-r-xl">
+      <span class="material-symbols-outlined mr-4 text-[20px]">assignment</span>
+      <span class="text-[15px]">Công việc</span>
+    </a>
+    <a href="customers.html" class="flex items-center text-[#7A6F63] py-3 px-6 hover:bg-[#B9823F]/5 rounded-r-xl">
+      <span class="material-symbols-outlined mr-4 text-[20px]">groups</span>
+      <span class="text-[15px]">Danh sách khách hàng</span>
+    </a>
+    <a href="payments.html" class="flex items-center text-[#7A6F63] py-3 px-6 hover:bg-[#B9823F]/5 rounded-r-xl">
+      <span class="material-symbols-outlined mr-4 text-[20px]">payments</span>
+      <span class="text-[15px]">Thanh toán</span>
+    </a>
+    <!-- Active: Cài đặt -->
+    <a href="settings.html" class="nav-active relative flex items-center bg-[#F3E3CF] text-[#9F6D33] font-semibold py-3 px-6 rounded-r-xl">
+      <div class="absolute left-0 top-0 bottom-0 w-1 bg-[#B9823F] rounded-r"></div>
+      <span class="material-symbols-outlined mr-4 text-[20px]" style="font-variation-settings:'FILL' 1;">settings</span>
+      <span class="text-[15px]">Cài đặt</span>
+    </a>
+  </nav>
+  <!-- Profile footer with dropdown -->
+  <div class="mt-auto p-4 border-t border-[#E3D8CA]/50 bg-[#F4EDE2] relative">
+    <div id="profile-dropdown" class="hidden absolute bottom-full left-4 right-4 mb-2 bg-white border border-[#E3D8CA] rounded-[14px] shadow-lg overflow-hidden z-10">
+      <a href="profile.html" class="flex items-center gap-3 px-4 py-3 hover:bg-[#F4EDE2] text-sm">
+        <span class="material-symbols-outlined text-[#B9823F] text-[18px]">person</span>
+        <span class="font-medium">Xem hồ sơ</span>
+      </a>
+      <a href="settings.html" class="flex items-center gap-3 px-4 py-3 bg-[#F4EDE2] text-sm">
+        <span class="material-symbols-outlined text-[#B9823F] text-[18px]" style="font-variation-settings:'FILL' 1;">settings</span>
+        <span class="font-semibold text-[#B9823F]">Cài đặt</span>
+      </a>
+      <div class="border-t border-[#E3D8CA]/50 mx-2"></div>
+      <a href="index.html" class="flex items-center gap-3 px-4 py-3 hover:bg-red-50 text-sm text-red-600">
+        <span class="material-symbols-outlined text-[18px]">logout</span>
+        <span class="font-medium">Đăng xuất</span>
+      </a>
+    </div>
+    <div onclick="toggleProfileDropdown()" class="flex items-center gap-3 hover:bg-[#B9823F]/5 p-2 rounded-xl cursor-pointer">
+      <div class="relative">
+        <img class="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRrpeozyEJ-qX1mQ1mfknrMjUAebC1IUl0FzVdST9s3Ocju71cvkOLc0idwn9zDLDZ7XvWExo9maetvAugXOCUQsK18qsD_bxa85565xFcIQMi1GjSeyjFdNZhgm--7x1mHoAH2f7gIHrF_MlUUXXIES0xMiS2ACECxQJ93Xf_fzu95lrgkogZlNUGTOy9qDEndQl1bqSYFLmIIn3d4Bm7FXp-hgj2-JOFKMEf5h6PVVSTUq7bjFEFq3LezbEZ8msevCzX28BOs-G3" alt="Nguyễn Văn A"/>
+        <div class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></div>
+      </div>
+      <div class="flex flex-col flex-1 min-w-0">
+        <span class="text-[14px] font-bold text-[#241F1A] truncate">Nguyễn Văn A</span>
+        <span class="text-[12px] text-[#7A6F63]">Quản trị viên</span>
+      </div>
+      <span class="material-symbols-outlined text-[#7A6F63] text-[18px]">unfold_more</span>
+    </div>
+  </div>
+</aside>
+
+<!-- ===== HEADER ===== -->
+<header class="fixed top-0 left-[280px] right-0 h-16 bg-[#FAF7F1]/85 backdrop-blur-md border-b border-[#E3D8CA]/40 flex items-center justify-between px-8 z-40">
+  <div class="flex items-center gap-2 text-sm text-[#7A6F63]">
+    <span>CRM</span>
+    <span class="material-symbols-outlined text-[14px] text-[#D1C7BA]">chevron_right</span>
+    <span class="font-semibold text-[#241F1A]">Cài đặt</span>
+  </div>
+  <div class="flex items-center gap-2">
+    <button class="w-9 h-9 flex items-center justify-center rounded-full text-[#7A6F63] hover:bg-[#B9823F]/8 transition-colors" title="Thông báo">
+      <span class="material-symbols-outlined text-[20px]">notifications</span>
+    </button>
+    <button class="w-9 h-9 flex items-center justify-center rounded-full text-[#7A6F63] hover:bg-[#B9823F]/8 transition-colors" title="Trợ giúp">
+      <span class="material-symbols-outlined text-[20px]">help_outline</span>
+    </button>
+  </div>
+</header>
+
+<!-- ===== MAIN ===== -->
+<main class="ml-[280px] pt-20 px-8 pb-12 min-h-screen overflow-y-auto w-full">
+  <div class="max-w-5xl mx-auto">
+
+    <!-- Page title -->
+    <div class="mb-7 fade-up">
+      <h1 class="text-[26px] font-bold text-[#241F1A] leading-tight">Cài đặt hệ thống</h1>
+      <p class="text-[14px] text-[#7A6F63] mt-1">Quản lý cấu hình và tùy chỉnh hệ thống CRM</p>
+    </div>
+
+    <!-- Tabs -->
+    <div class="fade-up-2">
+      <div class="flex border-b border-[#E3D8CA] mb-7 overflow-x-auto gap-1">
+        <button class="tab-btn active" onclick="switchTab('taikhoan', this)">Tài khoản</button>
+        <button class="tab-btn" onclick="switchTab('thongbao', this)">Thông báo</button>
+        <button class="tab-btn" onclick="switchTab('nhom', this)">Nhóm &amp; Thành viên</button>
+        <button class="tab-btn" onclick="switchTab('giaodien', this)">Giao diện</button>
+      </div>
+
+      <!-- TAB 1: Tài khoản -->
+      <div id="tab-taikhoan" class="tab-content active space-y-5">
+
+        <!-- Section A: Thông tin công ty -->
+        <div class="frosted-cream rounded-[20px] p-6">
+          <h2 class="text-[16px] font-bold text-[#241F1A] mb-5 flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px] text-[#B9823F]" style="font-variation-settings:'FILL' 1;">business</span>
+            Thông tin công ty
+          </h2>
+          <form onsubmit="handleSaveCompany(event)">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[12px] font-semibold text-[#7A6F63] uppercase tracking-wide mb-2">Tên công ty</label>
+                <input type="text" class="form-input" value="Đỉnh Phong Luxury Beef"/>
+              </div>
+              <div>
+                <label class="block text-[12px] font-semibold text-[#7A6F63] uppercase tracking-wide mb-2">Ngành</label>
+                <input type="text" class="form-input" value="Thực phẩm cao cấp – Thịt bò nhập khẩu"/>
+              </div>
+              <div>
+                <label class="block text-[12px] font-semibold text-[#7A6F63] uppercase tracking-wide mb-2">Website</label>
+                <input type="url" class="form-input" value="https://dinhphong.vn"/>
+              </div>
+              <div>
+                <label class="block text-[12px] font-semibold text-[#7A6F63] uppercase tracking-wide mb-2">Múi giờ</label>
+                <select class="form-select">
+                  <option selected>Asia/Ho_Chi_Minh (GMT+7)</option>
+                  <option>Asia/Bangkok (GMT+7)</option>
+                  <option>Asia/Singapore (GMT+8)</option>
+                  <option>UTC (GMT+0)</option>
+                </select>
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block text-[12px] font-semibold text-[#7A6F63] uppercase tracking-wide mb-2">Địa chỉ</label>
+                <textarea class="form-input" rows="2">18 Nguyễn Huệ, Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh</textarea>
+              </div>
+              <div>
+                <label class="block text-[12px] font-semibold text-[#7A6F63] uppercase tracking-wide mb-2">Ngôn ngữ</label>
+                <select class="form-select">
+                  <option selected>Tiếng Việt</option>
+                  <option>English</option>
+                </select>
+              </div>
+            </div>
+            <div class="flex justify-end mt-6 pt-5 border-t border-[#E3D8CA]/60">
+              <button type="submit" class="flex items-center gap-2 px-5 py-2.5 bg-[#B9823F] hover:bg-[#9F6D33] text-white font-semibold rounded-[14px] text-[14px] transition-colors">
+                <span class="material-symbols-outlined text-[17px]" style="font-variation-settings:'FILL' 1;">save</span>
+                Lưu thay đổi
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Section B: Tích hợp -->
+        <div class="frosted-cream rounded-[20px] p-6">
+          <h2 class="text-[16px] font-bold text-[#241F1A] mb-5 flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px] text-[#B9823F]">extension</span>
+            Tích hợp
+          </h2>
+          <div class="space-y-3">
+
+            <!-- Google Calendar -->
+            <div class="flex items-center gap-4 p-4 bg-[#F4EDE2]/50 rounded-[14px] border border-[#E3D8CA]/60">
+              <div class="w-10 h-10 rounded-xl bg-white border border-[#E3D8CA] flex items-center justify-center flex-shrink-0 shadow-sm">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <rect x="3" y="4" width="18" height="17" rx="2" fill="#fff" stroke="#E3D8CA" stroke-width="1.5"/>
+                  <path d="M16 2v4M8 2v4M3 10h18" stroke="#4285F4" stroke-width="1.5" stroke-linecap="round"/>
+                  <text x="8" y="19" font-size="7" fill="#4285F4" font-family="Inter" font-weight="700">CAL</text>
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-[14px] font-semibold text-[#241F1A]">Google Calendar</p>
+                <p class="text-[12px] text-[#7A6F63]">Đồng bộ công việc và lịch hẹn</p>
+              </div>
+              <span class="int-connected flex items-center gap-1.5 text-[12px] font-semibold px-3 py-1.5 rounded-full">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500 inline-block"></span>
+                Đã kết nối
+              </span>
+              <button onclick="toast('Đã ngắt kết nối Google Calendar','#514539')" class="px-3 py-1.5 text-[12px] font-medium border border-[#E3D8CA] hover:bg-red-50 hover:text-red-600 hover:border-red-200 rounded-[10px] transition-colors text-[#7A6F63]">Ngắt</button>
+            </div>
+
+            <!-- Zalo OA -->
+            <div class="flex items-center gap-4 p-4 bg-[#F4EDE2]/50 rounded-[14px] border border-[#E3D8CA]/60">
+              <div class="w-10 h-10 rounded-xl bg-white border border-[#E3D8CA] flex items-center justify-center flex-shrink-0 shadow-sm">
+                <svg width="20" height="20" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="12" cy="12" r="10" fill="#0068FF"/>
+                  <text x="5" y="16" font-size="7" fill="#fff" font-family="Inter" font-weight="700">Zalo</text>
+                </svg>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-[14px] font-semibold text-[#241F1A]">Zalo OA</p>
+                <p class="text-[12px] text-[#7A6F63]">Gửi tin nhắn tự động tới khách hàng</p>
+              </div>
+              <span class="int-connected flex items-center gap-1.5 text-[12px] font-semibold px-3 py-1.5 rounded-full">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500 inline-block"></span>
+                Đã kết nối
+              </span>
+              <button onclick="toast('Đã ngắt kết nối Zalo OA','#514539')" class="px-3 py-1.5 text-[12px] font-medium border border-[#E3D8CA] hover:bg-red-50 hover:text-red-600 hover:border-red-200 rounded-[10px] transition-colors text-[#7A6F63]">Ngắt</button>
+            </div>
+
+            <!-- Email SMTP -->
+            <div class="flex items-center gap-4 p-4 bg-white/50 rounded-[14px] border border-[#E3D8CA]/60">
+              <div class="w-10 h-10 rounded-xl bg-white border border-[#E3D8CA] flex items-center justify-center flex-shrink-0 shadow-sm">
+                <span class="material-symbols-outlined text-[#7A6F63] text-[20px]">mail</span>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-[14px] font-semibold text-[#241F1A]">Email SMTP</p>
+                <p class="text-[12px] text-[#7A6F63]">Gửi email giao dịch và báo cáo</p>
+              </div>
+              <span class="int-disconnected flex items-center gap-1.5 text-[12px] font-semibold px-3 py-1.5 rounded-full">
+                <span class="w-1.5 h-1.5 rounded-full bg-[#D1C7BA] inline-block"></span>
+                Chưa kết nối
+              </span>
+              <button onclick="toast('Chức năng đang phát triển','#B9823F')" class="px-3 py-1.5 text-[12px] font-semibold bg-[#B9823F] hover:bg-[#9F6D33] text-white rounded-[10px] transition-colors">Kết nối</button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 2: Thông báo -->
+      <div id="tab-thongbao" class="tab-content">
+        <div class="frosted-cream rounded-[20px] p-6">
+          <h2 class="text-[16px] font-bold text-[#241F1A] mb-5 flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px] text-[#B9823F]" style="font-variation-settings:'FILL' 1;">notifications</span>
+            Cài đặt thông báo hệ thống
+          </h2>
+          <div class="space-y-1">
+
+            <div class="flex items-center justify-between p-4 rounded-[14px] hover:bg-[#F4EDE2]/50 transition-colors">
+              <div class="flex-1 pr-4">
+                <p class="text-[14px] font-semibold text-[#241F1A]">Thông báo cơ hội mới</p>
+                <p class="text-[12px] text-[#7A6F63] mt-0.5">Khi có cơ hội bán hàng được tạo hoặc chuyển giao</p>
+              </div>
+              <div class="toggle-wrap">
+                <input type="checkbox" id="sn-1" class="toggle-input" checked/>
+                <label for="sn-1" class="toggle-label"></label>
+              </div>
+            </div>
+            <div class="mx-4 border-t border-[#E3D8CA]/40"></div>
+
+            <div class="flex items-center justify-between p-4 rounded-[14px] hover:bg-[#F4EDE2]/50 transition-colors">
+              <div class="flex-1 pr-4">
+                <p class="text-[14px] font-semibold text-[#241F1A]">Thông báo công việc quá hạn</p>
+                <p class="text-[12px] text-[#7A6F63] mt-0.5">Gửi cảnh báo khi công việc đã qua deadline</p>
+              </div>
+              <div class="toggle-wrap">
+                <input type="checkbox" id="sn-2" class="toggle-input" checked/>
+                <label for="sn-2" class="toggle-label"></label>
+              </div>
+            </div>
+            <div class="mx-4 border-t border-[#E3D8CA]/40"></div>
+
+            <div class="flex items-center justify-between p-4 rounded-[14px] hover:bg-[#F4EDE2]/50 transition-colors">
+              <div class="flex-1 pr-4">
+                <p class="text-[14px] font-semibold text-[#241F1A]">Nhắc nhở deadline</p>
+                <p class="text-[12px] text-[#7A6F63] mt-0.5">Nhắc trước 24 giờ khi công việc sắp đến hạn</p>
+              </div>
+              <div class="toggle-wrap">
+                <input type="checkbox" id="sn-3" class="toggle-input" checked/>
+                <label for="sn-3" class="toggle-label"></label>
+              </div>
+            </div>
+            <div class="mx-4 border-t border-[#E3D8CA]/40"></div>
+
+            <div class="flex items-center justify-between p-4 rounded-[14px] hover:bg-[#F4EDE2]/50 transition-colors">
+              <div class="flex-1 pr-4">
+                <p class="text-[14px] font-semibold text-[#241F1A]">Email tóm tắt hàng tuần</p>
+                <p class="text-[12px] text-[#7A6F63] mt-0.5">Báo cáo tổng hợp gửi mỗi sáng thứ Hai</p>
+              </div>
+              <div class="toggle-wrap">
+                <input type="checkbox" id="sn-4" class="toggle-input"/>
+                <label for="sn-4" class="toggle-label"></label>
+              </div>
+            </div>
+            <div class="mx-4 border-t border-[#E3D8CA]/40"></div>
+
+            <div class="flex items-center justify-between p-4 rounded-[14px] hover:bg-[#F4EDE2]/50 transition-colors">
+              <div class="flex-1 pr-4">
+                <p class="text-[14px] font-semibold text-[#241F1A]">Thông báo hệ thống</p>
+                <p class="text-[12px] text-[#7A6F63] mt-0.5">Cập nhật tính năng, bảo trì và cảnh báo hệ thống</p>
+              </div>
+              <div class="toggle-wrap">
+                <input type="checkbox" id="sn-5" class="toggle-input" checked/>
+                <label for="sn-5" class="toggle-label"></label>
+              </div>
+            </div>
+
+          </div>
+          <div class="flex justify-end mt-5 pt-4 border-t border-[#E3D8CA]/60">
+            <button onclick="handleSaveNotif()" class="flex items-center gap-2 px-5 py-2.5 bg-[#B9823F] hover:bg-[#9F6D33] text-white font-semibold rounded-[14px] text-[14px] transition-colors">
+              <span class="material-symbols-outlined text-[17px]" style="font-variation-settings:'FILL' 1;">save</span>
+              Lưu cài đặt
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: Nhóm & Thành viên -->
+      <div id="tab-nhom" class="tab-content">
+        <div class="frosted-cream rounded-[20px] p-6">
+          <!-- Header row -->
+          <div class="flex items-center justify-between mb-5">
+            <h2 class="text-[16px] font-bold text-[#241F1A] flex items-center gap-2">
+              <span class="material-symbols-outlined text-[18px] text-[#B9823F]" style="font-variation-settings:'FILL' 1;">group</span>
+              Thành viên
+              <span class="text-[13px] font-normal text-[#7A6F63] ml-1">(4 người)</span>
+            </h2>
+            <button onclick="toast('Chức năng mời thành viên đang phát triển','#B9823F')" class="flex items-center gap-2 px-4 py-2 bg-[#B9823F] hover:bg-[#9F6D33] text-white font-semibold rounded-[14px] text-[13px] transition-colors">
+              <span class="material-symbols-outlined text-[16px]">person_add</span>
+              Mời thành viên
+            </button>
+          </div>
+
+          <!-- Table header -->
+          <div class="grid grid-cols-[auto_1fr_auto_auto_auto] gap-x-4 items-center px-4 py-2 bg-[#F4EDE2] rounded-[10px] mb-2">
+            <div class="w-9"></div>
+            <div class="text-[11px] font-semibold text-[#7A6F63] uppercase tracking-wide">Thành viên</div>
+            <div class="text-[11px] font-semibold text-[#7A6F63] uppercase tracking-wide text-center">Vai trò</div>
+            <div class="text-[11px] font-semibold text-[#7A6F63] uppercase tracking-wide text-center">Tham gia</div>
+            <div class="text-[11px] font-semibold text-[#7A6F63] uppercase tracking-wide text-center">Hành động</div>
+          </div>
+
+          <!-- Member rows -->
+          <div class="space-y-1">
+            <!-- Row 1 -->
+            <div class="member-row grid grid-cols-[auto_1fr_auto_auto_auto] gap-x-4 items-center px-4 py-3 rounded-[10px]">
+              <img class="w-9 h-9 rounded-full object-cover border border-[#E3D8CA]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRrpeozyEJ-qX1mQ1mfknrMjUAebC1IUl0FzVdST9s3Ocju71cvkOLc0idwn9zDLDZ7XvWExo9maetvAugXOCUQsK18qsD_bxa85565xFcIQMi1GjSeyjFdNZhgm--7x1mHoAH2f7gIHrF_MlUUXXIES0xMiS2ACECxQJ93Xf_fzu95lrgkogZlNUGTOy9qDEndQl1bqSYFLmIIn3d4Bm7FXp-hgj2-JOFKMEf5h6PVVSTUq7bjFEFq3LezbEZ8msevCzX28BOs-G3" alt="Nguyễn Văn A"/>
+              <div>
+                <p class="text-[14px] font-semibold text-[#241F1A]">Nguyễn Văn A</p>
+                <p class="text-[12px] text-[#7A6F63]">admin@dinhphong.vn</p>
+              </div>
+              <span class="badge-admin text-[11px] font-bold px-2.5 py-1 rounded-full text-center">Admin</span>
+              <span class="text-[12px] text-[#7A6F63] text-center">15/03/2023</span>
+              <button onclick="toast('Xem hồ sơ Nguyễn Văn A','#514539')" class="text-[12px] font-medium text-[#B9823F] hover:underline text-center">Xem</button>
+            </div>
+            <div class="mx-4 border-t border-[#E3D8CA]/40"></div>
+
+            <!-- Row 2 -->
+            <div class="member-row grid grid-cols-[auto_1fr_auto_auto_auto] gap-x-4 items-center px-4 py-3 rounded-[10px]">
+              <div class="w-9 h-9 rounded-full bg-[#DBEAFE] border border-[#E3D8CA] flex items-center justify-center text-[13px] font-bold text-blue-700">TM</div>
+              <div>
+                <p class="text-[14px] font-semibold text-[#241F1A]">Trần Minh</p>
+                <p class="text-[12px] text-[#7A6F63]">t.minh@dinhphong.vn</p>
+              </div>
+              <span class="badge-sales text-[11px] font-bold px-2.5 py-1 rounded-full text-center">Nhân viên KD</span>
+              <span class="text-[12px] text-[#7A6F63] text-center">02/07/2023</span>
+              <button onclick="toast('Xem hồ sơ Trần Minh','#514539')" class="text-[12px] font-medium text-[#B9823F] hover:underline text-center">Xem</button>
+            </div>
+            <div class="mx-4 border-t border-[#E3D8CA]/40"></div>
+
+            <!-- Row 3 -->
+            <div class="member-row grid grid-cols-[auto_1fr_auto_auto_auto] gap-x-4 items-center px-4 py-3 rounded-[10px]">
+              <div class="w-9 h-9 rounded-full bg-[#FCE7F3] border border-[#E3D8CA] flex items-center justify-center text-[13px] font-bold text-pink-700">PH</div>
+              <div>
+                <p class="text-[14px] font-semibold text-[#241F1A]">Phan Minh Hằng</p>
+                <p class="text-[12px] text-[#7A6F63]">p.hang@dinhphong.vn</p>
+              </div>
+              <span class="badge-sales text-[11px] font-bold px-2.5 py-1 rounded-full text-center">Nhân viên KD</span>
+              <span class="text-[12px] text-[#7A6F63] text-center">14/09/2023</span>
+              <button onclick="toast('Xem hồ sơ Phan Minh Hằng','#514539')" class="text-[12px] font-medium text-[#B9823F] hover:underline text-center">Xem</button>
+            </div>
+            <div class="mx-4 border-t border-[#E3D8CA]/40"></div>
+
+            <!-- Row 4 -->
+            <div class="member-row grid grid-cols-[auto_1fr_auto_auto_auto] gap-x-4 items-center px-4 py-3 rounded-[10px]">
+              <div class="w-9 h-9 rounded-full bg-[#F5F5F5] border border-[#E3D8CA] flex items-center justify-center text-[13px] font-bold text-gray-600">LA</div>
+              <div>
+                <p class="text-[14px] font-semibold text-[#241F1A]">Lê Tuấn Anh</p>
+                <p class="text-[12px] text-[#7A6F63]">l.anh@dinhphong.vn</p>
+              </div>
+              <span class="badge-support text-[11px] font-bold px-2.5 py-1 rounded-full text-center">Hỗ trợ KH</span>
+              <span class="text-[12px] text-[#7A6F63] text-center">20/01/2024</span>
+              <button onclick="toast('Xem hồ sơ Lê Tuấn Anh','#514539')" class="text-[12px] font-medium text-[#B9823F] hover:underline text-center">Xem</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 4: Giao diện -->
+      <div id="tab-giaodien" class="tab-content space-y-5">
+
+        <!-- Chủ đề màu sắc -->
+        <div class="frosted-cream rounded-[20px] p-6">
+          <h2 class="text-[16px] font-bold text-[#241F1A] mb-4 flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px] text-[#B9823F]" style="font-variation-settings:'FILL' 1;">palette</span>
+            Chủ đề màu sắc
+          </h2>
+          <div class="flex flex-wrap items-center gap-5">
+            <!-- Gold (current) -->
+            <label class="theme-option flex flex-col items-center gap-2 cursor-pointer">
+              <input type="radio" name="theme-color" value="gold" checked/>
+              <span class="theme-swatch" style="background: linear-gradient(135deg,#B9823F,#D4A06A);"></span>
+              <span class="text-[12px] font-medium text-[#241F1A]">Vàng đồng</span>
+              <span class="text-[10px] text-[#B9823F] font-semibold uppercase tracking-wide">Hiện tại</span>
+            </label>
+            <!-- Navy blue -->
+            <label class="theme-option flex flex-col items-center gap-2 cursor-pointer">
+              <input type="radio" name="theme-color" value="navy"/>
+              <span class="theme-swatch" style="background: linear-gradient(135deg,#1E3A5F,#2E5D9B);"></span>
+              <span class="text-[12px] font-medium text-[#241F1A]">Xanh hải quân</span>
+            </label>
+            <!-- Forest green -->
+            <label class="theme-option flex flex-col items-center gap-2 cursor-pointer">
+              <input type="radio" name="theme-color" value="forest"/>
+              <span class="theme-swatch" style="background: linear-gradient(135deg,#2D5A27,#4A8C3F);"></span>
+              <span class="text-[12px] font-medium text-[#241F1A]">Xanh rừng</span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Mật độ hiển thị -->
+        <div class="frosted-cream rounded-[20px] p-6">
+          <h2 class="text-[16px] font-bold text-[#241F1A] mb-4 flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px] text-[#B9823F]">view_agenda</span>
+            Mật độ hiển thị
+          </h2>
+          <div class="flex flex-wrap gap-3">
+            <label class="radio-card">
+              <input type="radio" name="density" value="comfortable" checked/>
+              <span class="radio-card-label">
+                <span class="material-symbols-outlined text-[20px]">density_medium</span>
+                Thoải mái
+              </span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="density" value="compact"/>
+              <span class="radio-card-label">
+                <span class="material-symbols-outlined text-[20px]">density_small</span>
+                Thu gọn
+              </span>
+            </label>
+            <label class="radio-card">
+              <input type="radio" name="density" value="wide"/>
+              <span class="radio-card-label">
+                <span class="material-symbols-outlined text-[20px]">density_large</span>
+                Rộng
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <!-- Định dạng ngày + Ngôn ngữ -->
+        <div class="frosted-cream rounded-[20px] p-6">
+          <h2 class="text-[16px] font-bold text-[#241F1A] mb-4 flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px] text-[#B9823F]">language</span>
+            Định dạng &amp; Ngôn ngữ
+          </h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-[12px] font-semibold text-[#7A6F63] uppercase tracking-wide mb-2">Định dạng ngày</label>
+              <select class="form-select">
+                <option selected>DD/MM/YYYY</option>
+                <option>MM/DD/YYYY</option>
+                <option>YYYY-MM-DD</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[12px] font-semibold text-[#7A6F63] uppercase tracking-wide mb-2">Ngôn ngữ hiển thị</label>
+              <select class="form-select">
+                <option selected>Tiếng Việt</option>
+                <option>English</option>
+              </select>
+            </div>
+          </div>
+          <div class="flex justify-end mt-6 pt-5 border-t border-[#E3D8CA]/60">
+            <button onclick="handleSaveAppearance()" class="flex items-center gap-2 px-5 py-2.5 bg-[#B9823F] hover:bg-[#9F6D33] text-white font-semibold rounded-[14px] text-[14px] transition-colors">
+              <span class="material-symbols-outlined text-[17px]" style="font-variation-settings:'FILL' 1;">save</span>
+              Lưu thay đổi
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div><!-- /tabs wrapper -->
+  </div>
+</main>
+
+<script>
+  // Profile dropdown
+  function toggleProfileDropdown() {
+    const d = document.getElementById('profile-dropdown');
+    d.classList.toggle('hidden');
+  }
+  document.addEventListener('click', function(e) {
+    const d = document.getElementById('profile-dropdown');
+    const trigger = d.closest('.relative');
+    if (!trigger.contains(e.target)) d.classList.add('hidden');
+  });
+
+  // Tab switching
+  function switchTab(id, btn) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // Toast helper
+  function toast(msg, bg) {
+    Toastify({
+      text: msg,
+      duration: 3000,
+      gravity: 'top',
+      position: 'right',
+      style: { background: bg || '#B9823F', borderRadius: '12px', fontFamily: 'Inter', fontSize: '14px' }
+    }).showToast();
+  }
+
+  function handleSaveCompany(e) {
+    e.preventDefault();
+    toast('Đã lưu thông tin công ty', '#B9823F');
+  }
+  function handleSaveNotif() {
+    toast('Đã lưu cài đặt thông báo', '#B9823F');
+  }
+  function handleSaveAppearance() {
+    toast('Đã lưu cài đặt giao diện', '#B9823F');
+  }
+</script>
+</body>
+</html>

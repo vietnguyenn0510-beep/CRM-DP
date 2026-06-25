@@ -1,0 +1,9 @@
+# Python scripts (internal tools)
+*.py
+__pycache__/
+
+# macOS
+.DS_Store
+
+# Editor
+.vscode/

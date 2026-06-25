@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html class="light" lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>JW Marriott Hanoi — A5 Kagoshima Full Loin | Đỉnh Phong CRM</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="js/tailwind.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<style>
+  :root {
+    --ground: #FAF7F1;
+    --text:   #241F1A;
+    --accent: #B9823F;
+    --accent-2: #9F6D33;
+  }
+
+  body {
+    background-color: var(--ground);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+  }
+
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    vertical-align: middle;
+  }
+
+  .frosted-cream {
+    background: rgba(255, 255, 255, 0.68);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid #E3D8CA;
+    box-shadow: 0px 4px 20px rgba(122, 111, 99, 0.08);
+  }
+
+  /* Pipeline steps */
+  .pipeline-step-active .step-circle {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+    box-shadow: 0 0 0 4px rgba(185, 130, 63, 0.18);
+  }
+  .pipeline-step-active .step-label {
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .pipeline-step-done .step-circle {
+    background-color: #C8BBAD;
+    border-color: #C8BBAD;
+    color: #fff;
+  }
+  .pipeline-step-done .step-label {
+    color: #7A6F63;
+  }
+  .pipeline-step-future .step-circle {
+    background-color: transparent;
+    border: 2px solid #D8CCBD;
+    color: #B5A898;
+  }
+  .pipeline-step-future .step-label {
+    color: #B5A898;
+  }
+  .pipeline-connector {
+    flex: 1;
+    height: 2px;
+    background: #E3D8CA;
+    margin-top: -14px;
+    position: relative;
+    z-index: 0;
+  }
+  .pipeline-connector-done {
+    background: #C8BBAD;
+  }
+
+  /* Activity timeline */
+  .timeline-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid #FAF7F1;
+    box-shadow: 0 0 0 2px var(--accent);
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+  .timeline-dot-past {
+    background: #C8BBAD;
+    box-shadow: 0 0 0 2px #C8BBAD;
+  }
+  .timeline-line {
+    width: 1px;
+    background: linear-gradient(to bottom, #E3D8CA, transparent);
+    flex-shrink: 0;
+    margin-left: 4px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+  }
+
+  /* Status badge */
+  .status-consulting {
+    background: rgba(185, 130, 63, 0.12);
+    color: #9F6D33;
+    border: 1px solid rgba(185, 130, 63, 0.28);
+  }
+
+  /* VIP badge */
+  .vip-badge {
+    background: linear-gradient(135deg, #F3E3CF 0%, #E8CC9F 100%);
+    color: #7A5420;
+    border: 1px solid rgba(185, 130, 63, 0.32);
+    letter-spacing: 0.06em;
+  }
+
+  /* Subtle marbling accent — the aesthetic risk:
+     A faint, single-use watermark of beef marbling behind the pipeline card,
+     rendered in canvas, grounding the UI in the product's world without noise. */
+  #marbling-canvas {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    border-radius: 20px;
+    opacity: 0.055;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: #E3D8CA; border-radius: 10px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+  /* Table rows */
+  .task-row:hover { background: rgba(185, 130, 63, 0.04); }
+
+  /* Button styles */
+  .btn-primary {
+    background-color: var(--accent);
+    color: #fff;
+    font-weight: 600;
+    border-radius: 12px;
+    padding: 8px 18px;
+    font-size: 14px;
+    transition: background-color 0.18s, transform 0.12s;
+  }
+  .btn-primary:hover { background-color: var(--accent-2); }
+  .btn-primary:active { transform: scale(0.97); }
+
+  .btn-secondary {
+    background: rgba(255,255,255,0.68);
+    color: var(--text);
+    font-weight: 500;
+    border-radius: 12px;
+    padding: 8px 18px;
+    font-size: 14px;
+    border: 1px solid #E3D8CA;
+    transition: border-color 0.18s, background-color 0.18s;
+  }
+  .btn-secondary:hover {
+    border-color: var(--accent);
+    background: rgba(185, 130, 63, 0.06);
+  }
+
+  .btn-ghost {
+    color: var(--accent);
+    font-weight: 500;
+    border-radius: 10px;
+    padding: 7px 14px;
+    font-size: 13px;
+    border: 1px solid rgba(185, 130, 63, 0.32);
+    transition: background-color 0.15s;
+  }
+  .btn-ghost:hover { background: rgba(185, 130, 63, 0.08); }
+
+  /* Back link */
+  .back-link {
+    color: var(--accent);
+    font-size: 14px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 0.15s;
+  }
+  .back-link:hover { color: var(--accent-2); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ── SIDEBAR ─────────────────────────────────────────────────────────── -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-[#F4EDE2] border-r border-[#E3D8CA] flex flex-col z-50">
+  <div class="px-6 py-8 flex items-center gap-3">
+    <div class="w-10 h-10 bg-[#B9823F] flex items-center justify-center rounded-lg shadow-sm">
+      <span class="material-symbols-outlined text-white" style="font-variation-settings:'FILL' 1;">restaurant_menu</span>
+    </div>
+    <div>
+      <h1 class="text-[22px] font-bold text-[#B9823F] tracking-tight leading-none uppercase">Đỉnh Phong</h1>
+      <p class="text-[10px] text-[#7A6F63] tracking-widest uppercase mt-1">Premium Beef CRM</p>
+    </div>
+  </div>
+  <nav class="flex-1 px-4 space-y-1 mt-2 overflow-y-auto">
+    <a href="dashboard.html" class="flex items-center text-[#7A6F63] py-3 px-6 hover:bg-[#B9823F]/5 transition-colors rounded-r-xl">
+      <span class="material-symbols-outlined mr-4">dashboard</span>
+      <span class="text-[15px]">Tổng quan</span>
+    </a>
+    <a href="opportunities.html" class="relative flex items-center bg-[#F3E3CF] text-[#9F6D33] font-semibold py-3 px-6 rounded-r-xl">
+      <div class="absolute left-0 top-0 bottom-0 w-1 bg-[#B9823F] rounded-r"></div>
+      <span class="material-symbols-outlined mr-4" style="font-variation-settings:'FILL' 1;">monetization_on</span>
+      <span class="text-[15px]">Cơ hội bán hàng</span>
+    </a>
+    <a href="tasks.html" class="flex items-center text-[#7A6F63] py-3 px-6 hover:bg-[#B9823F]/5 transition-colors rounded-r-xl">
+      <span class="material-symbols-outlined mr-4">assignment</span>
+      <span class="text-[15px]">Công việc</span>
+    </a>
+    <a href="customers.html" class="flex items-center text-[#7A6F63] py-3 px-6 hover:bg-[#B9823F]/5 transition-colors rounded-r-xl">
+      <span class="material-symbols-outlined mr-4">groups</span>
+      <span class="text-[15px]">Danh sách khách hàng</span>
+    </a>
+    <a href="payments.html" class="flex items-center text-[#7A6F63] py-3 px-6 hover:bg-[#B9823F]/5 transition-colors rounded-r-xl">
+      <span class="material-symbols-outlined mr-4">payments</span>
+      <span class="text-[15px]">Thanh toán</span>
+    </a>
+    <a href="settings.html" class="flex items-center text-[#7A6F63] py-3 px-6 hover:bg-[#B9823F]/5 transition-colors rounded-r-xl">
+      <span class="material-symbols-outlined mr-4">settings</span>
+      <span class="text-[15px]">Cài đặt</span>
+    </a>
+  </nav>
+  <div class="mt-auto p-4 border-t border-[#E3D8CA]/50 bg-[#F4EDE2] relative">
+    <div id="profile-dropdown" class="hidden absolute bottom-full left-4 right-4 mb-2 bg-white border border-[#E3D8CA] rounded-[14px] shadow-lg overflow-hidden z-10">
+      <a href="profile.html" class="flex items-center gap-3 px-4 py-3 hover:bg-[#F4EDE2] text-sm">
+        <span class="material-symbols-outlined text-[#B9823F] text-[18px]">person</span>
+        <span class="font-medium">Xem hồ sơ</span>
+      </a>
+      <a href="settings.html" class="flex items-center gap-3 px-4 py-3 hover:bg-[#F4EDE2] text-sm">
+        <span class="material-symbols-outlined text-[#7A6F63] text-[18px]">settings</span>
+        <span class="font-medium">Cài đặt</span>
+      </a>
+      <div class="border-t border-[#E3D8CA]/50 mx-2"></div>
+      <a href="index.html" class="flex items-center gap-3 px-4 py-3 hover:bg-red-50 text-sm text-red-600">
+        <span class="material-symbols-outlined text-[18px]">logout</span>
+        <span class="font-medium">Đăng xuất</span>
+      </a>
+    </div>
+    <div onclick="toggleProfileDropdown()" class="flex items-center gap-3 hover:bg-[#B9823F]/5 p-2 rounded-xl cursor-pointer">
+      <div class="relative">
+        <img class="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm"
+             src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRrpeozyEJ-qX1mQ1mfknrMjUAebC1IUl0FzVdST9s3Ocju71cvkOLc0idwn9zDLDZ7XvWExo9maetvAugXOCUQsK18qsD_bxa85565xFcIQMi1GjSeyjFdNZhgm--7x1mHoAH2f7gIHrF_MlUUXXIES0xMiS2ACECxQJ93Xf_fzu95lrgkogZlNUGTOy9qDEndQl1bqSYFLmIIn3d4Bm7FXp-hgj2-JOFKMEf5h6PVVSTUq7bjFEFq3LezbEZ8msevCzX28BOs-G3"
+             alt="Ảnh đại diện"/>
+        <div class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></div>
+      </div>
+      <div class="flex flex-col flex-1 min-w-0">
+        <span class="text-[14px] font-bold text-[#241F1A] truncate">Nguyễn Văn A</span>
+        <span class="text-[12px] text-[#7A6F63]">Quản trị viên</span>
+      </div>
+      <span class="material-symbols-outlined text-[#7A6F63] text-[18px]">unfold_more</span>
+    </div>
+  </div>
+</aside>
+
+<!-- ── STICKY HEADER ───────────────────────────────────────────────────── -->
+<header class="fixed top-0 left-[280px] right-0 h-16 z-40 bg-[#FAF7F1]/80 backdrop-blur-md border-b border-[#E3D8CA]/60 flex items-center justify-between px-8">
+  <nav class="flex items-center gap-2 text-[13px] text-[#7A6F63]">
+    <span>CRM</span>
+    <span class="material-symbols-outlined text-[14px] text-[#B5A898]">chevron_right</span>
+    <a href="opportunities.html" class="hover:text-[#B9823F] transition-colors">Cơ hội bán hàng</a>
+    <span class="material-symbols-outlined text-[14px] text-[#B5A898]">chevron_right</span>
+    <span class="text-[#241F1A] font-medium">JW Marriott Hanoi</span>
+  </nav>
+  <div class="flex items-center gap-2">
+    <button
+      onclick="showToast('Không có thông báo mới.')"
+      class="relative w-9 h-9 flex items-center justify-center rounded-full hover:bg-[#B9823F]/8 transition-colors"
+      aria-label="Thông báo">
+      <span class="material-symbols-outlined text-[#7A6F63] text-[20px]">notifications</span>
+      <span class="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full border border-white"></span>
+    </button>
+    <button
+      onclick="showToast('Trung tâm hỗ trợ đang được cập nhật.')"
+      class="w-9 h-9 flex items-center justify-center rounded-full hover:bg-[#B9823F]/8 transition-colors"
+      aria-label="Trợ giúp">
+      <span class="material-symbols-outlined text-[#7A6F63] text-[20px]">help_outline</span>
+    </button>
+  </div>
+</header>
+
+<!-- ── MAIN ────────────────────────────────────────────────────────────── -->
+<main class="ml-[280px] pt-20 px-8 pb-12 min-h-screen">
+
+  <!-- Back link -->
+  <a href="opportunities.html" class="back-link mb-5 inline-flex">
+    <span class="material-symbols-outlined text-[18px]">arrow_back</span>
+    Cơ hội bán hàng
+  </a>
+
+  <!-- ── PAGE HEADER ─────────────────────────────────────────────────── -->
+  <div class="flex flex-wrap items-start justify-between gap-4 mb-6">
+    <div class="flex items-center gap-3 flex-wrap">
+      <h1 class="text-[26px] font-bold text-[#241F1A] leading-tight tracking-tight">
+        JW Marriott Hanoi &mdash; A5 Kagoshima Full Loin
+      </h1>
+      <span class="vip-badge text-[11px] font-bold px-2.5 py-0.5 rounded-full uppercase">VIP</span>
+    </div>
+    <div class="flex items-center gap-2 flex-wrap">
+      <span class="status-consulting text-[13px] font-semibold px-3.5 py-1.5 rounded-full inline-flex items-center gap-1.5">
+        <span class="w-2 h-2 rounded-full bg-[#B9823F] inline-block"></span>
+        Đang tư vấn
+      </span>
+      <button onclick="showToast('Đã mở chế độ chỉnh sửa.')" class="btn-secondary flex items-center gap-1.5">
+        <span class="material-symbols-outlined text-[17px]">edit</span>
+        Chỉnh sửa
+      </button>
+      <button onclick="showToast('Đã thêm ghi chú mới.')" class="btn-primary flex items-center gap-1.5">
+        <span class="material-symbols-outlined text-[17px]">add_comment</span>
+        Thêm ghi chú
+      </button>
+    </div>
+  </div>
+
+  <!-- ── PIPELINE CARD ───────────────────────────────────────────────── -->
+  <div class="frosted-cream rounded-[20px] p-6 mb-6 relative overflow-hidden">
+    <!-- Aesthetic risk: faint beef-marbling canvas watermark -->
+    <canvas id="marbling-canvas" aria-hidden="true"></canvas>
+
+    <h2 class="text-[13px] font-semibold text-[#7A6F63] uppercase tracking-widest mb-5">Giai đoạn pipeline</h2>
+
+    <div class="flex items-start" role="list" aria-label="Các giai đoạn pipeline">
+
+      <!-- Stage 1: Khách mới (done) -->
+      <div class="pipeline-step-done flex flex-col items-center" role="listitem" style="min-width:80px;">
+        <div class="step-circle w-9 h-9 rounded-full flex items-center justify-center text-[15px] relative z-10">
+          <span class="material-symbols-outlined text-[16px]" style="font-variation-settings:'FILL' 1;">check</span>
+        </div>
+        <span class="step-label text-[12px] mt-2 text-center leading-snug">Khách mới</span>
+      </div>
+
+      <div class="pipeline-connector pipeline-connector-done mt-[18px]"></div>
+
+      <!-- Stage 2: Đang tư vấn (active) -->
+      <div class="pipeline-step-active flex flex-col items-center" role="listitem" style="min-width:100px;">
+        <div class="step-circle w-9 h-9 rounded-full flex items-center justify-center relative z-10">
+          <span class="material-symbols-outlined text-[16px]" style="font-variation-settings:'FILL' 1;">chat</span>
+        </div>
+        <span class="step-label text-[12px] mt-2 text-center leading-snug">Đang tư vấn</span>
+        <span class="text-[10px] text-[#B9823F] mt-1 font-medium">Bắt đầu: 10/11/2024</span>
+      </div>
+
+      <div class="pipeline-connector mt-[18px]"></div>
+
+      <!-- Stage 3: Đã gửi báo giá (future) -->
+      <div class="pipeline-step-future flex flex-col items-center" role="listitem" style="min-width:100px;">
+        <div class="step-circle w-9 h-9 rounded-full flex items-center justify-center relative z-10">
+          <span class="material-symbols-outlined text-[16px]">description</span>
+        </div>
+        <span class="step-label text-[12px] mt-2 text-center leading-snug">Đã gửi báo giá</span>
+      </div>
+
+      <div class="pipeline-connector mt-[18px]"></div>
+
+      <!-- Stage 4: Chờ phản hồi (future) -->
+      <div class="pipeline-step-future flex flex-col items-center" role="listitem" style="min-width:100px;">
+        <div class="step-circle w-9 h-9 rounded-full flex items-center justify-center relative z-10">
+          <span class="material-symbols-outlined text-[16px]">hourglass_empty</span>
+        </div>
+        <span class="step-label text-[12px] mt-2 text-center leading-snug">Chờ phản hồi</span>
+      </div>
+
+      <div class="pipeline-connector mt-[18px]"></div>
+
+      <!-- Stage 5: Đã chốt (future) -->
+      <div class="pipeline-step-future flex flex-col items-center" role="listitem" style="min-width:80px;">
+        <div class="step-circle w-9 h-9 rounded-full flex items-center justify-center relative z-10">
+          <span class="material-symbols-outlined text-[16px]">verified</span>
+        </div>
+        <span class="step-label text-[12px] mt-2 text-center leading-snug">Đã chốt</span>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── TWO-COLUMN GRID ─────────────────────────────────────────────── -->
+  <div class="grid grid-cols-3 gap-6">
+
+    <!-- LEFT: Details ────────────────────────────────────────────────── -->
+    <div class="col-span-1">
+      <div class="frosted-cream rounded-[20px] p-6">
+        <h2 class="text-[13px] font-semibold text-[#7A6F63] uppercase tracking-widest mb-5">Thông tin cơ hội</h2>
+
+        <dl class="space-y-4">
+
+          <!-- Khách hàng -->
+          <div>
+            <dt class="flex items-center gap-2 text-[11px] text-[#7A6F63] font-medium uppercase tracking-wider mb-1">
+              <span class="material-symbols-outlined text-[15px]">business</span>
+              Khách hàng
+            </dt>
+            <dd>
+              <a href="customer_detail.html" class="flex items-center gap-2 group">
+                <div class="w-8 h-8 rounded-full bg-[#F3E3CF] border border-[#E3D8CA] flex items-center justify-center text-[12px] font-bold text-[#9F6D33] flex-shrink-0">JW</div>
+                <span class="text-[14px] font-semibold text-[#B9823F] group-hover:text-[#9F6D33] transition-colors underline decoration-dotted underline-offset-2">JW Marriott Hanoi</span>
+              </a>
+            </dd>
+          </div>
+
+          <div class="h-px bg-[#E3D8CA]/60"></div>
+
+          <!-- Giá trị dự kiến -->
+          <div>
+            <dt class="flex items-center gap-2 text-[11px] text-[#7A6F63] font-medium uppercase tracking-wider mb-1">
+              <span class="material-symbols-outlined text-[15px]">payments</span>
+              Giá trị dự kiến
+            </dt>
+            <dd class="text-[22px] font-bold text-[#B9823F] leading-none tracking-tight">
+              65.000.000 đ
+            </dd>
+          </div>
+
+          <div class="h-px bg-[#E3D8CA]/60"></div>
+
+          <!-- Sản phẩm -->
+          <div>
+            <dt class="flex items-center gap-2 text-[11px] text-[#7A6F63] font-medium uppercase tracking-wider mb-1">
+              <span class="material-symbols-outlined text-[15px]">restaurant_menu</span>
+              Sản phẩm
+            </dt>
+            <dd class="text-[14px] font-semibold text-[#241F1A]">A5 Kagoshima Full Loin</dd>
+          </div>
+
+          <div class="h-px bg-[#E3D8CA]/60"></div>
+
+          <!-- Người phụ trách -->
+          <div>
+            <dt class="flex items-center gap-2 text-[11px] text-[#7A6F63] font-medium uppercase tracking-wider mb-1">
+              <span class="material-symbols-outlined text-[15px]">person</span>
+              Người phụ trách
+            </dt>
+            <dd class="flex items-center gap-2">
+              <div class="w-7 h-7 rounded-full bg-[#EBE1D8] border border-[#E3D8CA] flex items-center justify-center text-[11px] font-bold text-[#7A5420]">TM</div>
+              <span class="text-[14px] font-medium text-[#241F1A]">Trần Minh</span>
+            </dd>
+          </div>
+
+          <div class="h-px bg-[#E3D8CA]/60"></div>
+
+          <!-- Ngày tạo -->
+          <div>
+            <dt class="flex items-center gap-2 text-[11px] text-[#7A6F63] font-medium uppercase tracking-wider mb-1">
+              <span class="material-symbols-outlined text-[15px]">calendar_today</span>
+              Ngày tạo
+            </dt>
+            <dd class="text-[14px] text-[#241F1A]">01/11/2024</dd>
+          </div>
+
+          <!-- Ngày dự kiến chốt -->
+          <div>
+            <dt class="flex items-center gap-2 text-[11px] text-[#7A6F63] font-medium uppercase tracking-wider mb-1">
+              <span class="material-symbols-outlined text-[15px]">event</span>
+              Ngày dự kiến chốt
+            </dt>
+            <dd class="text-[14px] text-[#241F1A]">31/12/2024</dd>
+          </div>
+
+          <div class="h-px bg-[#E3D8CA]/60"></div>
+
+          <!-- Ghi chú -->
+          <div>
+            <dt class="flex items-center gap-2 text-[11px] text-[#7A6F63] font-medium uppercase tracking-wider mb-1.5">
+              <span class="material-symbols-outlined text-[15px]">sticky_note_2</span>
+              Ghi chú
+            </dt>
+            <dd class="text-[13px] text-[#514539] leading-relaxed bg-[#FAF7F1] border border-[#E3D8CA]/70 rounded-[10px] p-3">
+              Khách sạn 5 sao, cần cung cấp chứng nhận xuất xứ Nhật Bản A5. Đang chờ phê duyệt ngân sách.
+            </dd>
+          </div>
+
+        </dl>
+      </div>
+    </div>
+
+    <!-- RIGHT: Tasks + Activity ──────────────────────────────────────── -->
+    <div class="col-span-2 flex flex-col gap-6">
+
+      <!-- Công việc liên quan -->
+      <div class="frosted-cream rounded-[20px] p-6">
+        <div class="flex items-center justify-between mb-5">
+          <h2 class="text-[13px] font-semibold text-[#7A6F63] uppercase tracking-widest">Công việc liên quan</h2>
+          <button onclick="showToast('Đang mở form tạo công việc...')" class="btn-ghost flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[16px]">add</span>
+            Tạo công việc
+          </button>
+        </div>
+
+        <table class="w-full text-[13px]" role="table">
+          <thead>
+            <tr class="border-b border-[#E3D8CA]">
+              <th class="text-left text-[11px] text-[#7A6F63] font-semibold uppercase tracking-wider pb-2.5 pr-4">Tên công việc</th>
+              <th class="text-left text-[11px] text-[#7A6F63] font-semibold uppercase tracking-wider pb-2.5 pr-4">Phụ trách</th>
+              <th class="text-left text-[11px] text-[#7A6F63] font-semibold uppercase tracking-wider pb-2.5 pr-4">Hạn chót</th>
+              <th class="text-left text-[11px] text-[#7A6F63] font-semibold uppercase tracking-wider pb-2.5 pr-4">Trạng thái</th>
+              <th class="pb-2.5"></th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-[#E3D8CA]/50">
+            <!-- Task 1 -->
+            <tr class="task-row transition-colors">
+              <td class="py-3.5 pr-4">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-[#B9823F] text-[16px]">assignment</span>
+                  <span class="font-medium text-[#241F1A]">Gửi catalogue sản phẩm A5 Kagoshima</span>
+                </div>
+              </td>
+              <td class="py-3.5 pr-4">
+                <div class="flex items-center gap-1.5">
+                  <div class="w-6 h-6 rounded-full bg-[#EBE1D8] border border-[#E3D8CA] flex items-center justify-center text-[10px] font-bold text-[#7A5420]">TM</div>
+                  <span class="text-[#514539]">Trần Minh</span>
+                </div>
+              </td>
+              <td class="py-3.5 pr-4 text-[#514539]">15/11/2024</td>
+              <td class="py-3.5 pr-4">
+                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-amber-50 text-amber-700 border border-amber-200">
+                  <span class="w-1.5 h-1.5 rounded-full bg-amber-500 inline-block"></span>
+                  Đang thực hiện
+                </span>
+              </td>
+              <td class="py-3.5">
+                <a href="task_detail.html" class="btn-ghost text-[12px] px-3 py-1.5">Xem</a>
+              </td>
+            </tr>
+            <!-- Task 2 -->
+            <tr class="task-row transition-colors">
+              <td class="py-3.5 pr-4">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-[#C8BBAD] text-[16px]">assignment_turned_in</span>
+                  <span class="font-medium text-[#241F1A]">Lên lịch tham quan kho lạnh với bếp trưởng</span>
+                </div>
+              </td>
+              <td class="py-3.5 pr-4">
+                <div class="flex items-center gap-1.5">
+                  <div class="w-6 h-6 rounded-full bg-[#EFE0D1] border border-[#E3D8CA] flex items-center justify-center text-[10px] font-bold text-[#514539]">LH</div>
+                  <span class="text-[#514539]">Lê Hòa</span>
+                </div>
+              </td>
+              <td class="py-3.5 pr-4 text-[#514539]">20/11/2024</td>
+              <td class="py-3.5 pr-4">
+                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[11px] font-semibold bg-stone-50 text-stone-500 border border-stone-200">
+                  <span class="w-1.5 h-1.5 rounded-full bg-stone-400 inline-block"></span>
+                  Chưa bắt đầu
+                </span>
+              </td>
+              <td class="py-3.5">
+                <a href="task_detail.html" class="btn-ghost text-[12px] px-3 py-1.5">Xem</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Lịch sử hoạt động -->
+      <div class="frosted-cream rounded-[20px] p-6">
+        <h2 class="text-[13px] font-semibold text-[#7A6F63] uppercase tracking-widest mb-5">Lịch sử hoạt động</h2>
+
+        <ol class="relative" aria-label="Dòng thời gian hoạt động">
+
+          <!-- Entry 4 (most recent — shown first) -->
+          <li class="flex gap-4 pb-6">
+            <div class="flex flex-col items-center">
+              <div class="timeline-dot"></div>
+              <div class="timeline-line flex-1 w-px bg-[#E3D8CA]" style="min-height:32px;"></div>
+            </div>
+            <div class="flex-1 pb-1 -mt-0.5">
+              <div class="flex items-start justify-between gap-2">
+                <p class="text-[14px] font-semibold text-[#241F1A]">Lên lịch họp với bếp trưởng</p>
+                <time class="text-[11px] text-[#7A6F63] whitespace-nowrap flex-shrink-0">12/11/2024</time>
+              </div>
+              <p class="text-[13px] text-[#514539] mt-0.5">Cuộc họp dự kiến ngày 20/11 tại JW Marriott Kitchen. Phụ trách: Trần Minh.</p>
+            </div>
+          </li>
+
+          <!-- Entry 3 -->
+          <li class="flex gap-4 pb-6">
+            <div class="flex flex-col items-center">
+              <div class="timeline-dot timeline-dot-past"></div>
+              <div class="timeline-line flex-1 w-px bg-[#E3D8CA]" style="min-height:32px;"></div>
+            </div>
+            <div class="flex-1 pb-1 -mt-0.5">
+              <div class="flex items-start justify-between gap-2">
+                <p class="text-[14px] font-semibold text-[#241F1A]">
+                  <span class="text-[#7A6F63] font-normal text-[12px] bg-[#F4EDE2] rounded-md px-1.5 py-0.5 mr-1">Ghi chú</span>
+                  Gửi email giới thiệu sản phẩm
+                </p>
+                <time class="text-[11px] text-[#7A6F63] whitespace-nowrap flex-shrink-0">08/11/2024</time>
+              </div>
+              <p class="text-[13px] text-[#514539] mt-0.5">Email giới thiệu dòng A5 Kagoshima Full Loin đã gửi đến Mr. Kenji Yamamoto — Bếp trưởng điều hành.</p>
+            </div>
+          </li>
+
+          <!-- Entry 2 -->
+          <li class="flex gap-4 pb-6">
+            <div class="flex flex-col items-center">
+              <div class="timeline-dot timeline-dot-past"></div>
+              <div class="timeline-line flex-1 w-px bg-[#E3D8CA]" style="min-height:32px;"></div>
+            </div>
+            <div class="flex-1 pb-1 -mt-0.5">
+              <div class="flex items-start justify-between gap-2">
+                <p class="text-[14px] font-semibold text-[#241F1A]">Chuyển sang <span class="text-[#B9823F]">Đang tư vấn</span></p>
+                <time class="text-[11px] text-[#7A6F63] whitespace-nowrap flex-shrink-0">05/11/2024</time>
+              </div>
+              <p class="text-[13px] text-[#514539] mt-0.5">Khách hàng xác nhận quan tâm. Giai đoạn chuyển từ "Khách mới" sang "Đang tư vấn".</p>
+            </div>
+          </li>
+
+          <!-- Entry 1 (oldest) -->
+          <li class="flex gap-4">
+            <div class="flex flex-col items-center">
+              <div class="timeline-dot timeline-dot-past"></div>
+            </div>
+            <div class="flex-1 pb-1 -mt-0.5">
+              <div class="flex items-start justify-between gap-2">
+                <p class="text-[14px] font-semibold text-[#241F1A]">Cơ hội được tạo</p>
+                <time class="text-[11px] text-[#7A6F63] whitespace-nowrap flex-shrink-0">01/11/2024</time>
+              </div>
+              <p class="text-[13px] text-[#514539] mt-0.5">Người tạo: Trần Minh. Nguồn: Referral từ Park Hyatt Saigon. Sản phẩm: A5 Kagoshima Full Loin.</p>
+            </div>
+          </li>
+
+        </ol>
+      </div>
+
+    </div>
+  </div>
+</main>
+
+<script>
+  /* ── Profile dropdown ─────────────────────────────────────── */
+  function toggleProfileDropdown() {
+    const dd = document.getElementById('profile-dropdown');
+    dd.classList.toggle('hidden');
+  }
+  document.addEventListener('click', function(e) {
+    const dd = document.getElementById('profile-dropdown');
+    if (!dd.classList.contains('hidden') && !e.target.closest('[onclick="toggleProfileDropdown()"]') && !e.target.closest('#profile-dropdown')) {
+      dd.classList.add('hidden');
+    }
+  });
+
+  /* ── Toast helper ─────────────────────────────────────────── */
+  function showToast(msg) {
+    Toastify({
+      text: msg,
+      duration: 2800,
+      gravity: 'bottom',
+      position: 'right',
+      style: {
+        background: '#241F1A',
+        color: '#FAF7F1',
+        borderRadius: '12px',
+        fontSize: '13px',
+        fontFamily: 'Inter, sans-serif',
+        padding: '10px 18px',
+        boxShadow: '0 8px 24px rgba(36,31,26,0.18)'
+      }
+    }).showToast();
+  }
+
+  /* ── Marbling canvas watermark ────────────────────────────── */
+  (function drawMarbling() {
+    const canvas = document.getElementById('marbling-canvas');
+    if (!canvas) return;
+    const parent = canvas.parentElement;
+    const W = parent.offsetWidth;
+    const H = parent.offsetHeight;
+    canvas.width = W;
+    canvas.height = H;
+    const ctx = canvas.getContext('2d');
+
+    // Draw soft, organic vein-like curves reminiscent of A5 marbling
+    // Rendered once; purely decorative. Opacity handled in CSS.
+    ctx.strokeStyle = '#8B5E2A';
+    ctx.lineWidth = 1.5;
+    ctx.lineCap = 'round';
+
+    function vein(startX, startY, angle, length, splits) {
+      if (length < 18 || splits < 0) return;
+      const endX = startX + Math.cos(angle) * length;
+      const endY = startY + Math.sin(angle) * length;
+
+      // Slight bezier wobble
+      const cx1 = startX + Math.cos(angle - 0.3) * length * 0.4;
+      const cy1 = startY + Math.sin(angle - 0.3) * length * 0.4;
+      const cx2 = startX + Math.cos(angle + 0.2) * length * 0.7;
+      const cy2 = startY + Math.sin(angle + 0.2) * length * 0.7;
+
+      ctx.globalAlpha = 0.15 + splits * 0.1;
+      ctx.beginPath();
+      ctx.moveTo(startX, startY);
+      ctx.bezierCurveTo(cx1, cy1, cx2, cy2, endX, endY);
+      ctx.stroke();
+
+      // Branch
+      vein(endX, endY, angle + 0.25 + Math.random() * 0.3, length * 0.62, splits - 1);
+      if (splits > 1) {
+        vein(endX, endY, angle - 0.35 - Math.random() * 0.25, length * 0.5, splits - 2);
+      }
+    }
+
+    const seeds = [
+      { x: W * 0.12, y: H * 0.25, angle: 0.4, length: W * 0.28, splits: 4 },
+      { x: W * 0.55, y: H * 0.15, angle: 0.7, length: W * 0.22, splits: 3 },
+      { x: W * 0.35, y: H * 0.6,  angle: -0.2, length: W * 0.2,  splits: 3 },
+      { x: W * 0.75, y: H * 0.45, angle: 0.15, length: W * 0.18, splits: 3 },
+      { x: W * 0.88, y: H * 0.7,  angle: 0.55, length: W * 0.15, splits: 2 },
+    ];
+    seeds.forEach(s => vein(s.x, s.y, s.angle, s.length, s.splits));
+    ctx.globalAlpha = 1;
+  })();
+</script>
+
+</body>
+</html>

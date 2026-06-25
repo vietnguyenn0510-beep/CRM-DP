@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Đỉnh Phong CRM - Premium Beef Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="js/tailwind.js"></script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FAF7F1;
+            color: #241F1A;
+        }
+
+        .frosted-cream {
+            background: rgba(255, 255, 255, 0.68);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid #E3D8CA;
+            box-shadow: 0px 4px 20px rgba(122, 111, 99, 0.08);
+        }
+
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .sidebar-active-indicator {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background-color: #B9823F;
+        }
+
+        .sidebar-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        .sidebar-scroll::-webkit-scrollbar-thumb {
+            background: #E3D8CA;
+            border-radius: 10px;
+        }
+    </style>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body class="flex min-h-screen overflow-hidden">
+<!-- Side Navigation Bar -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-[#F4EDE2] border-r border-[#E3D8CA] flex flex-col z-50">
+<!-- Logo Section -->
+<div class="px-lg py-xl flex items-center gap-3">
+<div class="w-10 h-10 bg-primary flex items-center justify-center rounded-lg shadow-sm">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">restaurant_menu</span>
+</div>
+<div>
+<h1 class="font-headline-lg text-[24px] font-bold text-primary tracking-tight leading-none uppercase">Đỉnh Phong</h1>
+<p class="font-label-md text-[10px] text-tertiary tracking-widest uppercase mt-1">Premium Beef CRM</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="flex-1 px-4 space-y-1 mt-4 sidebar-scroll overflow-y-auto">
+<!-- Active Item: Tổng quan -->
+<a class="relative flex items-center bg-[#F3E3CF] text-[#9F6D33] font-semibold py-3 px-6 rounded-r-xl group transition-all duration-200" href="dashboard.html">
+<div class="sidebar-active-indicator"></div>
+<span class="material-symbols-outlined mr-4" data-icon="dashboard">dashboard</span>
+<span class="font-body-lg text-body-lg">Tổng quan</span>
+</a>
+<!-- Inactive Item: Cơ hội bán hàng -->
+<a class="flex items-center text-[#7A6F63] py-3 px-6 hover:bg-[#B9823F]/5 transition-colors duration-200 group rounded-r-xl" href="opportunities.html">
+<span class="material-symbols-outlined mr-4" data-icon="monetization_on">monetization_on</span>
+<span class="font-body-lg text-body-lg">Cơ hội bán hàng</span>
+</a>
+<!-- Inactive Item: Công việc -->
+<a class="flex items-center text-[#7A6F63] py-3 px-6 hover:bg-[#B9823F]/5 transition-colors duration-200 group rounded-r-xl" href="tasks.html">
+<span class="material-symbols-outlined mr-4" data-icon="assignment">assignment</span>
+<span class="font-body-lg text-body-lg">Công việc</span>
+</a>
+<!-- Inactive Item: Danh sách khách hàng -->
+<a class="flex items-center text-[#7A6F63] py-3 px-6 hover:bg-[#B9823F]/5 transition-colors duration-200 group rounded-r-xl" href="customers.html">
+<span class="material-symbols-outlined mr-4" data-icon="groups">groups</span>
+<span class="font-body-lg text-body-lg">Danh sách khách hàng</span>
+</a>
+<!-- Inactive Item: Thanh toán -->
+<a class="flex items-center text-[#7A6F63] py-3 px-6 hover:bg-[#B9823F]/5 transition-colors duration-200 group rounded-r-xl" href="payments.html">
+<span class="material-symbols-outlined mr-4" data-icon="payments">payments</span>
+<span class="font-body-lg text-body-lg">Thanh toán</span>
+</a>
+<!-- Inactive Item: Cài đặt -->
+<a class="flex items-center text-[#7A6F63] py-3 px-6 hover:bg-[#B9823F]/5 transition-colors duration-200 group rounded-r-xl" href="settings.html">
+<span class="material-symbols-outlined mr-4" data-icon="settings">settings</span>
+<span class="font-body-lg text-body-lg">Cài đặt</span>
+</a>
+</nav>
+<!-- User Profile Footer -->
+<div class="mt-auto p-4 border-t border-[#E3D8CA]/50 bg-[#F4EDE2] relative">
+<div id="profile-dropdown" class="hidden absolute bottom-full left-2 right-2 mb-2 bg-white border border-[#E3D8CA] rounded-[14px] shadow-lg overflow-hidden z-10">
+<a href="profile.html" class="flex items-center gap-3 px-4 py-3 hover:bg-[#F4EDE2] text-sm transition-colors"><span class="material-symbols-outlined text-[#B9823F] text-[18px]">person</span><span class="font-medium text-[#241F1A]">Xem hồ sơ</span></a>
+<a href="settings.html" class="flex items-center gap-3 px-4 py-3 hover:bg-[#F4EDE2] text-sm transition-colors"><span class="material-symbols-outlined text-[#7A6F63] text-[18px]">settings</span><span class="font-medium text-[#241F1A]">Cài đặt</span></a>
+<div class="border-t border-[#E3D8CA]/50 mx-3"></div>
+<a href="index.html" class="flex items-center gap-3 px-4 py-3 hover:bg-red-50 text-sm transition-colors text-red-600"><span class="material-symbols-outlined text-[18px]">logout</span><span class="font-medium">Đăng xuất</span></a>
+</div>
+<div onclick="toggleProfileDropdown()" class="flex items-center gap-3 hover:bg-[#B9823F]/5 p-2 rounded-xl transition-all cursor-pointer">
+<div class="relative flex-shrink-0">
+<img class="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRrpeozyEJ-qX1mQ1mfknrMjUAebC1IUl0FzVdST9s3Ocju71cvkOLc0idwn9zDLDZ7XvWExo9maetvAugXOCUQsK18qsD_bxa85565xFcIQMi1GjSeyjFdNZhgm--7x1mHoAH2f7gIHrF_MlUUXXIES0xMiS2ACECxQJ93Xf_fzu95lrgkogZlNUGTOy9qDEndQl1bqSYFLmIIn3d4Bm7FXp-hgj2-JOFKMEf5h6PVVSTUq7bjFEFq3LezbEZ8msevCzX28BOs-G3" alt="Profile"/>
+<div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white rounded-full"></div>
+</div>
+<div class="flex flex-col flex-1 min-w-0">
+<span class="text-[14px] font-bold text-[#241F1A] truncate">Nguyễn Văn A</span>
+<span class="text-[12px] text-[#7A6F63]">Quản trị viên</span>
+</div>
+<span class="material-symbols-outlined text-[#7A6F63] text-[18px]">unfold_more</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="flex-1 ml-[280px] min-h-screen bg-[#FAF7F1] overflow-y-auto">
+<!-- Top App Bar (Contextual) -->
+<header class="h-16 flex items-center justify-between px-xl sticky top-0 bg-[#FAF7F1]/80 backdrop-blur-md z-40 border-b border-[#E3D8CA]/30">
+<div class="flex items-center gap-4">
+<div class="bg-white/50 p-2 rounded-lg border border-[#E3D8CA] flex items-center">
+<span class="material-symbols-outlined text-primary mr-2" data-icon="search">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-sm w-64 placeholder:text-[#7A6F63]" placeholder="Tìm kiếm đơn hàng, khách hàng..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-[#7A6F63] hover:bg-secondary-container transition-all">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full text-[#7A6F63] hover:bg-secondary-container transition-all">
+<span class="material-symbols-outlined" data-icon="help_outline">help_outline</span>
+</button>
+</div>
+</header>
+<!-- Page Content -->
+<div class="p-xl max-w-7xl mx-auto">
+<!-- Hero Heading -->
+<div class="mb-xl"><div class="flex items-center justify-between">
+<div>
+<nav class="flex items-center gap-1 text-[12px] text-[#7A6F63] mb-1">
+<span>CRM</span><span class="material-symbols-outlined text-[12px]">chevron_right</span><span class="text-[#B9823F] font-medium">Tổng quan</span>
+</nav>
+<h1 class="font-headline-lg text-[28px] font-medium text-[#241F1A] mb-1">Tổng quan</h1>
+<p class="font-body-lg text-[#7A6F63]">Hôm nay là ngày 24 tháng 6, 2026</p>
+</div>
+<div class="flex items-center gap-2 bg-white/50 px-4 py-2 rounded-lg border border-[#E3D8CA] cursor-pointer hover:bg-white transition-colors">
+<span class="font-body-sm text-[#241F1A] font-medium">Tháng này</span>
+<span class="material-symbols-outlined text-[#7A6F63] text-[20px]">expand_more</span>
+</div>
+</div></div>
+<!-- Dashboard Grid (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-lg"><!-- Row 1 -->
+<div class="frosted-cream p-lg rounded-[20px] flex flex-col justify-between h-40">
+<p class="font-label-md text-[#7A6F63] uppercase tracking-widest">Tổng khách hàng</p>
+<h3 class="text-[32px] font-light text-[#241F1A]">1,240</h3>
+<div class="h-1 w-full bg-[#E3D8CA]/30 rounded-full"></div>
+</div>
+<div class="frosted-cream p-lg rounded-[20px] flex flex-col justify-between h-40">
+<p class="font-label-md text-[#7A6F63] uppercase tracking-widest">Khách hàng mới</p>
+<div class="flex items-baseline gap-2">
+<h3 class="text-[32px] font-light text-[#241F1A]">86</h3>
+<span class="text-green-600 text-sm font-bold">+12%</span>
+</div>
+<div class="h-1 w-full bg-[#E3D8CA]/30 rounded-full"></div>
+</div>
+<div class="frosted-cream p-lg rounded-[20px] flex flex-col justify-between h-40">
+<p class="font-label-md text-[#7A6F63] uppercase tracking-widest">Cơ hội đang mở</p>
+<h3 class="text-[32px] font-light text-[#241F1A]">42</h3>
+<div class="h-1 w-full bg-[#E3D8CA]/30 rounded-full"></div>
+</div>
+<!-- Row 2 -->
+<div class="frosted-cream p-lg rounded-[20px] flex flex-col justify-between h-40">
+<p class="font-label-md text-[#7A6F63] uppercase tracking-widest">Doanh thu ghi nhận</p>
+<h3 class="text-[32px] font-light text-[#B9823F]">1.250.000.000đ</h3>
+<div class="h-1 w-full bg-[#B9823F]/20 rounded-full"></div>
+</div>
+<div class="frosted-cream p-lg rounded-[20px] flex flex-col justify-between h-40">
+<p class="font-label-md text-[#7A6F63] uppercase tracking-widest">Công việc quá hạn</p>
+<div class="bg-[#EFE0D4] px-3 py-1 rounded-lg w-fit">
+<h3 class="text-[32px] font-light text-[#7A3E2A]">08</h3>
+</div>
+<div class="h-1 w-full bg-[#7A3E2A]/20 rounded-full"></div>
+</div>
+<div class="frosted-cream p-lg rounded-[20px] flex flex-col justify-between h-40">
+<p class="font-label-md text-[#7A6F63] uppercase tracking-widest">Giá trị cơ hội dự kiến</p>
+<h3 class="text-[32px] font-light text-[#241F1A]">3.400.000.000đ</h3>
+<div class="h-1 w-full bg-[#E3D8CA]/30 rounded-full"></div>
+</div></div><!-- Charts Area -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg mt-lg">
+<div class="frosted-cream p-lg rounded-[20px] h-80 flex flex-col">
+<h4 class="font-title-md text-[#241F1A] mb-4">Doanh thu theo thời gian</h4>
+<div class="flex-1 flex items-end gap-2 px-2">
+<div class="flex-1 bg-[#B9823F]/10 rounded-t-lg relative group" style="height: 40%"><div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#241F1A] text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity">T2</div></div>
+<div class="flex-1 bg-[#B9823F]/20 rounded-t-lg relative group" style="height: 60%"></div>
+<div class="flex-1 bg-[#B9823F]/40 rounded-t-lg relative group" style="height: 45%"></div>
+<div class="flex-1 bg-[#B9823F]/60 rounded-t-lg relative group" style="height: 85%"></div>
+<div class="flex-1 bg-[#B9823F] rounded-t-lg relative group" style="height: 70%"></div>
+<div class="flex-1 bg-[#B9823F]/30 rounded-t-lg relative group" style="height: 55%"></div>
+<div class="flex-1 bg-[#B9823F]/50 rounded-t-lg relative group" style="height: 90%"></div>
+</div>
+</div>
+<div class="frosted-cream p-lg rounded-[20px] h-80 flex flex-col">
+<h4 class="font-title-md text-[#241F1A] mb-4">Cơ hội theo trạng thái</h4>
+<div class="flex-1 flex flex-col justify-center gap-4">
+<div class="space-y-1">
+<div class="flex justify-between text-body-sm mb-1"><span>Mới</span><span>12</span></div>
+<div class="h-2 w-full bg-[#E3D8CA] rounded-full"><div class="h-full bg-[#B9823F] rounded-full" style="width: 30%"></div></div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-body-sm mb-1"><span>Đang đàm phán</span><span>24</span></div>
+<div class="h-2 w-full bg-[#E3D8CA] rounded-full"><div class="h-full bg-[#9F6D33] rounded-full" style="width: 60%"></div></div>
+</div>
+<div class="space-y-1">
+<div class="flex justify-between text-body-sm mb-1"><span>Chốt đơn</span><span>06</span></div>
+<div class="h-2 w-full bg-[#E3D8CA] rounded-full"><div class="h-full bg-[#F3E3CF] rounded-full" style="width: 15%"></div></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Lists -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg mt-lg">
+<div class="p-lg">
+<h4 class="font-title-md text-[#241F1A] mb-6">Công việc đến hạn hôm nay</h4>
+<div class="space-y-6">
+<div onclick="window.location.href='task_detail.html'" class="flex items-center justify-between group cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-[#F3E3CF] flex items-center justify-center text-[#9F6D33]"><span class="material-symbols-outlined">call</span></div>
+<div>
+<p class="text-[#241F1A] font-medium">Gọi điện tư vấn Nhà hàng Opus</p>
+<p class="text-[#7A6F63] text-sm">14:30 • Ưu tiên cao</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-[#7A6F63] opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</div>
+<div onclick="window.location.href='task_detail.html'" class="flex items-center justify-between group cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-[#F3E3CF] flex items-center justify-center text-[#9F6D33]"><span class="material-symbols-outlined">description</span></div>
+<div>
+<p class="text-[#241F1A] font-medium">Gửi báo giá Thịt Bò Úc - Lô 24</p>
+<p class="text-[#7A6F63] text-sm">16:00 • Trần Thị B</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-[#7A6F63] opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</div>
+</div>
+</div>
+<div class="p-lg">
+<h4 class="font-title-md text-[#241F1A] mb-6">Cơ hội giá trị cao</h4>
+<div class="space-y-6">
+<div onclick="window.location.href='opportunity_detail.html'" class="flex items-center justify-between group cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-[#B9823F]/10 flex items-center justify-center text-[#B9823F]"><span class="material-symbols-outlined">payments</span></div>
+<div>
+<p class="text-[#241F1A] font-medium">Cung cấp sỉ - Khách sạn Sheraton</p>
+<p class="text-[#7A6F63] text-sm">Dự kiến: 450.000.000đ</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-[#7A6F63] opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</div>
+<div onclick="window.location.href='opportunity_detail.html'" class="flex items-center justify-between group cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-[#B9823F]/10 flex items-center justify-center text-[#B9823F]"><span class="material-symbols-outlined">payments</span></div>
+<div>
+<p class="text-[#241F1A] font-medium">Hợp đồng năm - Chuỗi BBQ King</p>
+<p class="text-[#7A6F63] text-sm">Dự kiến: 1.200.000.000đ</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-[#7A6F63] opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Action Button (FAB) -->
+<button onclick="openModal('modal-quick-action')" class="fixed bottom-lg right-lg w-14 h-14 bg-primary text-white rounded-full shadow-lg flex items-center justify-center hover:bg-[#9F6D33] active:scale-90 transition-all z-50">
+<span class="material-symbols-outlined" style="font-variation-settings: 'opsz' 32;">add</span>
+</button>
+
+<!-- Modal: Quick Action -->
+<div id="modal-quick-action" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4">
+<div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="closeModal('modal-quick-action')"></div>
+<div class="relative bg-white rounded-[24px] w-full max-w-sm shadow-2xl overflow-hidden">
+<div class="bg-[#F4EDE2] px-6 py-5 border-b border-[#E3D8CA] flex items-center justify-between">
+<h2 class="text-[18px] font-bold text-[#241F1A]">Tạo nhanh</h2>
+<button onclick="closeModal('modal-quick-action')" class="p-1.5 hover:bg-[#E3D8CA] rounded-full transition-all"><span class="material-symbols-outlined text-[#7A6F63]">close</span></button>
+</div>
+<div class="p-5 space-y-3">
+<a href="customers.html" class="flex items-center gap-4 p-4 rounded-[14px] hover:bg-[#F4EDE2] border border-[#E3D8CA] transition-all group">
+<div class="w-10 h-10 rounded-full bg-[#B9823F]/10 flex items-center justify-center text-[#B9823F]"><span class="material-symbols-outlined">person_add</span></div>
+<div><p class="font-semibold text-[#241F1A] text-sm">Thêm khách hàng</p><p class="text-xs text-[#7A6F63]">Thêm đối tác hoặc khách hàng mới</p></div>
+<span class="material-symbols-outlined text-[#E3D8CA] ml-auto group-hover:text-[#B9823F] transition-colors">chevron_right</span>
+</a>
+<a href="opportunities.html" class="flex items-center gap-4 p-4 rounded-[14px] hover:bg-[#F4EDE2] border border-[#E3D8CA] transition-all group">
+<div class="w-10 h-10 rounded-full bg-[#B9823F]/10 flex items-center justify-center text-[#B9823F]"><span class="material-symbols-outlined">monetization_on</span></div>
+<div><p class="font-semibold text-[#241F1A] text-sm">Tạo cơ hội bán hàng</p><p class="text-xs text-[#7A6F63]">Thêm cơ hội vào pipeline</p></div>
+<span class="material-symbols-outlined text-[#E3D8CA] ml-auto group-hover:text-[#B9823F] transition-colors">chevron_right</span>
+</a>
+<a href="tasks.html" class="flex items-center gap-4 p-4 rounded-[14px] hover:bg-[#F4EDE2] border border-[#E3D8CA] transition-all group">
+<div class="w-10 h-10 rounded-full bg-[#B9823F]/10 flex items-center justify-center text-[#B9823F]"><span class="material-symbols-outlined">assignment_add</span></div>
+<div><p class="font-semibold text-[#241F1A] text-sm">Tạo công việc</p><p class="text-xs text-[#7A6F63]">Đặt nhiệm vụ và thời hạn mới</p></div>
+<span class="material-symbols-outlined text-[#E3D8CA] ml-auto group-hover:text-[#B9823F] transition-colors">chevron_right</span>
+</a>
+<a href="payments.html" class="flex items-center gap-4 p-4 rounded-[14px] hover:bg-[#F4EDE2] border border-[#E3D8CA] transition-all group">
+<div class="w-10 h-10 rounded-full bg-[#B9823F]/10 flex items-center justify-center text-[#B9823F]"><span class="material-symbols-outlined">add_card</span></div>
+<div><p class="font-semibold text-[#241F1A] text-sm">Ghi nhận thanh toán</p><p class="text-xs text-[#7A6F63]">Cập nhật giao dịch và hóa đơn</p></div>
+<span class="material-symbols-outlined text-[#E3D8CA] ml-auto group-hover:text-[#B9823F] transition-colors">chevron_right</span>
+</a>
+</div>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script>
+    function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+    function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+    function toggleProfileDropdown() { document.getElementById('profile-dropdown').classList.toggle('hidden'); }
+    document.addEventListener('click', (e) => {
+        const d = document.getElementById('profile-dropdown');
+        if (d && !d.classList.contains('hidden') && !e.target.closest('[onclick="toggleProfileDropdown()"]') && !e.target.closest('#profile-dropdown')) d.classList.add('hidden');
+    });
+    // Quick list row navigation
+    document.querySelectorAll('[data-nav]').forEach(el => {
+        el.addEventListener('click', () => window.location.href = el.dataset.nav);
+    });
+    // Sidebar hover
+    document.querySelectorAll('nav a').forEach(item => {
+        item.addEventListener('mouseenter', () => { if (!item.classList.contains('bg-[#F3E3CF]')) item.style.transform = 'translateX(4px)'; });
+        item.addEventListener('mouseleave', () => { item.style.transform = 'translateX(0)'; });
+    });
+    // Fade-in on load
+    window.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.frosted-cream').forEach((card, i) => {
+            card.style.opacity = '0'; card.style.transform = 'translateY(10px)';
+            setTimeout(() => { card.style.transition = 'all 0.5s ease-out'; card.style.opacity = '1'; card.style.transform = 'translateY(0)'; }, 100 * i);
+        });
+    });
+    // Bell notification
+    document.querySelector('[data-icon="notifications"]')?.closest('button').addEventListener('click', () => {
+        Toastify({ text: '🔔 Bạn có 3 thông báo mới', duration: 3000, gravity: 'top', position: 'right', style: { background: 'linear-gradient(135deg,#B9823F,#9F6D33)', borderRadius: '12px' } }).showToast();
+    });
+</script>
+</body></html>

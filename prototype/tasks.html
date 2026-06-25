@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Công việc | Đỉnh Phong CRM</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="js/tailwind.js"></script>
+<style>
+        body {
+            background-color: #FAF7F1;
+            font-family: 'Inter', sans-serif;
+            color: #241F1A;
+        }
+
+        .frosted-cream {
+            background: rgba(255, 255, 255, 0.68);
+            backdrop-filter: blur(16px);
+            border: 1px solid #E3D8CA;
+            box-shadow: 0px 4px 20px rgba(122, 111, 99, 0.08);
+        }
+
+        .butcher-gold-btn {
+            background-color: #B9823F;
+            transition: all 0.2s ease;
+        }
+
+        .butcher-gold-btn:hover {
+            background-color: #9F6D33;
+            transform: translateY(-1px);
+        }
+
+        .task-checkbox {
+            appearance: none;
+            width: 22px;
+            height: 22px;
+            border: 2px solid #E3D8CA;
+            border-radius: 50%;
+            cursor: pointer;
+            position: relative;
+            transition: all 0.2s;
+        }
+
+        .task-checkbox:checked {
+            background-color: #B9823F;
+            border-color: #B9823F;
+        }
+
+        .task-checkbox:checked::after {
+            content: 'check';
+            font-family: 'Material Symbols Outlined';
+            font-size: 16px;
+            color: white;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .active-tab {
+            color: #9F6D33;
+            border-bottom: 2px solid #B9823F;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #E3D8CA;
+            border-radius: 10px;
+        }
+    </style>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body class="overflow-hidden">
+<!-- Side Navigation Shell -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-surface-container border-r border-outline-variant flex flex-col z-50">
+<div class="py-lg px-6">
+<h1 class="font-headline-lg text-headline-lg font-bold text-primary">Đỉnh Phong</h1>
+<p class="text-on-surface-variant font-label-md text-label-md mt-1 uppercase tracking-wider">Premium Beef CRM</p>
+</div>
+<nav class="flex-1 mt-4 overflow-y-auto custom-scrollbar">
+<div class="space-y-1">
+<a class="flex items-center text-tertiary py-3 px-6 hover:bg-secondary-container/50 transition-colors duration-200" href="dashboard.html">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+<span class="font-body-lg text-body-lg">Tổng quan</span>
+</a>
+<a class="flex items-center text-tertiary py-3 px-6 hover:bg-secondary-container/50 transition-colors duration-200" href="opportunities.html">
+<span class="material-symbols-outlined mr-3">monetization_on</span>
+<span class="font-body-lg text-body-lg">Cơ hội bán hàng</span>
+</a>
+<!-- Active Tab: Công việc -->
+<a class="relative flex items-center bg-secondary-container text-primary font-semibold py-3 px-6 before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-primary" href="tasks.html">
+<span class="material-symbols-outlined mr-3">assignment</span>
+<span class="font-body-lg text-body-lg">Công việc</span>
+</a>
+<a class="flex items-center text-tertiary py-3 px-6 hover:bg-secondary-container/50 transition-colors duration-200" href="customers.html">
+<span class="material-symbols-outlined mr-3">groups</span>
+<span class="font-body-lg text-body-lg">Danh sách khách hàng</span>
+</a>
+<a class="flex items-center text-tertiary py-3 px-6 hover:bg-secondary-container/50 transition-colors duration-200" href="payments.html">
+<span class="material-symbols-outlined mr-3">payments</span>
+<span class="font-body-lg text-body-lg">Thanh toán</span>
+</a>
+<a class="flex items-center text-tertiary py-3 px-6 hover:bg-secondary-container/50 transition-colors duration-200" href="settings.html">
+<span class="material-symbols-outlined mr-3">settings</span>
+<span class="font-body-lg text-body-lg">Cài đặt</span>
+</a>
+</div>
+</nav>
+<div class="p-3 mt-auto border-t border-outline-variant/30 relative">
+<div id="profile-dropdown" class="hidden absolute bottom-full left-2 right-2 mb-2 bg-white border border-[#E3D8CA] rounded-[14px] shadow-lg overflow-hidden z-10">
+<a href="profile.html" class="flex items-center gap-3 px-4 py-3 hover:bg-[#F4EDE2] text-sm transition-colors"><span class="material-symbols-outlined text-[#B9823F] text-[18px]">person</span><span class="font-medium text-[#241F1A]">Xem hồ sơ</span></a>
+<a href="settings.html" class="flex items-center gap-3 px-4 py-3 hover:bg-[#F4EDE2] text-sm transition-colors"><span class="material-symbols-outlined text-[#7A6F63] text-[18px]">settings</span><span class="font-medium text-[#241F1A]">Cài đặt</span></a>
+<div class="border-t border-[#E3D8CA]/50 mx-3"></div>
+<a href="index.html" class="flex items-center gap-3 px-4 py-3 hover:bg-red-50 text-sm transition-colors text-red-600"><span class="material-symbols-outlined text-[18px]">logout</span><span class="font-medium">Đăng xuất</span></a>
+</div>
+<div onclick="toggleProfileDropdown()" class="flex items-center gap-3 hover:bg-[#B9823F]/5 p-2 rounded-xl transition-all cursor-pointer">
+<img class="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRrpeozyEJ-qX1mQ1mfknrMjUAebC1IUl0FzVdST9s3Ocju71cvkOLc0idwn9zDLDZ7XvWExo9maetvAugXOCUQsK18qsD_bxa85565xFcIQMi1GjSeyjFdNZhgm--7x1mHoAH2f7gIHrF_MlUUXXIES0xMiS2ACECxQJ93Xf_fzu95lrgkogZlNUGTOy9qDEndQl1bqSYFLmIIn3d4Bm7FXp-hgj2-JOFKMEf5h6PVVSTUq7bjFEFq3LezbEZ8msevCzX28BOs-G3" alt="Profile"/>
+<div class="flex flex-col flex-1 min-w-0"><span class="text-[14px] font-bold text-[#241F1A] truncate">Nguyễn Văn A</span><span class="text-[12px] text-[#7A6F63]">Quản trị viên</span></div>
+<span class="material-symbols-outlined text-[#7A6F63] text-[18px]">unfold_more</span>
+</div>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-[280px] h-screen overflow-y-auto bg-[#FAF7F1] flex flex-col relative">
+<!-- Top App Bar Shell -->
+<header class="sticky top-0 h-16 bg-surface/68 backdrop-blur-xl border-b border-outline-variant/30 flex items-center justify-between px-lg z-40">
+<div class="flex items-center gap-4 flex-1">
+<div class="relative w-full max-w-md">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-white/50 border border-outline-variant rounded-[14px] pl-10 pr-4 py-2 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-body-sm font-body-sm" placeholder="Tìm kiếm công việc, khách hàng..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-on-surface-variant/5 rounded-full p-2 transition-all">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-on-surface-variant/5 rounded-full p-2 transition-all">help_outline</button>
+<div class="w-8 h-8 rounded-full bg-secondary-fixed overflow-hidden ml-2">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a premium estate manager for a luxury beef distributor, wearing a sophisticated linen shirt, set against a soft, sunlit cream-colored background. The lighting is elegant and high-key, matching the frosted cream UI aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCasnGnXkZxUXR39-lQtl_yhyAapvgy1h47feA0IM25gsR9AQmuXLPiMhSkX58JhwVs_3V218V_18P8X_sumZf3YAm33cV2whYEd-f7kgtfJFVB90pBDYrTd-6qgETtQJLfhLpU_8xtVX1BozpNcrNBlmZ3HW6c_l2THJosfIs_9RxNUEhLSVO610h6_dDXS7QaZvck9KglOIRUd07LHuDpF92AU2v7Pk6FU4bZ_Cw_geQFMGVyPXESu7eDaulxsKIb-yC0tc-VVtxt"/>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<div class="p-lg flex-1">
+<!-- Header Section -->
+<div class="flex items-center justify-between mb-8">
+<div>
+<nav class="flex items-center gap-1 text-[12px] text-[#7A6F63] mb-1">
+<a href="dashboard.html" class="hover:text-[#B9823F] transition-colors">CRM</a><span class="material-symbols-outlined text-[12px]">chevron_right</span><span class="text-[#B9823F] font-medium">Công việc</span>
+</nav>
+<h1 class="text-[28px] font-medium text-[#241F1A]">Công việc</h1>
+<p class="text-[#7A6F63] font-body-lg text-body-lg">Quản lý các đầu mục công việc và lịch hẹn với đối tác.</p>
+</div>
+<button onclick="openModal('modal-add-task')" class="butcher-gold-btn text-white px-6 py-3 rounded-[14px] flex items-center gap-2 font-semibold shadow-sm">
+<span class="material-symbols-outlined text-xl">add</span>
+<span>Tạo công việc</span>
+</button>
+</div>
+<!-- Tabs Section -->
+<div class="flex gap-8 mb-6 border-b border-[#E3D8CA]">
+<button class="pb-3 px-1 active-tab font-semibold transition-all">Tất cả</button>
+<button class="pb-3 px-1 text-[#7A6F63] hover:text-[#9F6D33] font-medium transition-all">Hôm nay</button>
+<button class="pb-3 px-1 text-[#7A6F63] hover:text-[#9F6D33] font-medium transition-all">Quá hạn</button>
+<button class="pb-3 px-1 text-[#7A6F63] hover:text-[#9F6D33] font-medium transition-all">Đã hoàn thành</button>
+</div>
+<!-- Task List Glass Card -->
+<div class="frosted-cream rounded-[20px] p-6">
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead>
+<tr class="text-[#7A6F63] font-label-md text-label-md uppercase tracking-wider border-b border-[#E3D8CA]/50">
+<th class="pb-4 font-semibold w-12 text-center"></th>
+<th class="pb-4 font-semibold">Tên công việc &amp; Khách hàng</th>
+<th class="pb-4 font-semibold">Người phụ trách</th>
+<th class="pb-4 font-semibold">Mức độ ưu tiên</th>
+<th class="pb-4 font-semibold">Deadline</th>
+<th class="pb-4 font-semibold">Trạng thái</th>
+<th class="pb-4 font-semibold w-10 text-center"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#E3D8CA]/30">
+<!-- Task Row 1 -->
+<tr class="group hover:bg-[#F4EDE2]/30 transition-colors">
+<td class="py-5 text-center">
+<input class="task-checkbox" type="checkbox"/>
+</td>
+<td class="py-5">
+<div class="flex flex-col">
+<span class="font-semibold text-[#241F1A]">Gửi báo giá Thịt Bò Úc - Lô 24</span>
+<span class="text-[#7A6F63] text-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-base">domain</span>
+                                            Sheraton Saigon Hotel
+                                        </span>
+</div>
+</td>
+<td class="py-5">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full overflow-hidden border-2 border-white shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Close up portrait of a young professional man in a tailored tan suit, smiling warmly. Professional lighting, soft focus cream background, warm boutique aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA5Hwotr6on4soxENL3mGKAF7ALCPby08lg-SPl-CQDc63UxAIKagkPbjBxClH1DuPDvmdfXoIQ8FgVUehP8jaGOK96q3qI7fHGpMltFFpjk_GC7O54ElrNmjjw7xYa7D6q7yyjUmU6XfYB2eBFk-J0lfNTaRijVsyVIFoeRiwBBhHj2NdCvnGgW_bEO8KY6_LrpXIDKvw-ib2iIiAXaRgmXNf57Y_nv_23hreukan9s1l8IdvRPe2iQG3nyykyJlQQIw66by8xloRw"/>
+</div>
+<span class="font-medium text-body-sm">Minh Khôi</span>
+</div>
+</td>
+<td class="py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-[#A66D38]/10 text-[#A66D38] border border-[#A66D38]/20">
+                                        Cao
+                                    </span>
+</td>
+<td class="py-5">
+<span class="text-[#7A3E2A] font-semibold text-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-base">event_busy</span>
+                                        Hôm qua, 17:00
+                                    </span>
+</td>
+<td class="py-5">
+<span class="text-body-sm text-[#7A6F63]">Đang chờ gửi</span>
+</td>
+<td class="py-5 text-center" onclick="event.stopPropagation()">
+<div class="relative inline-block">
+<button onclick="toggleRowDropdown(this)" class="p-1 hover:bg-[#E3D8CA]/70 rounded-full transition-all">
+<span class="material-symbols-outlined text-[#7A6F63]">more_vert</span>
+</button>
+<div class="row-dropdown hidden absolute right-0 top-full mt-1 bg-white border border-[#E3D8CA] rounded-[12px] shadow-lg z-20 min-w-[160px] py-1">
+<a href="task_detail.html" class="flex items-center gap-2.5 px-4 py-2.5 hover:bg-[#F4EDE2] text-sm text-[#241F1A] transition-colors"><span class="material-symbols-outlined text-[16px] text-[#7A6F63]">open_in_new</span>Xem chi tiết</a>
+<button class="flex items-center gap-2.5 px-4 py-2.5 hover:bg-[#F4EDE2] text-sm text-[#241F1A] transition-colors w-full text-left"><span class="material-symbols-outlined text-[16px] text-[#7A6F63]">edit</span>Chỉnh sửa</button>
+<div class="border-t border-[#E3D8CA]/40 mx-3 my-1"></div>
+<button class="flex items-center gap-2.5 px-4 py-2.5 hover:bg-red-50 text-sm text-red-600 transition-colors w-full text-left"><span class="material-symbols-outlined text-[16px]">delete</span>Xóa</button>
+</div>
+</div>
+</td>
+</tr>
+<!-- Task Row 2 -->
+<tr class="group hover:bg-[#F4EDE2]/30 transition-colors">
+<td class="py-5 text-center">
+<input class="task-checkbox" type="checkbox"/>
+</td>
+<td class="py-5">
+<div class="flex flex-col">
+<span class="font-semibold text-[#241F1A]">Gọi điện tư vấn Nhà hàng Opus</span>
+<span class="text-[#7A6F63] text-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-base">domain</span>
+                                            Opus Restaurant
+                                        </span>
+</div>
+</td>
+<td class="py-5">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full overflow-hidden border-2 border-white shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Portrait of a sophisticated female executive with tied back hair, wearing a neutral-toned professional outfit. High-end lighting, cream interior office background, warm minimalist style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCZN4mGEn8yUHMGAH6e3lJBY8Tw47Jl0uEa4V4BeA-zGNRZt9SkcFmrvtGJFKx5dO2xhqmB7ityvehcIy8_BOT7ocoYQR92e3jIJaf1xZWprFLKI2rWFZpI2J9Yrx8JuT4NlDlZiaVM9q8M2wiBU3Nj-sDdEJD_gx5jKTIG213zuQ7WgbcLGNi9Ekg6xyKD85_M1gNebgBbV_nOO5Sv_CkRkGN6yVXcBYp1vgxIULiRnov5-PJ3BjYAQQUb-vcO173K73uUF8Irkiju"/>
+</div>
+<span class="font-medium text-body-sm">Phương Linh</span>
+</div>
+</td>
+<td class="py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-[#C8B6A6]/20 text-[#7A6F63] border border-[#C8B6A6]/40">
+                                        Trung bình
+                                    </span>
+</td>
+<td class="py-5">
+<span class="text-[#241F1A] font-medium text-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-base">event</span>
+                                        Hôm nay, 10:30
+                                    </span>
+</td>
+<td class="py-5">
+<span class="text-body-sm text-[#7A6F63]">Đang thực hiện</span>
+</td>
+<td class="py-5 text-center" onclick="event.stopPropagation()">
+<div class="relative inline-block">
+<button onclick="toggleRowDropdown(this)" class="p-1 hover:bg-[#E3D8CA]/70 rounded-full transition-all">
+<span class="material-symbols-outlined text-[#7A6F63]">more_vert</span>
+</button>
+<div class="row-dropdown hidden absolute right-0 top-full mt-1 bg-white border border-[#E3D8CA] rounded-[12px] shadow-lg z-20 min-w-[160px] py-1">
+<a href="task_detail.html" class="flex items-center gap-2.5 px-4 py-2.5 hover:bg-[#F4EDE2] text-sm text-[#241F1A] transition-colors"><span class="material-symbols-outlined text-[16px] text-[#7A6F63]">open_in_new</span>Xem chi tiết</a>
+<button class="flex items-center gap-2.5 px-4 py-2.5 hover:bg-[#F4EDE2] text-sm text-[#241F1A] transition-colors w-full text-left"><span class="material-symbols-outlined text-[16px] text-[#7A6F63]">edit</span>Chỉnh sửa</button>
+<div class="border-t border-[#E3D8CA]/40 mx-3 my-1"></div>
+<button class="flex items-center gap-2.5 px-4 py-2.5 hover:bg-red-50 text-sm text-red-600 transition-colors w-full text-left"><span class="material-symbols-outlined text-[16px]">delete</span>Xóa</button>
+</div>
+</div>
+</td>
+</tr>
+<!-- Task Row 3 -->
+<tr class="group hover:bg-[#F4EDE2]/30 transition-colors">
+<td class="py-5 text-center">
+<input checked="" class="task-checkbox" type="checkbox"/>
+</td>
+<td class="py-5">
+<div class="flex flex-col">
+<span class="font-semibold text-[#241F1A] line-through opacity-50">Hợp đồng năm - Chuỗi BBQ King</span>
+<span class="text-[#7A6F63] text-body-sm flex items-center gap-1 opacity-50">
+<span class="material-symbols-outlined text-base">domain</span>
+                                            King BBQ Group
+                                        </span>
+</div>
+</td>
+<td class="py-5 opacity-50">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full overflow-hidden border-2 border-white shadow-sm">
+<img class="w-full h-full object-cover" data-alt="Portrait of a senior business consultant with a kind expression, wearing spectacles and a soft brown cardigan. The setting is a cozy, high-end library with warm golden tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMog5WY7HkVy-o_YFfHMdZobqP8N8bZyuo_6dWerdCeJnulUNKQdDfOf0EdwCFz_Xqzy3rTsSWsBXbWqeEVC0DE8y4tgQVCKu0pMldfvgegSYidY25CS8TYLEwHiA2DiSIsA8z32_B0PzhxJbQVjTNIXywaCFXwNOaIRbS0PqzryIj0qL74SjvjtQaSknaWpeEZxTLL5N04TP4I7cjdCpamnAYuwu1v5IxpRki7QfbnvWtJxhot0DgTyVJgwP6E4jNEIU57HziEGjo"/>
+</div>
+<span class="font-medium text-body-sm">Đình Phong</span>
+</div>
+</td>
+<td class="py-5 opacity-50">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-[#B8B0A8]/20 text-[#7A6F63] border border-[#B8B0A8]/40">
+                                        Thấp
+                                    </span>
+</td>
+<td class="py-5 opacity-50">
+<span class="text-[#241F1A] font-medium text-body-sm">
+                                        01/10/2023
+                                    </span>
+</td>
+<td class="py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-green-100 text-green-700">
+                                        Hoàn thành
+                                    </span>
+</td>
+<td class="py-5 text-center" onclick="event.stopPropagation()">
+<div class="relative inline-block">
+<button onclick="toggleRowDropdown(this)" class="p-1 hover:bg-[#E3D8CA]/70 rounded-full transition-all">
+<span class="material-symbols-outlined text-[#7A6F63]">more_vert</span>
+</button>
+<div class="row-dropdown hidden absolute right-0 top-full mt-1 bg-white border border-[#E3D8CA] rounded-[12px] shadow-lg z-20 min-w-[160px] py-1">
+<a href="task_detail.html" class="flex items-center gap-2.5 px-4 py-2.5 hover:bg-[#F4EDE2] text-sm text-[#241F1A] transition-colors"><span class="material-symbols-outlined text-[16px] text-[#7A6F63]">open_in_new</span>Xem chi tiết</a>
+<button class="flex items-center gap-2.5 px-4 py-2.5 hover:bg-[#F4EDE2] text-sm text-[#241F1A] transition-colors w-full text-left"><span class="material-symbols-outlined text-[16px] text-[#7A6F63]">edit</span>Chỉnh sửa</button>
+<div class="border-t border-[#E3D8CA]/40 mx-3 my-1"></div>
+<button class="flex items-center gap-2.5 px-4 py-2.5 hover:bg-red-50 text-sm text-red-600 transition-colors w-full text-left"><span class="material-symbols-outlined text-[16px]">delete</span>Xóa</button>
+</div>
+</div>
+</td>
+</tr>
+<!-- Task Row 4 (Extra for visual depth) -->
+<tr class="group hover:bg-[#F4EDE2]/30 transition-colors">
+<td class="py-5 text-center">
+<input class="task-checkbox" type="checkbox"/>
+</td>
+<td class="py-5">
+<div class="flex flex-col">
+<span class="font-semibold text-[#241F1A]">Kiểm tra kho lạnh - Chi nhánh 2</span>
+<span class="text-[#7A6F63] text-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-base">location_on</span>
+                                            Kho Bình Chánh
+                                        </span>
+</div>
+</td>
+<td class="py-5">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full overflow-hidden border-2 border-white shadow-sm">
+<img class="w-full h-full object-cover" data-alt="A portrait of a male operations manager in his 30s, looking focused and professional, wearing a dark polo shirt with a subtle gold logo. High-end minimalist background with soft lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9538A2QHLnlzlKSxY50AzUHhnUH6ed1IJykvmR8IO_I-59buVoRWxbjQ-_dIfwKYoKX4RvE8VT-11-RV112qBmGeYxF37GXrQS1zpwsb5xz6HWvlr0RXJ4yeR6_Ssd-S2LTmrMzQqkrck9ap4_WLu-c8O6UZHmSj3QOfEmgjTg5Xj0toSqgzeTvEByO5PUOwmBXklmoPMxcxfAUvziQu-7_hopCf48HZqmv_ijt8OG-y8LLeRd2WNY7r0sSfMpTkN2a2JGSzzCCVu"/>
+</div>
+<span class="font-medium text-body-sm">Thành Đạt</span>
+</div>
+</td>
+<td class="py-5">
+<span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-[#A66D38]/10 text-[#A66D38] border border-[#A66D38]/20">
+                                        Cao
+                                    </span>
+</td>
+<td class="py-5">
+<span class="text-[#241F1A] font-medium text-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-base">event</span>
+                                        Mai, 08:00
+                                    </span>
+</td>
+<td class="py-5">
+<span class="text-body-sm text-[#7A6F63]">Chưa bắt đầu</span>
+</td>
+<td class="py-5 text-center" onclick="event.stopPropagation()">
+<div class="relative inline-block">
+<button onclick="toggleRowDropdown(this)" class="p-1 hover:bg-[#E3D8CA]/70 rounded-full transition-all">
+<span class="material-symbols-outlined text-[#7A6F63]">more_vert</span>
+</button>
+<div class="row-dropdown hidden absolute right-0 top-full mt-1 bg-white border border-[#E3D8CA] rounded-[12px] shadow-lg z-20 min-w-[160px] py-1">
+<a href="task_detail.html" class="flex items-center gap-2.5 px-4 py-2.5 hover:bg-[#F4EDE2] text-sm text-[#241F1A] transition-colors"><span class="material-symbols-outlined text-[16px] text-[#7A6F63]">open_in_new</span>Xem chi tiết</a>
+<button class="flex items-center gap-2.5 px-4 py-2.5 hover:bg-[#F4EDE2] text-sm text-[#241F1A] transition-colors w-full text-left"><span class="material-symbols-outlined text-[16px] text-[#7A6F63]">edit</span>Chỉnh sửa</button>
+<div class="border-t border-[#E3D8CA]/40 mx-3 my-1"></div>
+<button class="flex items-center gap-2.5 px-4 py-2.5 hover:bg-red-50 text-sm text-red-600 transition-colors w-full text-left"><span class="material-symbols-outlined text-[16px]">delete</span>Xóa</button>
+</div>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination/Summary -->
+<div class="mt-8 flex items-center justify-between text-body-sm text-[#7A6F63] border-t border-[#E3D8CA]/30 pt-4">
+<p>Hiển thị 4 trong tổng số 24 công việc</p>
+<div class="flex items-center gap-2">
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg bg-primary text-white font-bold">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-secondary-container transition-colors">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-secondary-container transition-colors">3</button>
+<button class="w-8 h-8 flex items-center justify-center rounded-lg hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Modal: Tạo công việc -->
+<div id="modal-add-task" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4">
+<div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="closeModal('modal-add-task')"></div>
+<div class="relative bg-white rounded-[24px] w-full max-w-lg shadow-2xl overflow-hidden">
+<div class="bg-[#F4EDE2] px-6 py-5 border-b border-[#E3D8CA] flex items-center justify-between">
+<div class="flex items-center gap-3"><div class="w-9 h-9 rounded-full bg-[#B9823F] flex items-center justify-center"><span class="material-symbols-outlined text-white text-[18px]">assignment_add</span></div><h2 class="text-[18px] font-bold text-[#241F1A]">Tạo công việc mới</h2></div>
+<button onclick="closeModal('modal-add-task')" class="p-1.5 hover:bg-[#E3D8CA] rounded-full transition-all"><span class="material-symbols-outlined text-[#7A6F63]">close</span></button>
+</div>
+<form class="p-6 space-y-4" onsubmit="submitAddTask(event)">
+<div><label class="block text-xs font-semibold text-[#7A6F63] mb-1.5 uppercase tracking-wide">Tên công việc *</label><input required type="text" placeholder="VD: Gửi báo giá Thịt Bò Úc - Lô 25" class="w-full border border-[#E3D8CA] rounded-[12px] px-4 py-2.5 text-sm focus:border-[#B9823F] focus:ring-2 focus:ring-[#B9823F]/15 outline-none transition-all"/></div>
+<div class="grid grid-cols-2 gap-4">
+<div><label class="block text-xs font-semibold text-[#7A6F63] mb-1.5 uppercase tracking-wide">Khách hàng liên quan</label><input type="text" placeholder="Tên khách hàng" class="w-full border border-[#E3D8CA] rounded-[12px] px-4 py-2.5 text-sm focus:border-[#B9823F] focus:ring-2 focus:ring-[#B9823F]/15 outline-none transition-all"/></div>
+<div><label class="block text-xs font-semibold text-[#7A6F63] mb-1.5 uppercase tracking-wide">Người phụ trách</label><select class="w-full border border-[#E3D8CA] rounded-[12px] px-4 py-2.5 text-sm focus:border-[#B9823F] outline-none transition-all bg-white"><option value="">Chọn người</option><option>Minh Khôi</option><option>Phương Linh</option><option>Thành Đạt</option></select></div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div><label class="block text-xs font-semibold text-[#7A6F63] mb-1.5 uppercase tracking-wide">Mức độ ưu tiên</label><select class="w-full border border-[#E3D8CA] rounded-[12px] px-4 py-2.5 text-sm focus:border-[#B9823F] outline-none transition-all bg-white"><option>Cao</option><option>Trung bình</option><option>Thấp</option></select></div>
+<div><label class="block text-xs font-semibold text-[#7A6F63] mb-1.5 uppercase tracking-wide">Deadline</label><input type="datetime-local" class="w-full border border-[#E3D8CA] rounded-[12px] px-4 py-2.5 text-sm focus:border-[#B9823F] outline-none transition-all"/></div>
+</div>
+<div><label class="block text-xs font-semibold text-[#7A6F63] mb-1.5 uppercase tracking-wide">Ghi chú</label><textarea rows="2" placeholder="Mô tả thêm về công việc..." class="w-full border border-[#E3D8CA] rounded-[12px] px-4 py-2.5 text-sm focus:border-[#B9823F] focus:ring-2 focus:ring-[#B9823F]/15 outline-none transition-all resize-none"></textarea></div>
+<div class="flex gap-3 pt-2">
+<button type="button" onclick="closeModal('modal-add-task')" class="flex-1 py-2.5 border border-[#E3D8CA] text-[#241F1A] rounded-[12px] text-sm font-medium hover:bg-[#F4EDE2] transition-all">Hủy</button>
+<button type="submit" class="flex-1 py-2.5 bg-[#B9823F] hover:bg-[#9F6D33] text-white rounded-[12px] text-sm font-bold transition-all">Tạo công việc</button>
+</div>
+</form>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script>
+    function toast(msg) {
+        Toastify({ text: msg, duration: 3000, gravity: 'top', position: 'right', style: { background: 'linear-gradient(135deg,#B9823F,#9F6D33)', borderRadius: '12px' } }).showToast();
+    }
+    function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+    function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+    function toggleProfileDropdown() { document.getElementById('profile-dropdown').classList.toggle('hidden'); }
+    document.addEventListener('click', (e) => {
+        const d = document.getElementById('profile-dropdown');
+        if (!d.classList.contains('hidden') && !e.target.closest('[onclick="toggleProfileDropdown()"]') && !e.target.closest('#profile-dropdown')) d.classList.add('hidden');
+        document.querySelectorAll('.row-dropdown').forEach(drop => {
+            if (!drop.classList.contains('hidden') && !e.target.closest('.row-dropdown') && !e.target.closest('[onclick*="toggleRowDropdown"]')) drop.classList.add('hidden');
+        });
+    });
+    function toggleRowDropdown(btn) {
+        const drop = btn.nextElementSibling;
+        document.querySelectorAll('.row-dropdown').forEach(d => { if (d !== drop) d.classList.add('hidden'); });
+        drop.classList.toggle('hidden');
+    }
+    function submitAddTask(e) { e.preventDefault(); closeModal('modal-add-task'); toast('Đã tạo công việc mới thành công!'); }
+    // Task row click navigation
+    document.querySelectorAll('tbody tr').forEach(row => {
+        row.addEventListener('click', (e) => {
+            if (e.target.closest('[onclick*="stopPropagation"]') || e.target.closest('.row-dropdown') || e.target.classList.contains('task-checkbox')) return;
+            window.location.href = 'task_detail.html';
+        });
+    });
+    // Checkbox strike-through
+    document.querySelectorAll('.task-checkbox').forEach(cb => {
+        cb.addEventListener('change', function() {
+            const row = this.closest('tr');
+            const title = row.querySelector('.font-semibold');
+            if (this.checked) { title.classList.add('line-through', 'opacity-50'); }
+            else { title.classList.remove('line-through', 'opacity-50'); }
+        });
+    });
+    // Tab switching
+    document.querySelectorAll('button[class*="pb-3"]').forEach(tab => {
+        tab.addEventListener('click', function() {
+            document.querySelectorAll('button[class*="pb-3"]').forEach(t => { t.classList.remove('active-tab', 'font-semibold'); t.classList.add('text-[#7A6F63]', 'font-medium'); });
+            this.classList.add('active-tab', 'font-semibold');
+            this.classList.remove('text-[#7A6F63]', 'font-medium');
+        });
+    });
+</script>
+</body></html>

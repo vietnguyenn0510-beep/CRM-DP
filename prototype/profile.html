@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html class="light" lang="vi">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Hồ sơ cá nhân | Đỉnh Phong CRM</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="js/tailwind.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<style>
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #FAF7F1;
+    color: #241F1A;
+  }
+  .frosted-cream {
+    background: rgba(255,255,255,0.68);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid #E3D8CA;
+    box-shadow: 0px 4px 20px rgba(122,111,99,0.08);
+  }
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    vertical-align: middle;
+  }
+  .sidebar-scroll::-webkit-scrollbar { width: 4px; }
+  .sidebar-scroll::-webkit-scrollbar-thumb { background: #E3D8CA; border-radius: 10px; }
+
+  /* Tab system */
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+  .tab-btn {
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #7A6F63;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+  }
+  .tab-btn:hover { color: #B9823F; }
+  .tab-btn.active {
+    color: #B9823F;
+    border-bottom-color: #B9823F;
+    font-weight: 600;
+  }
+
+  /* Toggle switch */
+  .toggle-wrap { display: flex; align-items: center; }
+  .toggle-input { display: none; }
+  .toggle-label {
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+    background: #D1C7BA;
+    border-radius: 9999px;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.25s;
+    flex-shrink: 0;
+  }
+  .toggle-label::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 18px;
+    height: 18px;
+    background: #fff;
+    border-radius: 9999px;
+    transition: left 0.25s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.18);
+  }
+  .toggle-input:checked + .toggle-label { background: #B9823F; }
+  .toggle-input:checked + .toggle-label::after { left: 23px; }
+
+  /* Avatar hover overlay */
+  .avatar-wrap { position: relative; display: inline-block; }
+  .avatar-overlay {
+    position: absolute; inset: 0;
+    background: rgba(36,31,26,0.45);
+    border-radius: 9999px;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity 0.2s;
+    cursor: pointer;
+  }
+  .avatar-wrap:hover .avatar-overlay { opacity: 1; }
+
+  /* Input focus style */
+  .form-input {
+    width: 100%;
+    border: 1px solid #E3D8CA;
+    border-radius: 14px;
+    padding: 12px 16px;
+    font-size: 14px;
+    color: #241F1A;
+    background: #fff;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .form-input:focus {
+    border-color: #B9823F;
+    box-shadow: 0 0 0 3px rgba(185,130,63,0.10);
+  }
+  .form-input:disabled, .form-input[readonly] {
+    background: #F4EDE2;
+    color: #7A6F63;
+    cursor: not-allowed;
+  }
+  .form-select {
+    width: 100%;
+    border: 1px solid #E3D8CA;
+    border-radius: 14px;
+    padding: 12px 16px;
+    font-size: 14px;
+    color: #241F1A;
+    background: #fff;
+    outline: none;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%237A6F63' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .form-select:focus {
+    border-color: #B9823F;
+    box-shadow: 0 0 0 3px rgba(185,130,63,0.10);
+  }
+
+  /* Card fade-in */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .fade-up { animation: fadeUp 0.4s ease-out both; }
+  .fade-up-2 { animation: fadeUp 0.4s 0.08s ease-out both; }
+
+  /* Sidebar nav hover slide */
+  nav a { transition: transform 0.15s ease, background-color 0.15s; }
+  nav a:not(.nav-active):hover { transform: translateX(3px); }
+</style>
+</head>
+<body class="flex min-h-screen overflow-hidden">
+
+<!-- ===== SIDEBAR ===== -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-[#F4EDE2] border-r border-[#E3D8CA] flex flex-col z-50">
+  <div class="px-6 py-8 flex items-center gap-3">
+    <div class="w-10 h-10 bg-[#B9823F] flex items-center justify-center rounded-lg shadow-sm">
+      <span class="material-symbols-outlined text-white" style="font-variation-settings:'FILL' 1;">restaurant_menu</span>
+    </div>
+    <div>
+      <h1 class="text-[22px] font-bold text-[#B9823F] tracking-tight leading-none uppercase">Đỉnh Phong</h1>
+      <p class="text-[10px] text-[#7A6F63] tracking-widest uppercase mt-1">Premium Beef CRM</p>
+    </div>
+  </div>
+  <nav class="flex-1 px-4 space-y-1 mt-2 sidebar-scroll overflow-y-auto">
+    <a href="dashboard.html" class="flex items-center text-[#7A6F63] py-3 px-6 hover:bg-[#B9823F]/5 rounded-r-xl">
+      <span class="material-symbols-outlined mr-4 text-[20px]">dashboard</span>
+      <span class="text-[15px]">Tổng quan</span>
+    </a>
+    <a href="opportunities.html" class="flex items-center text-[#7A6F63] py-3 px-6 hover:bg-[#B9823F]/5 rounded-r-xl">
+      <span class="material-symbols-outlined mr-4 text-[20px]">monetization_on</span>
+      <span class="text-[15px]">Cơ hội bán hàng</span>
+    </a>
+    <a href="tasks.html" class="flex items-center text-[#7A6F63] py-3 px-6 hover:bg-[#B9823F]/5 rounded-r-xl">
+      <span class="material-symbols-outlined mr-4 text-[20px]">assignment</span>
+      <span class="text-[15px]">Công việc</span>
+    </a>
+    <a href="customers.html" class="flex items-center text-[#7A6F63] py-3 px-6 hover:bg-[#B9823F]/5 rounded-r-xl">
+      <span class="material-symbols-outlined mr-4 text-[20px]">groups</span>
+      <span class="text-[15px]">Danh sách khách hàng</span>
+    </a>
+    <a href="payments.html" class="flex items-center text-[#7A6F63] py-3 px-6 hover:bg-[#B9823F]/5 rounded-r-xl">
+      <span class="material-symbols-outlined mr-4 text-[20px]">payments</span>
+      <span class="text-[15px]">Thanh toán</span>
+    </a>
+    <a href="settings.html" class="flex items-center text-[#7A6F63] py-3 px-6 hover:bg-[#B9823F]/5 rounded-r-xl">
+      <span class="material-symbols-outlined mr-4 text-[20px]">settings</span>
+      <span class="text-[15px]">Cài đặt</span>
+    </a>
+  </nav>
+  <!-- Profile footer with dropdown -->
+  <div class="mt-auto p-4 border-t border-[#E3D8CA]/50 bg-[#F4EDE2] relative">
+    <div id="profile-dropdown" class="hidden absolute bottom-full left-4 right-4 mb-2 bg-white border border-[#E3D8CA] rounded-[14px] shadow-lg overflow-hidden z-10">
+      <a href="profile.html" class="flex items-center gap-3 px-4 py-3 hover:bg-[#F4EDE2] text-sm bg-[#F4EDE2]">
+        <span class="material-symbols-outlined text-[#B9823F] text-[18px]">person</span>
+        <span class="font-semibold text-[#B9823F]">Xem hồ sơ</span>
+      </a>
+      <a href="settings.html" class="flex items-center gap-3 px-4 py-3 hover:bg-[#F4EDE2] text-sm">
+        <span class="material-symbols-outlined text-[#7A6F63] text-[18px]">settings</span>
+        <span class="font-medium">Cài đặt</span>
+      </a>
+      <div class="border-t border-[#E3D8CA]/50 mx-2"></div>
+      <a href="index.html" class="flex items-center gap-3 px-4 py-3 hover:bg-red-50 text-sm text-red-600">
+        <span class="material-symbols-outlined text-[18px]">logout</span>
+        <span class="font-medium">Đăng xuất</span>
+      </a>
+    </div>
+    <div onclick="toggleProfileDropdown()" class="flex items-center gap-3 hover:bg-[#B9823F]/5 p-2 rounded-xl cursor-pointer">
+      <div class="relative">
+        <img class="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRrpeozyEJ-qX1mQ1mfknrMjUAebC1IUl0FzVdST9s3Ocju71cvkOLc0idwn9zDLDZ7XvWExo9maetvAugXOCUQsK18qsD_bxa85565xFcIQMi1GjSeyjFdNZhgm--7x1mHoAH2f7gIHrF_MlUUXXIES0xMiS2ACECxQJ93Xf_fzu95lrgkogZlNUGTOy9qDEndQl1bqSYFLmIIn3d4Bm7FXp-hgj2-JOFKMEf5h6PVVSTUq7bjFEFq3LezbEZ8msevCzX28BOs-G3" alt="Nguyễn Văn A"/>
+        <div class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-green-500 border-2 border-white rounded-full"></div>
+      </div>
+      <div class="flex flex-col flex-1 min-w-0">
+        <span class="text-[14px] font-bold text-[#241F1A] truncate">Nguyễn Văn A</span>
+        <span class="text-[12px] text-[#7A6F63]">Quản trị viên</span>
+      </div>
+      <span class="material-symbols-outlined text-[#7A6F63] text-[18px]">unfold_more</span>
+    </div>
+  </div>
+</aside>
+
+<!-- ===== HEADER ===== -->
+<header class="fixed top-0 left-[280px] right-0 h-16 bg-[#FAF7F1]/85 backdrop-blur-md border-b border-[#E3D8CA]/40 flex items-center justify-between px-8 z-40">
+  <div class="flex items-center gap-2 text-sm text-[#7A6F63]">
+    <span>CRM</span>
+    <span class="material-symbols-outlined text-[14px] text-[#D1C7BA]">chevron_right</span>
+    <span class="font-semibold text-[#241F1A]">Hồ sơ cá nhân</span>
+  </div>
+  <div class="flex items-center gap-2">
+    <button class="w-9 h-9 flex items-center justify-center rounded-full text-[#7A6F63] hover:bg-[#B9823F]/8 transition-colors" title="Thông báo">
+      <span class="material-symbols-outlined text-[20px]">notifications</span>
+    </button>
+    <button class="w-9 h-9 flex items-center justify-center rounded-full text-[#7A6F63] hover:bg-[#B9823F]/8 transition-colors" title="Trợ giúp">
+      <span class="material-symbols-outlined text-[20px]">help_outline</span>
+    </button>
+  </div>
+</header>
+
+<!-- ===== MAIN ===== -->
+<main class="ml-[280px] pt-20 px-8 pb-12 min-h-screen overflow-y-auto w-full">
+  <div class="max-w-4xl mx-auto">
+
+    <!-- Profile Hero Card -->
+    <div class="frosted-cream rounded-[20px] p-8 mb-6 fade-up relative">
+      <!-- Logout button top-right -->
+      <a href="index.html" class="absolute top-6 right-6 flex items-center gap-2 px-4 py-2 border border-[#E3D8CA] hover:bg-[#F4EDE2] rounded-[14px] text-sm font-medium text-[#7A6F63] transition-colors">
+        <span class="material-symbols-outlined text-[16px]">logout</span>
+        Đăng xuất
+      </a>
+
+      <div class="flex items-start gap-6">
+        <!-- Avatar with hover overlay -->
+        <div class="avatar-wrap flex-shrink-0">
+          <img class="w-24 h-24 rounded-full object-cover border-[3px] border-white shadow-md" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRrpeozyEJ-qX1mQ1mfknrMjUAebC1IUl0FzVdST9s3Ocju71cvkOLc0idwn9zDLDZ7XvWExo9maetvAugXOCUQsK18qsD_bxa85565xFcIQMi1GjSeyjFdNZhgm--7x1mHoAH2f7gIHrF_MlUUXXIES0xMiS2ACECxQJ93Xf_fzu95lrgkogZlNUGTOy9qDEndQl1bqSYFLmIIn3d4Bm7FXp-hgj2-JOFKMEf5h6PVVSTUq7bjFEFq3LezbEZ8msevCzX28BOs-G3" alt="Nguyễn Văn A"/>
+          <div class="absolute bottom-1 right-1 w-4 h-4 bg-green-500 border-2 border-white rounded-full"></div>
+          <div class="avatar-overlay" title="Thay đổi ảnh">
+            <span class="material-symbols-outlined text-white text-[22px]" style="font-variation-settings:'FILL' 1;">photo_camera</span>
+          </div>
+        </div>
+        <!-- Name / role / email -->
+        <div class="flex-1 pt-1">
+          <h1 class="text-[26px] font-bold text-[#241F1A] leading-tight">Nguyễn Văn A</h1>
+          <p class="text-[15px] text-[#B9823F] font-semibold mt-0.5">Quản trị viên</p>
+          <p class="text-[14px] text-[#7A6F63] mt-1 flex items-center gap-1.5">
+            <span class="material-symbols-outlined text-[15px]">mail</span>
+            admin@dinhphong.vn
+          </p>
+          <!-- Stats row -->
+          <div class="flex flex-wrap items-center gap-x-5 gap-y-2 mt-4 pt-4 border-t border-[#E3D8CA]/60">
+            <div class="flex items-center gap-1.5 text-[13px] text-[#7A6F63]">
+              <span class="material-symbols-outlined text-[15px] text-[#B9823F]">calendar_month</span>
+              <span>Thành viên từ: <strong class="text-[#241F1A] font-semibold">15/03/2023</strong></span>
+            </div>
+            <div class="w-px h-4 bg-[#E3D8CA]"></div>
+            <div class="flex items-center gap-1.5 text-[13px] text-[#7A6F63]">
+              <span class="material-symbols-outlined text-[15px] text-[#B9823F]">badge</span>
+              <span>Vai trò: <strong class="text-[#241F1A] font-semibold">Quản trị viên</strong></span>
+            </div>
+            <div class="w-px h-4 bg-[#E3D8CA]"></div>
+            <div class="flex items-center gap-1.5 text-[13px] text-[#7A6F63]">
+              <span class="w-2 h-2 rounded-full bg-green-500 inline-block flex-shrink-0"></span>
+              <span>Trạng thái: <strong class="text-green-700 font-semibold">Đang hoạt động</strong></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="fade-up-2">
+      <div class="flex border-b border-[#E3D8CA] mb-6 overflow-x-auto gap-1">
+        <button class="tab-btn active" onclick="switchTab('thongtin', this)">Thông tin cá nhân</button>
+        <button class="tab-btn" onclick="switchTab('baomat', this)">Bảo mật</button>
+        <button class="tab-btn" onclick="switchTab('thongbao', this)">Thông báo</button>
+      </div>
+
+      <!-- TAB 1: Thông tin cá nhân -->
+      <div id="tab-thongtin" class="tab-content active">
+        <div class="frosted-cream rounded-[20px] p-6">
+          <h2 class="text-[16px] font-bold text-[#241F1A] mb-5 flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px] text-[#B9823F]">person</span>
+            Thông tin cơ bản
+          </h2>
+          <form onsubmit="handleSaveProfile(event)">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-[12px] font-semibold text-[#7A6F63] uppercase tracking-wide mb-2">Họ và tên</label>
+                <input type="text" class="form-input" value="Nguyễn Văn A"/>
+              </div>
+              <div>
+                <label class="block text-[12px] font-semibold text-[#7A6F63] uppercase tracking-wide mb-2">Chức danh</label>
+                <input type="text" class="form-input" value="Quản trị viên"/>
+              </div>
+              <div>
+                <label class="block text-[12px] font-semibold text-[#7A6F63] uppercase tracking-wide mb-2">Email</label>
+                <div class="relative">
+                  <input type="email" class="form-input pr-10" value="admin@dinhphong.vn" readonly/>
+                  <span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-[17px] text-[#B9823F]" style="font-variation-settings:'FILL' 1;">lock</span>
+                </div>
+              </div>
+              <div>
+                <label class="block text-[12px] font-semibold text-[#7A6F63] uppercase tracking-wide mb-2">Số điện thoại</label>
+                <input type="tel" class="form-input" value="090 123 4567"/>
+              </div>
+              <div>
+                <label class="block text-[12px] font-semibold text-[#7A6F63] uppercase tracking-wide mb-2">Công ty</label>
+                <input type="text" class="form-input" value="Đỉnh Phong Luxury"/>
+              </div>
+              <div>
+                <label class="block text-[12px] font-semibold text-[#7A6F63] uppercase tracking-wide mb-2">Múi giờ</label>
+                <select class="form-select">
+                  <option selected>Asia/Ho_Chi_Minh (GMT+7)</option>
+                  <option>Asia/Bangkok (GMT+7)</option>
+                  <option>Asia/Singapore (GMT+8)</option>
+                  <option>UTC (GMT+0)</option>
+                </select>
+              </div>
+            </div>
+            <div class="flex justify-end mt-6 pt-5 border-t border-[#E3D8CA]/60">
+              <button type="submit" class="flex items-center gap-2 px-5 py-2.5 bg-[#B9823F] hover:bg-[#9F6D33] text-white font-semibold rounded-[14px] text-[14px] transition-colors">
+                <span class="material-symbols-outlined text-[17px]" style="font-variation-settings:'FILL' 1;">save</span>
+                Lưu thay đổi
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- TAB 2: Bảo mật -->
+      <div id="tab-baomat" class="tab-content">
+        <!-- Đổi mật khẩu -->
+        <div class="frosted-cream rounded-[20px] p-6 mb-4">
+          <h2 class="text-[16px] font-bold text-[#241F1A] mb-5 flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px] text-[#B9823F]">key</span>
+            Đổi mật khẩu
+          </h2>
+          <form onsubmit="handleChangePassword(event)" class="space-y-4">
+            <div>
+              <label class="block text-[12px] font-semibold text-[#7A6F63] uppercase tracking-wide mb-2">Mật khẩu hiện tại</label>
+              <input type="password" class="form-input" placeholder="Nhập mật khẩu hiện tại"/>
+            </div>
+            <div>
+              <label class="block text-[12px] font-semibold text-[#7A6F63] uppercase tracking-wide mb-2">Mật khẩu mới</label>
+              <input type="password" class="form-input" placeholder="Tối thiểu 8 ký tự"/>
+            </div>
+            <div>
+              <label class="block text-[12px] font-semibold text-[#7A6F63] uppercase tracking-wide mb-2">Xác nhận mật khẩu mới</label>
+              <input type="password" class="form-input" placeholder="Nhập lại mật khẩu mới"/>
+            </div>
+            <div class="flex justify-end pt-2">
+              <button type="submit" class="flex items-center gap-2 px-5 py-2.5 bg-[#B9823F] hover:bg-[#9F6D33] text-white font-semibold rounded-[14px] text-[14px] transition-colors">
+                Cập nhật mật khẩu
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Xác thực 2 yếu tố -->
+        <div class="frosted-cream rounded-[20px] p-6 mb-4">
+          <h2 class="text-[16px] font-bold text-[#241F1A] mb-1 flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px] text-[#B9823F]">security</span>
+            Xác thực 2 yếu tố
+          </h2>
+          <p class="text-[13px] text-[#7A6F63] mb-4">Bảo vệ tài khoản với xác thực 2 yếu tố qua ứng dụng Authenticator.</p>
+          <div class="flex items-center justify-between p-4 bg-[#F4EDE2]/60 rounded-[14px] border border-[#E3D8CA]/60">
+            <div>
+              <p class="text-[14px] font-semibold text-[#241F1A]">Bật 2FA</p>
+              <p class="text-[12px] text-[#7A6F63] mt-0.5">Hiện tại đang tắt</p>
+            </div>
+            <div class="toggle-wrap">
+              <input type="checkbox" id="toggle-2fa" class="toggle-input"/>
+              <label for="toggle-2fa" class="toggle-label"></label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phiên đăng nhập -->
+        <div class="frosted-cream rounded-[20px] p-6">
+          <div class="flex items-center justify-between mb-4">
+            <h2 class="text-[16px] font-bold text-[#241F1A] flex items-center gap-2">
+              <span class="material-symbols-outlined text-[18px] text-[#B9823F]">devices</span>
+              Phiên đăng nhập
+            </h2>
+            <button onclick="handleLogoutAll()" class="flex items-center gap-1.5 px-3 py-1.5 border border-[#E3D8CA] hover:bg-red-50 text-red-600 text-[12px] font-semibold rounded-[10px] transition-colors">
+              <span class="material-symbols-outlined text-[14px]">logout</span>
+              Đăng xuất tất cả
+            </button>
+          </div>
+          <div class="space-y-3">
+            <div class="flex items-center gap-4 p-4 bg-[#F4EDE2]/60 rounded-[14px] border border-[#B9823F]/20">
+              <div class="w-9 h-9 rounded-full bg-[#B9823F]/10 flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-[#B9823F] text-[18px]">computer</span>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-[14px] font-semibold text-[#241F1A]">Chrome · macOS · Hà Nội</p>
+                <p class="text-[12px] text-[#7A6F63]">IP: 113.161.x.x · Đăng nhập lúc 08:14</p>
+              </div>
+              <span class="flex items-center gap-1 text-[11px] font-semibold text-green-700 bg-green-100 px-2.5 py-1 rounded-full">
+                <span class="w-1.5 h-1.5 rounded-full bg-green-500 inline-block"></span>
+                Hiện tại
+              </span>
+            </div>
+            <div class="flex items-center gap-4 p-4 bg-white/50 rounded-[14px] border border-[#E3D8CA]/60">
+              <div class="w-9 h-9 rounded-full bg-[#7A6F63]/10 flex items-center justify-center flex-shrink-0">
+                <span class="material-symbols-outlined text-[#7A6F63] text-[18px]">phone_iphone</span>
+              </div>
+              <div class="flex-1 min-w-0">
+                <p class="text-[14px] font-semibold text-[#241F1A]">Safari · iPhone · Hồ Chí Minh</p>
+                <p class="text-[12px] text-[#7A6F63]">IP: 42.119.x.x · 2 ngày trước</p>
+              </div>
+              <span class="text-[11px] font-medium text-[#7A6F63] bg-[#F4EDE2] px-2.5 py-1 rounded-full">2 ngày trước</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TAB 3: Thông báo -->
+      <div id="tab-thongbao" class="tab-content">
+        <div class="frosted-cream rounded-[20px] p-6">
+          <h2 class="text-[16px] font-bold text-[#241F1A] mb-5 flex items-center gap-2">
+            <span class="material-symbols-outlined text-[18px] text-[#B9823F]">notifications</span>
+            Tùy chỉnh thông báo
+          </h2>
+          <div class="space-y-1">
+
+            <!-- Toggle item -->
+            <div class="flex items-center justify-between p-4 rounded-[14px] hover:bg-[#F4EDE2]/50 transition-colors">
+              <div class="flex-1 pr-4">
+                <p class="text-[14px] font-semibold text-[#241F1A]">Cơ hội mới</p>
+                <p class="text-[12px] text-[#7A6F63] mt-0.5">Nhận thông báo khi có cơ hội được tạo hoặc giao</p>
+              </div>
+              <div class="toggle-wrap">
+                <input type="checkbox" id="notif-1" class="toggle-input" checked/>
+                <label for="notif-1" class="toggle-label"></label>
+              </div>
+            </div>
+            <div class="mx-4 border-t border-[#E3D8CA]/40"></div>
+
+            <div class="flex items-center justify-between p-4 rounded-[14px] hover:bg-[#F4EDE2]/50 transition-colors">
+              <div class="flex-1 pr-4">
+                <p class="text-[14px] font-semibold text-[#241F1A]">Công việc đến hạn</p>
+                <p class="text-[12px] text-[#7A6F63] mt-0.5">Nhắc nhở khi công việc sắp đến hạn</p>
+              </div>
+              <div class="toggle-wrap">
+                <input type="checkbox" id="notif-2" class="toggle-input" checked/>
+                <label for="notif-2" class="toggle-label"></label>
+              </div>
+            </div>
+            <div class="mx-4 border-t border-[#E3D8CA]/40"></div>
+
+            <div class="flex items-center justify-between p-4 rounded-[14px] hover:bg-[#F4EDE2]/50 transition-colors">
+              <div class="flex-1 pr-4">
+                <p class="text-[14px] font-semibold text-[#241F1A]">Thanh toán mới</p>
+                <p class="text-[12px] text-[#7A6F63] mt-0.5">Thông báo khi ghi nhận thanh toán mới</p>
+              </div>
+              <div class="toggle-wrap">
+                <input type="checkbox" id="notif-3" class="toggle-input" checked/>
+                <label for="notif-3" class="toggle-label"></label>
+              </div>
+            </div>
+            <div class="mx-4 border-t border-[#E3D8CA]/40"></div>
+
+            <div class="flex items-center justify-between p-4 rounded-[14px] hover:bg-[#F4EDE2]/50 transition-colors">
+              <div class="flex-1 pr-4">
+                <p class="text-[14px] font-semibold text-[#241F1A]">Thông báo qua email</p>
+                <p class="text-[12px] text-[#7A6F63] mt-0.5">Nhận tóm tắt hàng tuần qua email</p>
+              </div>
+              <div class="toggle-wrap">
+                <input type="checkbox" id="notif-4" class="toggle-input"/>
+                <label for="notif-4" class="toggle-label"></label>
+              </div>
+            </div>
+            <div class="mx-4 border-t border-[#E3D8CA]/40"></div>
+
+            <div class="flex items-center justify-between p-4 rounded-[14px] hover:bg-[#F4EDE2]/50 transition-colors">
+              <div class="flex-1 pr-4">
+                <p class="text-[14px] font-semibold text-[#241F1A]">Thông báo đẩy</p>
+                <p class="text-[12px] text-[#7A6F63] mt-0.5">Thông báo trực tiếp trên trình duyệt</p>
+              </div>
+              <div class="toggle-wrap">
+                <input type="checkbox" id="notif-5" class="toggle-input"/>
+                <label for="notif-5" class="toggle-label"></label>
+              </div>
+            </div>
+
+          </div>
+          <div class="flex justify-end mt-5 pt-4 border-t border-[#E3D8CA]/60">
+            <button onclick="handleSaveNotif()" class="flex items-center gap-2 px-5 py-2.5 bg-[#B9823F] hover:bg-[#9F6D33] text-white font-semibold rounded-[14px] text-[14px] transition-colors">
+              <span class="material-symbols-outlined text-[17px]" style="font-variation-settings:'FILL' 1;">save</span>
+              Lưu cài đặt
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /tabs wrapper -->
+  </div>
+</main>
+
+<script>
+  // Profile dropdown
+  function toggleProfileDropdown() {
+    const d = document.getElementById('profile-dropdown');
+    d.classList.toggle('hidden');
+  }
+  document.addEventListener('click', function(e) {
+    const d = document.getElementById('profile-dropdown');
+    const trigger = d.closest('.relative');
+    if (!trigger.contains(e.target)) d.classList.add('hidden');
+  });
+
+  // Tab switching
+  function switchTab(id, btn) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(el => el.classList.remove('active'));
+    document.getElementById('tab-' + id).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // Toast helper
+  function toast(msg, bg) {
+    Toastify({
+      text: msg,
+      duration: 3000,
+      gravity: 'top',
+      position: 'right',
+      style: { background: bg || '#B9823F', borderRadius: '12px', fontFamily: 'Inter', fontSize: '14px' }
+    }).showToast();
+  }
+
+  function handleSaveProfile(e) {
+    e.preventDefault();
+    toast('Đã lưu thông tin cá nhân', '#B9823F');
+  }
+  function handleChangePassword(e) {
+    e.preventDefault();
+    toast('Mật khẩu đã được cập nhật', '#B9823F');
+  }
+  function handleLogoutAll() {
+    toast('Đã đăng xuất tất cả phiên khác', '#514539');
+  }
+  function handleSaveNotif() {
+    toast('Đã lưu cài đặt thông báo', '#B9823F');
+  }
+</script>
+</body>
+</html>

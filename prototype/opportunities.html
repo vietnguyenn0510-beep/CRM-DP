@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cơ hội bán hàng | Đỉnh Phong Premium Beef CRM</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="js/tailwind.js"></script>
+<style>
+        body {
+            background-color: #FAF7F1;
+            color: #241F1A;
+            font-family: 'Inter', sans-serif;
+        }
+        .kanban-column {
+            background-color: #F4EDE2;
+            min-width: 320px;
+            max-width: 320px;
+        }
+        .frosted-glass {
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid #E3D8CA;
+            box-shadow: 0 8px 24px rgba(36, 31, 26, 0.06);
+            transition: all 0.3s ease;
+        }
+        .frosted-glass:hover {
+            border-color: #B9823F;
+            box-shadow: 0 0 0 1px #B9823F, 0 12px 32px rgba(185, 130, 63, 0.12);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            height: 8px;
+            width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #F4EDE2;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #E3D8CA;
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #B9823F;
+        }
+        .active-nav-indicator {
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 4px;
+            background-color: #B9823F;
+        }
+    </style>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+</head>
+<body class="overflow-hidden">
+<!-- Side Navigation Bar -->
+<aside class="fixed left-0 top-0 h-full w-[280px] bg-surface-container border-r border-outline-variant flex flex-col py-lg z-50">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+</div>
+<div>
+<h1 class="font-headline-lg text-title-md font-bold text-primary">Đỉnh Phong</h1>
+<p class="text-[10px] uppercase tracking-widest text-on-surface-variant font-bold">Premium Beef CRM</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1 overflow-y-auto">
+<a class="flex items-center text-tertiary py-3 px-6 hover:bg-on-primary-fixed-variant/10 transition-colors duration-200" href="dashboard.html">
+<span class="material-symbols-outlined mr-3">dashboard</span>
+<span class="font-label-md text-label-md">Tổng quan</span>
+</a>
+<a class="relative flex items-center bg-secondary-container text-primary font-semibold py-3 px-6" href="opportunities.html">
+<div class="active-nav-indicator"></div>
+<span class="material-symbols-outlined mr-3" style="font-variation-settings: 'FILL' 1;">monetization_on</span>
+<span class="font-label-md text-label-md">Cơ hội bán hàng</span>
+</a>
+<a class="flex items-center text-tertiary py-3 px-6 hover:bg-on-primary-fixed-variant/10 transition-colors duration-200" href="tasks.html">
+<span class="material-symbols-outlined mr-3">assignment</span>
+<span class="font-label-md text-label-md">Công việc</span>
+</a>
+<a class="flex items-center text-tertiary py-3 px-6 hover:bg-on-primary-fixed-variant/10 transition-colors duration-200" href="customers.html">
+<span class="material-symbols-outlined mr-3">groups</span>
+<span class="font-label-md text-label-md">Danh sách khách hàng</span>
+</a>
+<a class="flex items-center text-tertiary py-3 px-6 hover:bg-on-primary-fixed-variant/10 transition-colors duration-200" href="payments.html">
+<span class="material-symbols-outlined mr-3">payments</span>
+<span class="font-label-md text-label-md">Thanh toán</span>
+</a>
+<a class="flex items-center text-tertiary py-3 px-6 hover:bg-on-primary-fixed-variant/10 transition-colors duration-200" href="settings.html">
+<span class="material-symbols-outlined mr-3">settings</span>
+<span class="font-label-md text-label-md">Cài đặt</span>
+</a>
+</nav>
+<div class="mt-auto px-3 border-t border-outline-variant/30 pt-3 relative">
+<div id="profile-dropdown" class="hidden absolute bottom-full left-2 right-2 mb-2 bg-white border border-[#E3D8CA] rounded-[14px] shadow-lg overflow-hidden z-10">
+<a href="profile.html" class="flex items-center gap-3 px-4 py-3 hover:bg-[#F4EDE2] text-sm transition-colors"><span class="material-symbols-outlined text-[#B9823F] text-[18px]">person</span><span class="font-medium text-[#241F1A]">Xem hồ sơ</span></a>
+<a href="settings.html" class="flex items-center gap-3 px-4 py-3 hover:bg-[#F4EDE2] text-sm transition-colors"><span class="material-symbols-outlined text-[#7A6F63] text-[18px]">settings</span><span class="font-medium text-[#241F1A]">Cài đặt</span></a>
+<div class="border-t border-[#E3D8CA]/50 mx-3"></div>
+<a href="index.html" class="flex items-center gap-3 px-4 py-3 hover:bg-red-50 text-sm transition-colors text-red-600"><span class="material-symbols-outlined text-[18px]">logout</span><span class="font-medium">Đăng xuất</span></a>
+</div>
+<div onclick="toggleProfileDropdown()" class="flex items-center gap-3 hover:bg-[#B9823F]/5 p-2 rounded-xl transition-all cursor-pointer">
+<img class="w-10 h-10 rounded-full object-cover border-2 border-white shadow-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRrpeozyEJ-qX1mQ1mfknrMjUAebC1IUl0FzVdST9s3Ocju71cvkOLc0idwn9zDLDZ7XvWExo9maetvAugXOCUQsK18qsD_bxa85565xFcIQMi1GjSeyjFdNZhgm--7x1mHoAH2f7gIHrF_MlUUXXIES0xMiS2ACECxQJ93Xf_fzu95lrgkogZlNUGTOy9qDEndQl1bqSYFLmIIn3d4Bm7FXp-hgj2-JOFKMEf5h6PVVSTUq7bjFEFq3LezbEZ8msevCzX28BOs-G3" alt="Profile"/>
+<div class="flex flex-col flex-1 min-w-0"><span class="text-[14px] font-bold text-[#241F1A] truncate">Nguyễn Văn A</span><span class="text-[12px] text-[#7A6F63]">Quản trị viên</span></div>
+<span class="material-symbols-outlined text-[#7A6F63] text-[18px]">unfold_more</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Shell -->
+<main class="ml-[280px] h-screen flex flex-col bg-[#FAF7F1]">
+<!-- Top App Bar -->
+<header class="h-16 flex justify-between items-center px-lg border-b border-outline-variant/30 bg-surface/68 backdrop-blur-xl z-40">
+<div class="flex items-center bg-surface-container-low rounded-full px-4 py-2 w-96 border border-outline-variant/50">
+<span class="material-symbols-outlined text-outline text-sm mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-sm w-full placeholder:text-outline-variant" placeholder="Tìm kiếm cơ hội, khách hàng..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:bg-on-surface-variant/5 rounded-full p-2 transition-all relative">
+<span class="material-symbols-outlined text-on-surface-variant">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="hover:bg-on-surface-variant/5 rounded-full p-2 transition-all">
+<span class="material-symbols-outlined text-on-surface-variant">help_outline</span>
+</button>
+<div class="h-8 w-px bg-outline-variant/30 mx-2"></div>
+<div class="flex items-center gap-3">
+<div class="text-right">
+<p class="text-xs font-bold text-on-surface">Quản trị viên</p>
+<p class="text-[10px] text-outline">Đỉnh Phong Premium</p>
+</div>
+<div class="w-10 h-10 rounded-full border-2 border-primary/20 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="Professional portrait of a high-end luxury estate manager for a premium beef brand, wearing a minimalist brown linen shirt in a bright airy studio environment with soft natural lighting and warm neutral tones to match the frosted cream aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAoM6_l9ZpUr8tK1-mSlMTEzz8dKa7636KPIr0aJ_XBWkAUTvCaB6zwAcWbfvW_7MgEUTW8AhtM-szOi3m05nZIW6zWBbIba3q7O__bG-PDyLmSSg1iL4wgLV9oDdUQqJpfnN5jaTDn0EtJbBg-i-NDWudw6WoAAnIE__pQyK_c9_Oo2_AWXNGCciWiS-YYOSRA1Vy72_Z0CsDV2lEna424i6EZkFhwWXOPjJPz96Pv_F6Urg2soXpGKHYn4eZFiAvOW7MEW6h6At0r"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Kanban Viewport -->
+<div class="flex-1 flex flex-col overflow-hidden">
+<!-- Header Section -->
+<div class="px-xl pt-10 pb-6">
+<div class="flex justify-between items-end mb-8">
+<div>
+<nav class="flex items-center gap-2 text-xs text-outline mb-1">
+<a href="dashboard.html" class="hover:text-[#B9823F] transition-colors">CRM</a>
+<span class="material-symbols-outlined text-[10px]">chevron_right</span>
+<span class="text-[#B9823F] font-medium">Cơ hội bán hàng</span>
+</nav>
+<h1 class="text-[28px] font-medium text-[#241F1A]">Cơ hội bán hàng</h1>
+</div>
+<div class="flex gap-3">
+<button class="flex items-center gap-2 px-4 py-2.5 border border-outline-variant rounded-[14px] text-sm font-semibold hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-sm">filter_list</span>
+                            Bộ lọc
+                        </button>
+<button onclick="openModal('modal-add-opp')" class="flex items-center gap-2 px-6 py-2.5 bg-butcher-gold text-white rounded-[14px] text-sm font-bold shadow-lg shadow-butcher-gold/20 hover:bg-[#9F6D33] active:scale-95 transition-all">
+<span class="material-symbols-outlined text-sm">add</span>
+                            Tạo cơ hội
+                        </button>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 px-4 py-2 bg-white border border-[#E3D8CA] rounded-[14px] text-sm">
+<span class="text-outline text-xs">Người phụ trách:</span>
+<select class="border-none p-0 text-sm font-semibold focus:ring-0 bg-transparent">
+<option>Tất cả</option>
+<option>Trần Minh</option>
+<option>Lê Hòa</option>
+</select>
+</div>
+<div class="flex items-center gap-2 px-4 py-2 bg-white border border-[#E3D8CA] rounded-[14px] text-sm">
+<span class="text-outline text-xs">Sản phẩm:</span>
+<select class="border-none p-0 text-sm font-semibold focus:ring-0 bg-transparent">
+<option>Tất cả sản phẩm</option>
+<option>Wagyu A5</option>
+<option>Dry-aged Ribeye</option>
+</select>
+</div>
+<div class="flex items-center gap-2 px-4 py-2 bg-white border border-[#E3D8CA] rounded-[14px] text-sm">
+<span class="text-outline text-xs">Thời gian:</span>
+<span class="font-semibold">Tháng này</span>
+</div>
+</div>
+</div>
+<!-- Horizontal Scroll Area -->
+<div class="flex-1 overflow-x-auto overflow-y-hidden px-xl pb-10 custom-scrollbar flex gap-6 items-start">
+<!-- Column: Khách mới -->
+<div class="kanban-column rounded-column p-4 flex flex-col max-h-full">
+<div class="flex justify-between items-center mb-4 px-1">
+<div>
+<h3 class="font-bold text-sm text-[#241F1A]">Khách mới</h3>
+<p class="text-[10px] text-outline font-medium">3 Cơ hội • 45.000.000đ</p>
+</div>
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">more_horiz</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto space-y-4 pr-1 custom-scrollbar">
+<!-- Card 1 -->
+<div class="frosted-glass rounded-card p-4 cursor-pointer relative">
+<div class="flex justify-between items-start mb-2">
+<span class="bg-[#F3E3CF] text-[#9F6D33] text-[10px] font-bold px-2 py-0.5 rounded-full">VIP</span>
+<span class="material-symbols-outlined text-error text-lg" title="Quá hạn">error_outline</span>
+</div>
+<h4 class="font-bold text-sm mb-1">Sheraton Saigon Hotel</h4>
+<p class="text-xs text-outline mb-3">Wagyu A5 Striploin Set</p>
+<div class="flex justify-between items-end">
+<div>
+<p class="text-[10px] text-outline-variant mb-0.5">Giá trị dự kiến</p>
+<p class="text-butcher-gold font-bold text-sm">28.500.000đ</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] text-outline font-medium">Trần Minh</span>
+<div class="w-6 h-6 rounded-full bg-secondary-container border border-outline-variant flex items-center justify-center text-[10px] font-bold">TM</div>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="frosted-glass rounded-card p-4 cursor-pointer">
+<h4 class="font-bold text-sm mb-1">El Gaucho Argentinian</h4>
+<p class="text-xs text-outline mb-3">Dry-aged Ribeye (Bone-in)</p>
+<div class="flex justify-between items-end">
+<div>
+<p class="text-[10px] text-outline-variant mb-0.5">Giá trị dự kiến</p>
+<p class="text-butcher-gold font-bold text-sm">12.000.000đ</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] text-outline font-medium">Lê Hòa</span>
+<div class="w-6 h-6 rounded-full bg-tertiary-fixed border border-outline-variant flex items-center justify-center text-[10px] font-bold">LH</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column: Đang tư vấn -->
+<div class="kanban-column rounded-column p-4 flex flex-col max-h-full">
+<div class="flex justify-between items-center mb-4 px-1">
+<div>
+<h3 class="font-bold text-sm text-[#241F1A]">Đang tư vấn</h3>
+<p class="text-[10px] text-outline font-medium">2 Cơ hội • 82.000.000đ</p>
+</div>
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">more_horiz</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto space-y-4 pr-1 custom-scrollbar">
+<div class="frosted-glass rounded-card p-4 cursor-pointer">
+<div class="flex justify-between items-start mb-2">
+<span class="bg-[#F3E3CF] text-[#9F6D33] text-[10px] font-bold px-2 py-0.5 rounded-full">VIP</span>
+</div>
+<h4 class="font-bold text-sm mb-1">JW Marriott Hanoi</h4>
+<p class="text-xs text-outline mb-3">A5 Kagoshima Full Loin</p>
+<div class="flex justify-between items-end">
+<div>
+<p class="text-[10px] text-outline-variant mb-0.5">Giá trị dự kiến</p>
+<p class="text-butcher-gold font-bold text-sm">65.000.000đ</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] text-outline font-medium">Trần Minh</span>
+<div class="w-6 h-6 rounded-full bg-secondary-container border border-outline-variant flex items-center justify-center text-[10px] font-bold">TM</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column: Đã gửi báo giá -->
+<div class="kanban-column rounded-column p-4 flex flex-col max-h-full">
+<div class="flex justify-between items-center mb-4 px-1">
+<div>
+<h3 class="font-bold text-sm text-[#241F1A]">Đã gửi báo giá</h3>
+<p class="text-[10px] text-outline font-medium">4 Cơ hội • 156.000.000đ</p>
+</div>
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">more_horiz</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto space-y-4 pr-1 custom-scrollbar">
+<div class="frosted-glass rounded-card p-4 cursor-pointer">
+<h4 class="font-bold text-sm mb-1">Haidilao Hotpot Chain</h4>
+<p class="text-xs text-outline mb-3">Chuck Roll Sliced (Bulk)</p>
+<div class="flex justify-between items-end">
+<div>
+<p class="text-[10px] text-outline-variant mb-0.5">Giá trị dự kiến</p>
+<p class="text-butcher-gold font-bold text-sm">92.000.000đ</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] text-outline font-medium">Lê Hòa</span>
+<div class="w-6 h-6 rounded-full bg-tertiary-fixed border border-outline-variant flex items-center justify-center text-[10px] font-bold">LH</div>
+</div>
+</div>
+</div>
+<div class="frosted-glass rounded-card p-4 cursor-pointer">
+<h4 class="font-bold text-sm mb-1">Gogi House BBQ</h4>
+<p class="text-xs text-outline mb-3">Premium Short Ribs</p>
+<div class="flex justify-between items-end">
+<div>
+<p class="text-[10px] text-outline-variant mb-0.5">Giá trị dự kiến</p>
+<p class="text-butcher-gold font-bold text-sm">34.000.000đ</p>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-[10px] text-outline font-medium">Trần Minh</span>
+<div class="w-6 h-6 rounded-full bg-secondary-container border border-outline-variant flex items-center justify-center text-[10px] font-bold">TM</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column: Chờ phản hồi -->
+<div class="kanban-column rounded-column p-4 flex flex-col max-h-full">
+<div class="flex justify-between items-center mb-4 px-1">
+<div>
+<h3 class="font-bold text-sm text-[#241F1A]">Chờ phản hồi</h3>
+<p class="text-[10px] text-outline font-medium">1 Cơ hội • 12.500.000đ</p>
+</div>
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">more_horiz</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto space-y-4 pr-1 custom-scrollbar">
+<div class="frosted-glass rounded-card p-4 cursor-pointer opacity-80 italic">
+<p class="text-[10px] text-outline mb-1 font-normal">Trống</p>
+</div>
+</div>
+</div>
+<!-- Column: Đã chốt -->
+<div class="kanban-column rounded-column p-4 flex flex-col max-h-full">
+<div class="flex justify-between items-center mb-4 px-1">
+<div>
+<h3 class="font-bold text-sm text-[#241F1A]">Đã chốt</h3>
+<p class="text-[10px] text-outline font-medium">2 Cơ hội • 210.000.000đ</p>
+</div>
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">more_horiz</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto space-y-4 pr-1 custom-scrollbar">
+<div class="frosted-glass rounded-card p-4 cursor-pointer border-l-4 border-l-success">
+<div class="flex justify-between items-start mb-2">
+<span class="bg-[#F3E3CF] text-[#9F6D33] text-[10px] font-bold px-2 py-0.5 rounded-full">VIP</span>
+<span class="material-symbols-outlined text-primary text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<h4 class="font-bold text-sm mb-1">Park Hyatt Saigon</h4>
+<p class="text-xs text-outline mb-3">Whole Carcass - Wagyu F1</p>
+<div class="flex justify-between items-end">
+<div>
+<p class="text-[10px] text-outline-variant mb-0.5">Giá trị chốt</p>
+<p class="text-butcher-gold font-bold text-sm">185.000.000đ</p>
+</div>
+<div class="w-6 h-6 rounded-full bg-secondary-container border border-outline-variant flex items-center justify-center text-[10px] font-bold">TM</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Column: Đã thanh toán -->
+<div class="kanban-column rounded-column p-4 flex flex-col max-h-full">
+<div class="flex justify-between items-center mb-4 px-1">
+<div>
+<h3 class="font-bold text-sm text-[#241F1A]">Đã thanh toán</h3>
+<p class="text-[10px] text-outline font-medium">5 Cơ hội • 420.000.000đ</p>
+</div>
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">more_horiz</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto space-y-4 pr-1 custom-scrollbar">
+<div class="h-32 rounded-card border-2 border-dashed border-outline-variant/30 flex items-center justify-center">
+<span class="text-[10px] text-outline italic">Xem lịch sử thanh toán</span>
+</div>
+</div>
+</div>
+<!-- Column: Mất cơ hội -->
+<div class="kanban-column rounded-column p-4 flex flex-col max-h-full">
+<div class="flex justify-between items-center mb-4 px-1">
+<div>
+<h3 class="font-bold text-sm text-error">Mất cơ hội</h3>
+<p class="text-[10px] text-outline font-medium">0 Cơ hội</p>
+</div>
+<button class="text-outline hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-lg">more_horiz</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto space-y-4 pr-1 custom-scrollbar">
+<div class="p-8 text-center">
+<span class="material-symbols-outlined text-outline-variant text-4xl mb-2">sentiment_dissatisfied</span>
+<p class="text-xs text-outline italic">Không có dữ liệu</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB for quick action (Contextual Suppression Logic applies, but usually kept for Dashboard/Kanban) -->
+<button onclick="openModal('modal-add-opp')" class="fixed bottom-10 right-10 w-14 h-14 bg-butcher-gold text-white rounded-full shadow-2xl flex items-center justify-center active:scale-90 transition-transform z-50">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+<!-- Modal: Tạo cơ hội -->
+<div id="modal-add-opp" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-4">
+<div class="absolute inset-0 bg-black/40 backdrop-blur-sm" onclick="closeModal('modal-add-opp')"></div>
+<div class="relative bg-white rounded-[24px] w-full max-w-lg shadow-2xl overflow-hidden">
+<div class="bg-[#F4EDE2] px-6 py-5 border-b border-[#E3D8CA] flex items-center justify-between">
+<div class="flex items-center gap-3"><div class="w-9 h-9 rounded-full bg-[#B9823F] flex items-center justify-center"><span class="material-symbols-outlined text-white text-[18px]">monetization_on</span></div><h2 class="text-[18px] font-bold text-[#241F1A]">Tạo cơ hội bán hàng</h2></div>
+<button onclick="closeModal('modal-add-opp')" class="p-1.5 hover:bg-[#E3D8CA] rounded-full transition-all"><span class="material-symbols-outlined text-[#7A6F63]">close</span></button>
+</div>
+<form class="p-6 space-y-4" onsubmit="submitAddOpp(event)">
+<div><label class="block text-xs font-semibold text-[#7A6F63] mb-1.5 uppercase tracking-wide">Tên cơ hội *</label><input required type="text" placeholder="VD: Cung cấp Wagyu A5 - Park Hyatt Q1" class="w-full border border-[#E3D8CA] rounded-[12px] px-4 py-2.5 text-sm focus:border-[#B9823F] focus:ring-2 focus:ring-[#B9823F]/15 outline-none transition-all"/></div>
+<div class="grid grid-cols-2 gap-4">
+<div><label class="block text-xs font-semibold text-[#7A6F63] mb-1.5 uppercase tracking-wide">Khách hàng *</label><input required type="text" placeholder="Tên khách hàng" class="w-full border border-[#E3D8CA] rounded-[12px] px-4 py-2.5 text-sm focus:border-[#B9823F] focus:ring-2 focus:ring-[#B9823F]/15 outline-none transition-all"/></div>
+<div><label class="block text-xs font-semibold text-[#7A6F63] mb-1.5 uppercase tracking-wide">Sản phẩm</label><input type="text" placeholder="VD: Wagyu A5 Striploin" class="w-full border border-[#E3D8CA] rounded-[12px] px-4 py-2.5 text-sm focus:border-[#B9823F] focus:ring-2 focus:ring-[#B9823F]/15 outline-none transition-all"/></div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div><label class="block text-xs font-semibold text-[#7A6F63] mb-1.5 uppercase tracking-wide">Giá trị dự kiến (đ)</label><input type="number" placeholder="0" class="w-full border border-[#E3D8CA] rounded-[12px] px-4 py-2.5 text-sm focus:border-[#B9823F] focus:ring-2 focus:ring-[#B9823F]/15 outline-none transition-all"/></div>
+<div><label class="block text-xs font-semibold text-[#7A6F63] mb-1.5 uppercase tracking-wide">Người phụ trách</label><select class="w-full border border-[#E3D8CA] rounded-[12px] px-4 py-2.5 text-sm focus:border-[#B9823F] outline-none transition-all bg-white"><option value="">Chọn người</option><option>Trần Minh</option><option>Lê Hòa</option></select></div>
+</div>
+<div><label class="block text-xs font-semibold text-[#7A6F63] mb-1.5 uppercase tracking-wide">Giai đoạn ban đầu</label><select class="w-full border border-[#E3D8CA] rounded-[12px] px-4 py-2.5 text-sm focus:border-[#B9823F] outline-none transition-all bg-white"><option>Khách mới</option><option>Đang tư vấn</option><option>Đã gửi báo giá</option></select></div>
+<div class="flex gap-3 pt-2">
+<button type="button" onclick="closeModal('modal-add-opp')" class="flex-1 py-2.5 border border-[#E3D8CA] text-[#241F1A] rounded-[12px] text-sm font-medium hover:bg-[#F4EDE2] transition-all">Hủy</button>
+<button type="submit" class="flex-1 py-2.5 bg-[#B9823F] hover:bg-[#9F6D33] text-white rounded-[12px] text-sm font-bold transition-all">Tạo cơ hội</button>
+</div>
+</form>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+<script>
+    function toast(msg) {
+        Toastify({ text: msg, duration: 3000, gravity: 'top', position: 'right', style: { background: 'linear-gradient(135deg,#B9823F,#9F6D33)', borderRadius: '12px' } }).showToast();
+    }
+    function openModal(id) { document.getElementById(id).classList.remove('hidden'); }
+    function closeModal(id) { document.getElementById(id).classList.add('hidden'); }
+    function toggleProfileDropdown() { document.getElementById('profile-dropdown').classList.toggle('hidden'); }
+    document.addEventListener('click', (e) => {
+        const d = document.getElementById('profile-dropdown');
+        if (d && !d.classList.contains('hidden') && !e.target.closest('[onclick="toggleProfileDropdown()"]') && !e.target.closest('#profile-dropdown')) d.classList.add('hidden');
+    });
+    function submitAddOpp(e) { e.preventDefault(); closeModal('modal-add-opp'); toast('Đã tạo cơ hội bán hàng mới!'); }
+    // Kanban card click → detail page
+    document.querySelectorAll('.frosted-glass').forEach(card => {
+        card.addEventListener('click', () => { window.location.href = 'opportunity_detail.html'; });
+        card.addEventListener('mousedown', () => { card.style.transform = 'scale(0.98)'; });
+        card.addEventListener('mouseup', () => { card.style.transform = 'scale(1)'; });
+        card.addEventListener('mouseleave', () => { card.style.transform = 'scale(1)'; });
+    });
+    // Drag scroll for kanban
+    const scrollContainer = document.querySelector('.overflow-x-auto');
+    let isDown = false, startX, scrollLeft;
+    scrollContainer.addEventListener('mousedown', (e) => {
+        if (e.target.closest('.frosted-glass')) return;
+        isDown = true; startX = e.pageX - scrollContainer.offsetLeft; scrollLeft = scrollContainer.scrollLeft;
+    });
+    scrollContainer.addEventListener('mouseleave', () => { isDown = false; });
+    scrollContainer.addEventListener('mouseup', () => { isDown = false; });
+    scrollContainer.addEventListener('mousemove', (e) => {
+        if (!isDown) return;
+        e.preventDefault();
+        scrollContainer.scrollLeft = scrollLeft - (e.pageX - scrollContainer.offsetLeft - startX) * 2;
+    });
+</script>
+</body></html>
